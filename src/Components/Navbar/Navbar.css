@@ -4,6 +4,24 @@
     color: black;
 
 }
+
+    .logo-container {
+            display: inline-flex;
+            position: absolute;
+            align-items: center;
+          
+        }
+                .logo-container #logo{
+                border-radius: 50%;
+                    max-width: 5rem;
+                    max-height: 5rem;
+                   
+                }
+                                .logo-container #company-name {
+                                 color: black;
+                                 font-weight: bold;
+                                }
+
 .Navbar #nav{
     color: black;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
