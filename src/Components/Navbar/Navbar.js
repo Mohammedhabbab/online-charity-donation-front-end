@@ -8,7 +8,7 @@ export const Navbar = () => {
   const [companyData, setCompanyData] = useState({ logoUrl: '', name: '' });
 
   useEffect(() => {
-    // Fetlogo,name api
+    // Fetlogo,name api a
     fetchCompanyData();
   }, []);
 
