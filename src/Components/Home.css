@@ -1,0 +1,117 @@
+.New {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+  
+    /* background-color: #f2f2f2; */
+ 
+    margin: 20px;
+    padding: 20px;
+}
+
+.circle-loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.circle {
+    position: relative;
+    width: 100px;
+    
+    height: 100px;
+    /* c size */
+}
+
+svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+circle {
+    fill: transparent;
+    stroke: #0073e6;
+    /* C color */
+    stroke-width: 10;
+    /* C thick */
+}
+
+.loader-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.payment-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.payment-info img {
+    border-radius: 50%;
+}
+
+.payment-info h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.payment-info p {
+    font-size: 1rem;
+}
+
+.Hero {
+    display: flex;
+    position: absolute;
+    /* background-color: green;  */
+    width: 100%;
+    min-height: 35rem;
+    top: 25rem;
+
+}
+
+.Hero #hero-pic {
+    display: flex;
+    position: absolute;
+   
+    background-size: cover;
+    max-height: 35rem;
+    width: 100%;
+   
+    margin-bottom: -4px;
+    /* max-height: 13.5%; */
+}
+.Hero #W1{
+display: flex;
+    position: relative;
+    top: 13rem;
+    -webkit-margin-start: 71%;
+    color: white;
+    font-size: 52px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 50%;
+    max-height: 13.5%;
+   
+    word-wrap: break-word;
+}
+.Hero #W2 {
+    display: flex;
+    position: absolute;
+    top: 18rem;
+    -webkit-margin-start: 75%;
+    color: white;
+    font-size: 50px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 50%;
+    max-height: 13.5%;
+   
+    word-wrap: break-word;
+}
