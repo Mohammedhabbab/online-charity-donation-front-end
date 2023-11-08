@@ -9,6 +9,7 @@ import NavigationRouter from './Routes/NavigationRouter'
 // import Sign from './Pages/Sign'
 // import ProfileU from './Pages/ProfileU'
 // import ProfileO from './Pages/ProfileO'
+import '../src/Components/PagesStyles/Services.css'
 
 
 function App() {
