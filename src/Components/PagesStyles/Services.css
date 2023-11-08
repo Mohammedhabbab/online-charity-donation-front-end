@@ -1,0 +1,12 @@
+.Sernav{
+    font-size: 30px;
+    min-width: 100%;
+    position: absolute;
+    font-weight: bold;
+    text-align: end;
+    background-color: #C9C0BB;
+    padding: 30px;
+    right: 0rem;
+
+
+}
