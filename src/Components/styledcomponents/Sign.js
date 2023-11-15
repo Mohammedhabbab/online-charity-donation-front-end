@@ -25,7 +25,7 @@ export const SignUpContainer = styled.div`
   z-index: 1;
 
   ${props =>
-    props.signinin  !== true &&
+    props.signIn  !== true &&
     css`
       transform: translateX(100%);
       opacity: 1;
@@ -43,7 +43,7 @@ export const SignInContainer = styled.div`
   z-index: 2;
 
   ${props =>
-    props.signin  !== true &&
+    props.signIn  !== true &&
     css`
       transform: translateX(100%);
     `}
@@ -72,6 +72,82 @@ export const Input = styled.input`
   margin: 8px 0;
   width: 100%;
 `;
+
+
+
+
+export const SwitchButton = styled.button`
+width:20rem;
+  background-color: black;
+  border: 3px solid black;
+  margin-left:40%;
+  color:white;
+  cursor: pointer;
+  font-size: 24px;
+
+  margin-top: 1rem;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+`;
+
+
+export const RadioContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+  position: relative;
+  margin-bottom:2rem;
+ 
+`;
+
+export const RadioInput = styled.input`
+  display: none;
+
+  &:checked + label::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    background-color: #000;
+  }
+`;
+
+export const RadioLabel = styled.label`
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  cursor: pointer;
+  position: relative;
+  left: -22rem; /* Adjust the left position to move it slightly to the left */
+
+  &:before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    background-color: #fff;
+    margin-right: 5px;
+  }
+
+  ${RadioInput}:checked + &::before {
+    background-color: #000;
+  }
+
+  &:hover::before {
+    background-color: #ddd;
+  }
+`;
+
+
+
+
 
 export const Button = styled.button`
   border-radius: 20px;
@@ -117,7 +193,7 @@ export const OverlayContainer = styled.div`
   z-index: 100;
 
   ${props =>
-    props.signin  !== true &&
+    props.signIn  !== true &&
     css`
       transform: translateX(-100%);
     `}
@@ -139,7 +215,7 @@ export const Overlay = styled.div`
   transition: transform 0.6s ease-in-out;
 
   ${props =>
-    props.signin  !== true &&
+    props.signIn  !== true &&
     css`
       transform: translateX(50%);
     `}
@@ -164,7 +240,7 @@ export const LeftOverlayPanel = styled(OverlayPanel)`
   transform: translateX(-20%);
 
   ${props =>
-    props.signin !== true &&
+    props.signIn !== true &&
     css`
       transform: translateX(0);
     `}
@@ -175,7 +251,7 @@ export const RightOverlayPanel = styled(OverlayPanel)`
   transform: translateX(0);
 
   ${props =>
-    props.signin !== true &&
+    props.signIn !== true &&
     css`
       transform: translateX(20%);
     `}

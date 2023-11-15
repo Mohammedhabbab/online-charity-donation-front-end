@@ -1,117 +1,528 @@
-.New {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 300px;
-  
-    /* background-color: #f2f2f2; */
- 
-    margin: 20px;
-    padding: 20px;
-}
 
-.circle-loader {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
 
-.circle {
-    position: relative;
-    width: 100px;
-    
-    height: 100px;
-    /* c size */
-}
-
-svg {
-    width: 100%;
-    height: 100%;
-    transform: rotate(-90deg);
-}
-
-circle {
-    fill: transparent;
-    stroke: #0073e6;
-    /* C color */
-    stroke-width: 10;
-    /* C thick */
-}
-
-.loader-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-.payment-info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 20px;
-}
-
-.payment-info img {
-    border-radius: 50%;
-}
-
-.payment-info h3 {
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-.payment-info p {
-    font-size: 1rem;
-}
-
-.Hero {
-    display: flex;
-    position: absolute;
-    /* background-color: green;  */
-    width: 100%;
-    min-height: 35rem;
-    top: 25rem;
-
-}
-
-.Hero #hero-pic {
-    display: flex;
-    position: absolute;
-   
-    background-size: cover;
-    max-height: 35rem;
-    width: 100%;
-   
-    margin-bottom: -4px;
-    /* max-height: 13.5%; */
-}
-.Hero #W1{
+/* .New{
 display: flex;
     position: relative;
-    top: 13rem;
-    -webkit-margin-start: 71%;
-    color: white;
-    font-size: 52px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    max-width: 50%;
-    max-height: 13.5%;
-   
-    word-wrap: break-word;
+
+    border-radius: 20px;
+    justify-content: space-between;
+    max-width: 100%;
+    max-height: 15rem;
+    margin: 0 auto;
+
 }
-.Hero #W2 {
+
+.new-image-container {
+    display: flex;
+    position: relative;
+    max-width: 100%;
+    
+ 
+}
+
+.new-image {
+    display: inline-block;
+    position: relative;
+    left: 0.5%;
+width: 98%;
+border-radius: 30px;
+   
+}
+.New #p {
+    position: absolute;
+    font-size: 2.5rem;
+    font-weight: bolder;
+    color: white;
+    top:1rem;
+    margin-left: 20px;
+    white-space: pre-wrap;
+
+    word-wrap: break-word;
+  
+    overflow-wrap: break-word;
+   
+    width: 38rem;
+   
+}
+.New .new-image-container .new-amount-info #p {
+    position: absolute;
+    font-size: 1rem;
+font-weight: bold;
+    color: white;
+    top: 4rem;
+    left:86rem;
+    white-space: pre-wrap;
+
+    word-wrap: break-word;
+ 
+    overflow-wrap: break-word;
+  
+    width: 40rem;
+   
+}
+.New .new-image-container .new-amount-info #pp {
+    position: absolute;
+    font-size: 1rem;
+font-weight: bold;
+    color: white;
+    top: 6rem;
+    left: 87rem;
+    white-space: pre-wrap;
+
+    word-wrap: break-word;
+   
+    overflow-wrap: break-word;
+    
+    width: 40rem;
+   
+}
+
+.New .new-image-container  .new-expiration-date #p {
+    position: absolute;
+    font-size: 1rem;
+    font-weight: bolder;
+    color: white;
+    top: 8rem;
+    left: 88rem;
+    white-space: pre-wrap;
+
+    word-wrap: break-word;
+ 
+    overflow-wrap: break-word;
+
+    width: 38rem;
+    
+} */
+.Urgent-Container{
+    display: flex;
+    position: relative;
+width: 100%;
+height: 10rem;
+background-color: black;
+direction: rtl;
+   
+
+}
+.Urgent-Container .urgent{
+    display: flex;
+    position: relative;
+    width: 100%;
+right: 10rem;
+}
+.Urgent-Container .urgent h3 {
+    position: relative;
+    font-size: 36px;
+    color: white;
+left: 7rem;
+top: 1.5rem;
+
+}
+
+.Urgent-Container .urgent #urgent-img{
+    position: relative;
+    border-radius: 50%;
+    max-width: 9rem;
+        max-height: 9rem;
+-webkit-margin-start: 72%;
+ 
+}
+.CircularBar-Container{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap:40px;
+top: -2rem;
+}
+.CircularBar-Container .Progress{
+    position: relative;
+    width: 220px;
+    height: 220px;
+    
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.CircularBar-Container .Progress .Fill{
+position: relative;
+width: 150px;
+height: 150px;
+
+}
+
+.CircularBar-Container .Progress .Fill svg{
+    position: relative;
+        width: 150px;
+        height: 150px;
+        transform: rotate(270deg);
+}
+
+.CircularBar-Container .Progress .Fill svg circle{
+width: 100%;
+height: 100%;
+fill: transparent;
+stroke-width: 2;
+stroke: #191919;
+transform: translate(5px,5px) ;
+
+
+}
+
+.CircularBar-Container .Progress .Fill svg circle:nth-child(2) {
+stroke: var(--color);
+stroke-dasharray: 440;
+stroke-dashoffset: calc(440 - (440 * var(--percentage)) / 100);
+opacity: 0;
+animation: fadeIn 1s linear forwards;
+animation-delay: 2.5s;
+}
+@keyframes fadeIn{
+    0%{
+        opacity: 0;
+    }100%{
+        opacity: 1;
+    }
+}
+
+.Dot{
+    position: absolute;
+    inset: 5px;
+    z-index: 10;
+
+    animation: animateDot 2s linear forwards;
+}
+@keyframes animateDot{
+    0%{
+        transform: rotate(0deg);
+    }100%{
+        transform: rotate(calc(3.6deg *var(--percentage)));
+    }
+}
+.Dot::before{
+    content: '';
+    position: absolute;
+top: -5px;
+left: 50%;
+transform: translateX(-50%);
+width: 10px;
+height: 10px;
+border-radius: 50%;
+background: var(--color) ;
+box-shadow: 0 0 10px var(--color),
+0 0 30px var(--color);
+
+}
+.Number{
+position: absolute;
+inset: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+direction: ltr;
+
+}
+.Number h2 {
+display: flex;
+position: absolute;
+justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 3rem;
+    top:-0.3rem;
+    left: 2.7rem;
+
+}
+.Number h2 span{
+    position: absolute;
+    left: 3.4rem;
+    top:1.5rem;
+color: #fff;
+    font-weight:300;
+    font-size: 1.3rem;
+}
+.Number p{
+position: absolute;
+        font-weight: 300;
+        font-size:1rem;
+        line-height: 2px;
+top:6rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color:rgba(255, 255, 255, 0.75)
+}
+
+
+/*Hero-Section*/
+
+.Hero-Section {
+    display: flex;
+    position: relative;
+    background-color: #ddcdaf;
+    width: 100%;
+    height: 35rem;
+    overflow: hidden;
+}
+
+.Hero-Section .Hero-Card-Container {
+    display: flex;
+position: relative;
+    width:100%;
+
+
+
+transition: transform 0.5s ease-in-out;
+}
+
+.Hero-Section .Hero-Card {
     display: flex;
     position: absolute;
-    top: 18rem;
-    -webkit-margin-start: 75%;
-    color: white;
-    font-size: 50px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    max-width: 50%;
-    max-height: 13.5%;
-   
-    word-wrap: break-word;
+ width: 100%;
 }
+
+.Hero-Section .Hero-Card.active {
+    display: flex;
+    position: relative;
+   width: 100%;
+}
+
+.Hero-Section .Hero-Card img {
+  display: flex;
+  position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.Hero-Section .Hero-Card .Asset.active {
+    display: flex;
+    position: absolute;
+    left: 70rem;
+        top: 8rem;
+        width: 26rem;
+        height: 26rem;
+}
+
+.Hero-Section .Hero-Card .Asset.active img {
+    display: flex;
+    position: relative;
+    width: 100%;
+height: 100%;
+}
+
+.Slider-Button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    background-color: #ffffff;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.Slider-Button.Prev {
+    left: 10px;
+}
+
+.Slider-Button.Next {
+    right: 10px;
+}
+/* .Services-Section */
+ 
+
+.Services-Section {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 58rem;
+  background-color: #c7b492;
+  overflow: hidden; 
+
+   
+        white-space: nowrap;
+      
+}
+.Services-Section .Service-Card h2{
+    display: flex;
+        position: absolute;
+font-size: 48px;
+font-weight: 900;
+-webkit-margin-start: 48%;
+}
+.Services-Section .Service-Card img {
+  display: flex;
+  position: relative;
+
+  left: 1rem;
+  top: 0rem;
+  transform: rotate(0deg);
+}
+
+/* .Services-Section .Services-Card {
+  display: grid;
+  position: relative;
+max-width: 100%;
+  margin-left: 6rem;
+
+  transition: transform 0.5s ease-in-out;
+
+} */
+
+
+.Services-Section .Service-Card {
+display: flex;
+    position: relative;
+    width: 100%;
+ 
+}
+
+
+
+
+
+
+
+.Services-Section .Service-Card.A1{
+    display: flex;
+    position: relative;
+   top: -8rem;
+   
+   left: -72rem;
+    white-space: wrap;
+   
+}
+.Services-Section .Service-Card.A1 img {
+    display: flex;
+    position: relative;
+    width: 30rem ;
+   
+
+}
+.Services-Section .Service-Card.A1 h3{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+color: black;
+font-weight: 700;
+font-size: 28px;
+align-items: center;
+  
+    text-align: center;
+left: -15.5rem;
+width: 1rem;
+top: 16rem;
+
+
+}
+
+.Services-Section .Service-Card.A2 {
+    display: flex;
+    position: relative;
+ left: -90rem;
+ top: 15rem;
+    white-space: wrap;
+}
+
+.Services-Section .Service-Card.A2 img {
+    display: flex;
+    position: relative;
+    width: 30rem;
+ 
+}
+
+.Services-Section .Service-Card.A2 h3 {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    color: black;
+    font-weight: 700;
+    font-size: 28px;
+align-items: center;
+    
+    text-align: center;
+    left: -15.5rem;
+    width: 1rem;
+
+ top: 16rem;
+  
+
+}
+
+.Services-Section .Service-Card.A3 {
+    display: flex;
+    position: relative;
+top: -8rem;
+    left: -65rem;
+white-space: wrap;
+}
+
+.Services-Section .Service-Card.A3 img {
+    display: flex;
+    position: relative;
+    width: 30rem;
+  
+}
+
+.Services-Section .Service-Card.A3 h3 {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    color: black;
+    font-weight: 700;
+    font-size: 28px;
+    align-items: center;
+      
+        text-align: center;
+        left: -15.5rem;
+
+ top: 16rem;
+    width: 1rem;
+    
+
+}
+
+.Services-Section .Service-Card.A4 {
+    display: flex;
+    position: relative;
+    left: -110rem;
+        top: 15rem;
+white-space: wrap;
+}
+
+.Services-Section .Service-Card.A4 img {
+    display: flex;
+    position: relative;
+    width: 30rem;
+ 
+}
+
+.Services-Section .Service-Card.A4 h3 {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    color: black;
+    font-weight: 700;
+    font-size: 28px;
+align-items: center;
+   
+    text-align: center;
+    left: -15.5rem;
+    width: 1rem;
+
+   top:16rem;
+
+}
+
+
+.white-space{
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 1.5rem;
+    background-color: white;
+}
+
+
