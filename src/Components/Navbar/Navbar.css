@@ -1,31 +1,52 @@
 .Navbar {
+max-width: 100%;
     padding: 0.5%;
     
-    color: black;
+    color: white;
+     background-color: #ddcdaf; 
 
 }
 
     .logo-container {
-            display: inline-flex;
-            position: absolute;
-            align-items: center;
-          
+            display:flex;
+            position: relative;
+       
+          max-width: 100%;
         }
                 .logo-container #logo{
+                    display: flex;
+                    position: absolute;
+                    left: 5rem;
                 border-radius: 50%;
-                    max-width: 5rem;
-                    max-height: 5rem;
+                    max-width: 4rem;
+                    max-height: 4rem;
                    
                 }
-                                .logo-container #company-name {
+                                .logo-container #charity-name {
+                                        display: flex;
+                                            position: absolute;
+                                            left: 10rem;
+                                            top: 1rem;
                                  color: black;
-                                 font-weight: bold;
+                            font-family: Bangers;
+                                font-size: 32px;
+                                font-style: normal;
+                                font-variant: normal;
+                                font-weight: 700;
+                                line-height: 26.4px;
                                 }
 
 .Navbar #nav{
-    color: black;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    text-decoration-style: none;
+    color: white;
+
+        font-family: Bangers;
+            font-size: 24px;
+            font-style: normal;
+            font-variant: normal;
+            font-weight: 700;
+            line-height: 26.4px;
+   
+ text-decoration-style: none;
     text-decoration: none;
     
 }
@@ -39,13 +60,15 @@ border-bottom: 3px solid beige;
     border-bottom: 3px solid black;
 }
 .Navbar ul {
-    -webkit-margin-start: 50%;
+    -webkit-margin-start: 1%;
     list-style-type: none;
+    direction: rtl;
 }
 
 .Navbar li {
     display: inline-block;
     position: relative;
+
     margin-right: 5%;
 color: white;
     text-decoration-style: none;

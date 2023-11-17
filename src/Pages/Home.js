@@ -1,70 +1,87 @@
 import {useState,useEffect} from 'react'
 import Navbar from '../Components/Navbar/Navbar'
+import Urgent from '../Components/Urgent'
 import img from '../images/dmitry-ratushny-xsGApcVbojU-unsplash.jpg'
 import '../Components/Home.css'
+import HeroSection from '../Components/HeroSection'
+import ServicesSection from '../Components/ServicesSection'
 const Home = () => {
-  const [data, setData] = useState(null);
-
+  const [services, setServices] = useState([]);
+  const [visibleServices, setVisibleServices] = useState([]);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  
   useEffect(() => {
-   
-    fetch('/api/') 
+    
+    fetch('https://jsonplaceholder.typicode.com/users')
       .then((response) => response.json())
-      .then((responseData) => {
-        setData(responseData);
+      .then((serviceData) => {
+        setServices(serviceData);
       })
       .catch((error) => {
-        console.error('Error fetching data: ', error);
+        console.error('Error fetching services: ', error);
       });
   }, []);
 
-  let paymentPercentage = 0;
-  if (data) {
-    paymentPercentage = (data.payed / data.totalCost) * 100;
-  }
+ useEffect(() => {
+    
+    const interval = setInterval(() => {
+      
+      const updatedServices = [...services];
+      const firstService = updatedServices.shift();
+      updatedServices.push(firstService);
+      setServices(updatedServices);
+
+      
+      setScrollPosition(0);
+    }, 4500); 
+
+    return () => {
+      clearInterval(interval); 
+    };
+  }, [services]);
+
+ 
+  useEffect(() => {
+    setVisibleServices(services.slice(0, 4));
+  }, [services]);
 
   return (
     <>
       <Navbar />
-      <section className="New">
-        {data && (
-          <div className="circle-loader">
-            <div className="circle">
-              <svg width="100" height="100">
-                <circle cx="50" cy="50" r="45" />
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="45"
-                  style={{
-                    strokeDasharray: `${paymentPercentage}, 283`,
-                  }}
-                />
-              </svg>
-              <div className="loader-text">{paymentPercentage}%</div>
-            </div>
-            <div className="payment-info">
-              <div>
-                <img src={img} alt="name" id="hero-pic" style={{ width: '70%' }} />
-              </div>
-              <div style={{ width: '30%' }}>
-                <h3 id="W1">{data.name}</h3>
-                <p>Total Cost: {data.totalCost}</p>
-                <p>Payed Until Now: {data.payed}</p>
-              </div>
-            </div>
-          </div>
-        )}
-      </section>
-     
-      <section className='Hero'>
+      < >
+       <Urgent/>
+      </>
+      <>
+        <HeroSection/>
+      </>
+       <div className='white-space'>
+              
+      </div>
+      <>
+        <ServicesSection/>
+      </>
+        <div className='white-space'>
+              
+      </div>
+
+      {/* <section className='Hero'>
         <img src={img} alt='name' id='hero-pic' />
         <h3 id='W1'> We Rise</h3>
-                            <h3 id='W2'>By Lifting Others</h3>
+        <h3 id='W2'>By Lifting Others</h3>
+        </section> 
+       <section id="services">
+        <div className="service-cards-container" style={{ transform: `translateX(-${scrollPosition}px)` }}>
+          
+         {services.map((service, index) => (
+            <div key={index} className="service-card">
+            {/*<img src={service.imageUrl} alt={service.name} />
+            <h3>{service.name}</h3>
+         <p>{service.description}</p> 
+            </div>
+          ))}
+        </div>
       </section>
-       <section id="services-section">
-        services
-      </section>
-     
+     */}
       </>
   )
 }
