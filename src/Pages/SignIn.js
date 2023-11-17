@@ -25,7 +25,6 @@ const handleSignIn = () => {
     .then((response) => {
       console.log('Login response:', response);
       if (response.status === 200) {
-      
         navigate('/', { replace: true }); 
       } else if (response.status === 401) {
      
@@ -36,7 +35,6 @@ const handleSignIn = () => {
       }
     })
     .catch((error) => {
-     
       setLoginStatus('An error occurred. Please try again.');
     });
 };
