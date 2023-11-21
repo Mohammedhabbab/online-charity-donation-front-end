@@ -12,19 +12,13 @@ import NavigationRouter from './Routes/NavigationRouter'
 import '../src/Components/PagesStyles/Services.css'
 // import Logo from '../images/Logo.jpg';
 
+import NavigationRouter from './Routes/NavigationRouter'
 
 function App() {
-  return (<>
-     
-    <div className="Full">
-     <NavigationRouter />
-      
 
-     
-      <Footer/>
-    </div>
-    
-    </>
+  
+  return (
+     <NavigationRouter />
   );
 }
 

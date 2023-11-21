@@ -1,9 +1,9 @@
-/* ServicesCard.css */
+
 .ServiceContainer{
   width: 100%;
-  display:flex;
+  display:grid;
   position: relative;
-  top:4rem;
+  top:2rem;
 
 
 
@@ -18,7 +18,7 @@
   max-width: 300px; 
   display:inline-block;
   position: relative;
-  top: 5rem;
+  top: -55rem;
   min-height: 27rem;
   max-height: 29rem;
 

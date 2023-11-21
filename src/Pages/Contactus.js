@@ -36,7 +36,9 @@ const Contactus = () => {
   return (
     <>
       <Navbar />
+        <div>
       <div style={{ backgroundImage: `url(${BackContactImage})` }} className='BackgroundImage'>
+    
         <div className="contact-container">
          
           <div className="contact-info">
@@ -92,6 +94,7 @@ const Contactus = () => {
           </form>
           <ContactUsMap position={position} />
         </div>
+      </div>
       </div>
     </>
   );

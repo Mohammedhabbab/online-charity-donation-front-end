@@ -1,10 +1,12 @@
 import {useState,useEffect} from 'react'
-import Navbar from '../Components/Navbar/Navbar'
+
 import Urgent from '../Components/Urgent'
 import img from '../images/dmitry-ratushny-xsGApcVbojU-unsplash.jpg'
 import '../Components/Home.css'
 import HeroSection from '../Components/HeroSection'
 import ServicesSection from '../Components/ServicesSection'
+import AboutusHomeSection from '../Components/AboutusHomeSection'
+import ContactusHomeSection from '../Components/ContactusHomeSection'
 const Home = () => {
   const [services, setServices] = useState([]);
   const [visibleServices, setVisibleServices] = useState([]);
@@ -47,41 +49,24 @@ const Home = () => {
 
   return (
     <>
-      <Navbar />
       < >
        <Urgent/>
       </>
       <>
         <HeroSection/>
       </>
-       <div className='white-space'>
+       {/* <div className='white-space'></div> */}
               
-      </div>
+      
       <>
         <ServicesSection/>
       </>
-        <div className='white-space'>
-              
-      </div>
-
-      {/* <section className='Hero'>
-        <img src={img} alt='name' id='hero-pic' />
-        <h3 id='W1'> We Rise</h3>
-        <h3 id='W2'>By Lifting Others</h3>
-        </section> 
-       <section id="services">
-        <div className="service-cards-container" style={{ transform: `translateX(-${scrollPosition}px)` }}>
-          
-         {services.map((service, index) => (
-            <div key={index} className="service-card">
-            {/*<img src={service.imageUrl} alt={service.name} />
-            <h3>{service.name}</h3>
-         <p>{service.description}</p> 
-            </div>
-          ))}
-        </div>
-      </section>
-     */}
+      {/* <div className='white-space'>   </div> */}
+      <>
+     <AboutusHomeSection />
+      </>
+            {/* <div className='white-space'>   </div>*/}
+      <><ContactusHomeSection/></>
       </>
   )
 }
