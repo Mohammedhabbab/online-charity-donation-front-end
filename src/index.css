@@ -13,11 +13,9 @@ code {
     monospace;
 }
 .Full{
-  display: contents;
-
-  width: 100px;
-  height: 30rem; ;
-  background-color: rgb(212, 212, 190);
+  display: grid;
+  width: 100%;
+  background-color:#c7b492;
 }
 
 

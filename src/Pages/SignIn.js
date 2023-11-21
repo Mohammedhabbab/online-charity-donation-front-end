@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../Components/Navbar/Navbar'
 import * as Components from '../Components/styledcomponents/Sign';
 
 function Sign() {
@@ -28,7 +27,7 @@ const handleModeSwitch = () => {
  const handleSignIn = (e) => {
   e.preventDefault();
  console.log('Sign in button clicked');
-  // Check if the email or password field is empty
+ 
   if (!signInEmail || !signInPassword) {
    console.log('Please fill in both email and password.');
     return;
@@ -69,26 +68,26 @@ const handleModeSwitch = () => {
   e.preventDefault();
   console.log('Sign up button clicked');
 
-  // Define the API endpoint based on the mode
+ 
   const signUpApi = mode === 'user'
     ? 'http://localhost:8000/api/register'
     : 'https://org-signup-api-url';
 
-  // Common checks for both user and organization sign-up
+  
   if (!signUpName || !signUpEmail || !signUpPassword || !signUpPhone || !signUpAddress) {
     console.log('Please fill in all required fields.');
     return;
   }
 
   if (mode === 'user') {
-    // Additional checks and API call for user sign-up
+
     if (!signUpGender) {
       console.log('Please select a gender.');
       return;
     }
   }
 
-  // Make the API call with the defined API endpoint and data
+
   fetch(signUpApi, {
     method: 'POST',
     headers: {
@@ -128,7 +127,6 @@ const handleModeSwitch = () => {
   return (
   
 <>
-<Navbar />
  <Components.SwitchButton onClick={handleModeSwitch}>
         Switch to {mode === 'user' ? 'Organization' : 'User'}
       </Components.SwitchButton>
