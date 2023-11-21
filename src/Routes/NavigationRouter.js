@@ -5,20 +5,21 @@ import Services from '../Pages/Services'
 import About from '../Pages/About'
 import Contactus from '../Pages/Contactus'
 import Sign from '../Pages/Sign'
-import ProfileU from '../Pages/ProfileU'
-import ProfileO from '../Pages/ProfileO'
+import { RootPage } from '../Pages/Root'
+import OrganizationProfile from '../Pages/OrganizationProfile'
+import UserProfile from '../Pages/UserProfile'
 // import Navbar from '../Components/Navbar/Navbar'
 
 const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<Outlet />}>
-            <Route index element={<Home/>} />
+      <Route path="/" element={<RootPage />}>
+        <Route index element={<Home />} />
             <Route path="services" element={<Services />} />
             <Route path="about" element={<About/>}/>
             <Route path="contactus" element={<Contactus/>}/>
         <Route path="sign" element={<Sign />} />
-        <Route path="user-profile" element={<ProfileU />} />
-         <Route path="org-profile" element={<ProfileO/>}/>
+        <Route path="user-profile" element={<UserProfile />} />
+         <Route path="org-profile" element={<OrganizationProfile/>}/>
         </Route>
     )
 );

@@ -1,7 +1,79 @@
 .Footer {
-    text-align: center;
-    margin-top: 100%;
-    padding: 30px;
+    display:flex;
+    position: relative;
+
+    margin-top: 2rem;
     background-color: black;
-    color: white;
+    color: burlywood;
+width: 100%;
+    height: 20rem;
+}
+.Footer-Background{
+display: flex;
+    position: relative;
+
+max-width: 100%;
+max-height: 20rem;
+}
+
+
+.Footer-Background img {
+display: flex;
+position: relative;
+width: 100%;
+height: 20rem;
+    justify-content: center;
+        align-self: center;
+        align-items: center;
+left: 60%;
+}
+
+.Footer-Header{
+    display: flex;
+    position: relative;
+    justify-content: center;
+}
+.Footer-Header h1{
+    display: flex;
+        position: relative;
+top:1rem;
+}
+.Footer-Header img {
+    display: flex;
+        position: relative;
+        top: 0.5rem;
+        max-width: 8rem;
+            max-height: 8rem;
+            left: 1rem;
+}
+.Footer-Container{
+    display: flex;
+
+    position: relative;
+    direction: rtl;
+top: 7rem;
+max-height: 12rem;
+
+
+}
+.Footer-Container .address{
+    position: relative;
+width: 40%;
+    max-width: 40%;
+      
+-webkit-margin-start: 100%;
+}
+.Footer-Container .bank-info {
+position: relative;
+width: 40%;
+    max-width: 40%;
+    
+    -webkit-margin-start: 80%;
+}
+.Footer-Container .contact {
+position: relative;
+width: 40%;
+    max-width: 40%;
+    
+    -webkit-margin-start: 60%;
 }
