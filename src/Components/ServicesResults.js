@@ -12,7 +12,7 @@ const ServicesResults = ({ results }) => {
           description={result.description}
           imageUrl={result.imageUrl}
         >
-          <button onClick={() => window.location.href = `/service/${index+1}`}>Learn More</button>
+          <button onClick={() => window.location.href = `/service/${index+1}`}>اضغط</button>
         </ServicesCard>
       ))}
     </div>

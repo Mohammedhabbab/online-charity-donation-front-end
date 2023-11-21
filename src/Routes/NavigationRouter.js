@@ -4,9 +4,9 @@ import Home from '../Pages/Home'
 import Services from '../Pages/Services'
 import About from '../Pages/About'
 import Contactus from '../Pages/Contactus'
-import Sign from '../Pages/Sign'
-import ProfileU from '../Pages/ProfileU'
-import ProfileO from '../Pages/ProfileO'
+import SignIn from '../Pages/SignIn'
+import UserProfile from '../Pages/UserProfile'
+import OrganizationProfile from '../Pages/OrganizationProfile'
 // import Navbar from '../Components/Navbar/Navbar'
 
 const router = createBrowserRouter(
@@ -16,9 +16,9 @@ const router = createBrowserRouter(
             <Route path="services" element={<Services />} />
             <Route path="about" element={<About/>}/>
             <Route path="contactus" element={<Contactus/>}/>
-        <Route path="sign" element={<Sign />} />
-        <Route path="user-profile" element={<ProfileU />} />
-         <Route path="org-profile" element={<ProfileO/>}/>
+        <Route path="SignIn" element={<SignIn/>} />
+        <Route path="user-profile" element={< UserProfile/>} />
+         <Route path="org-profile" element={<OrganizationProfile/>}/>
         </Route>
     )
 );

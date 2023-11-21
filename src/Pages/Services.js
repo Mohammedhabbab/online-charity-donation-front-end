@@ -1,71 +1,77 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Navbar from '../Components/Navbar/Navbar';
-import '../Components/PagesStyles/Services.css';
 import ServicesSearchbar from '../Components/ServicesSearchbar';
-import ServicesResults from '../Components/ServicesResults';
-import ServicesCard from '../Components/ServicesCard'; 
-import '../Components/ServicesCard.css'; 
-import orphanImage from '../images/orphan.jpg';
-import MedicalImage from '../images/Medical.jpg';
-import studentsImage from '../images/students.jpg';
-import stuffImage from '../images/stuff.jpg';
+import ServicesCard from '../Components/ServicesCard';
+import '../Components/PagesStyles/Services.css';
+import '../Components/ServicesCard.css';
+import BackImage from '../images/Back.jpg';
 
 const Services = () => {
-  const [results, setResults] = useState([
-    {
-      title: 'كفالة يتيم',
-      description: '<قال رسول الله ﷺ: <أنا وكافل اليتيم في الجنة هكذا',
-      imageUrl: orphanImage
-    },
-    {
-      title: 'طالب علم',
-      description: ' قال النبي صلى الله عليه وسلم: الدال على الخير كفاعله.',
-      imageUrl: studentsImage
-    },
-    {
-      title: 'مستلزمات مدرسية',
-      description: 'قال صلى الله عليه وسلم: من أفضل الأعمال إدخال السرور على المؤمن، تقضي له دينا، تقضي له حاجة، تنفس له كربة',
-      imageUrl: stuffImage
-    },
-    {
-      title: ' رعاية طبية',
-      description: 'قال رسول الله ﷺ: مثل المؤمنين في توادهم وتراحمهم وتعاطفهم مثل الجسد إذا اشتكى منه عضو تداعى له سائر الجسد بالسهر والحمى',
-      imageUrl: MedicalImage
-    }
-  ]);
+  const [services, setServices] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [filteredServices, setFilteredServices] = useState();
+
+  useEffect(() => {
+    fetch('http://localhost:8000/api/get_donation_types')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setServices(data || []); 
+        setFilteredServices(data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setError(error);
+        setIsLoading(false);
+      });
+  }, []);
 
   const handleSearch = (query) => {
-    if (query.trim() === '') {
-     
-    } else {
-      const filteredResults = results.filter(result =>
-        result.title.includes(query) || result.description.includes(query)
-      );
-      setResults(filteredResults);
-    }
+    setSearchQuery(prev => query);
   };
+  
+  useMemo(() => {
+    const filterServices = services.filter(service =>
+    service.title.includes(searchQuery) ||
+    service.description.includes(searchQuery)  
+  );
 
-  return (
-    <>
+  setFilteredServices(filterServices);
+}, [services, searchQuery]);
+    
+    return (
+    <>  
       <Navbar />
-        <p className='Sernav'>المشاريع العامة</p>
+      <div className='ServiceContainer'>
         <ServicesSearchbar handleSearch={handleSearch} />
-   <div className='ServiceContainer'>
-      <div className='Services'>
-        <div className="services-grid">
-          {results.map((result, index) => (
-            <ServicesCard
-              key={index}
-              title={result.title}
-              description={result.description}
-              imageUrl={result.imageUrl}
-            />
-          ))}
+        <div className='Services'>
+          <img src={BackImage} className='BackgroundImage'></img>
+          <div className="services-grid">
+            {isLoading ? (
+              <div>Loading services...</div>
+            ) : error ? (
+              <div>Error fetching services: {error.message}</div>
+            ) : (
+              filteredServices.map((service) => ( 
+                <ServicesCard
+                  key={service.id}
+                  title={service.title}
+                  description={service.description}
+                  imageUrl={service.imageUrl}
+                />
+              ))
+            )}
+          </div>
         </div>
-      </div>
       </div>
     </>
   );
 };
 
-export default Services
+export default Services;

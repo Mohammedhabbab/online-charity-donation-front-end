@@ -58,7 +58,6 @@ const handleModeSwitch = () => {
       }
     })
     .catch((error) => {
-      console.error('An error occurred', error);
       setLoginStatus('An error occurred. Please try again.');
     });
   };

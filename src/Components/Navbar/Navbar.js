@@ -50,7 +50,7 @@ export const Navbar = () => {
               <li><NavLink id='nav' to="/org-profile">Profile</NavLink></li>
             )
           ) : (
-            <li><NavLink id='nav' to="/sign">تسجيل الدخول</NavLink></li>
+            <li><NavLink id='nav' to="/signin">Sign In</NavLink></li>
           )}
         </ul>
         
