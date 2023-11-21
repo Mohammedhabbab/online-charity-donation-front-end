@@ -35,7 +35,7 @@ const handleModeSwitch = () => {
    }
    
     const signInApi = mode === 'user'
-      ? 'https://user-signin-api-url' 
+      ? 'http://localhost:8000/api/login' 
     : 'https://org-signin-api-url';
 
   fetch(signInApi, {
@@ -71,7 +71,7 @@ const handleModeSwitch = () => {
 
   // Define the API endpoint based on the mode
   const signUpApi = mode === 'user'
-    ? 'https://user-signup-api-url'
+    ? 'http://localhost:8000/api/register'
     : 'https://org-signup-api-url';
 
   // Common checks for both user and organization sign-up
@@ -95,10 +95,10 @@ const handleModeSwitch = () => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      name: signUpName,
+      full_name: signUpName,
       email: signUpEmail,
       password: signUpPassword,
-      phone: signUpPhone,
+      mobile_number: signUpPhone,
       address: signUpAddress,
       gender: signUpGender,
     }),

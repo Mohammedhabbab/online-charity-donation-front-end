@@ -2,7 +2,7 @@
   from { opacity: 0; }
   to { opacity: 1; }
 }
-
+  
 .animated-fade-in {
   animation: fadeIn 3s ease-in-out forwards;
 }
@@ -15,18 +15,14 @@
 }
 
 .BackgroundImage {
-  position: absolute;
-  top: 5rem;
-  left: 0;
-  min-width: 80%;
-  min-height: 80%;
   background-size: cover;
   background-position: center;
+  
 }
 
 .contact-form {
   position: relative;
-  left: 25rem;
+  left: 55rem;
   max-width: 400px;
   margin: 50px auto;
   padding: 30px;
@@ -62,6 +58,7 @@
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s;
+  
 }
 
 .contact-form button:hover {
@@ -71,7 +68,6 @@
 
 
 .contact-container {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: flex-start; 
@@ -102,7 +98,6 @@
 .map-container {
   top: 17rem;
   left: 10rem;
-  height: 90rem; 
   width: 300px; 
   opacity: 0.5;  
   position: absolute;
