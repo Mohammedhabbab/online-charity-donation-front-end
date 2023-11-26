@@ -13,7 +13,7 @@ const ServicesSection = () => {
   
     const fetchData = async () => {
       try {
-        const response = await fetch(''); 
+        const response = await fetch('http://localhost:8000/api/get_services'); 
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
@@ -64,13 +64,15 @@ const ServicesSection = () => {
                   (index + setIndex * servicesPerSet) % 4 === 2 ? 'A3' : ''
                 } ${(index + setIndex * servicesPerSet) % 4 === 3 ? 'A4' : ''}`}
               >
-                <img src={service.img} alt={service.name} />
-                <h3>{service.name}</h3>
+                <img src={service.image} alt={service.title} />
+                <h3>{service.title}</h3>
               </Link>
             ))}
         </div>
       ))}
+     
     </div>
+ 
   );
 };
 

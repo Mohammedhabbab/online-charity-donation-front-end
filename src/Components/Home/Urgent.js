@@ -3,31 +3,27 @@ import React, { useState, useEffect } from 'react';
 import './Home.css';
 
 const Urgent = () => {
-  const [newdonationData, setNewDonationData] = useState({
-    donationType: '',
-    totalCost: 0,
-    amountPaid: 0,
-    expirationDate: '',
-  });
+  const [newdonationData, setNewDonationData] = useState([]);
 
-  useEffect(() => {
-  fetch('https://jsonplaceholder.typicode.com/posts/1')
-    .then((response) => response.json())
-    .then((data) => {
-      setNewDonationData({
-        donationType: data.title, 
-        totalCost: 1000, 
-        amountPaid: 800, 
-        expirationDate: '2023-12-31', 
+ useEffect(() => {
+    fetch('http://localhost:8000/api/get_dividable')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch hero data');
+        }
+        return response.json();
+      })
+      .then(data => {
+        setNewDonationData(data);
+      })
+      .catch(error => {
+        console.error(error);
       });
-    })
-    .catch((error) => {
-      console.error('Error fetching donation data: ', error);
-    });
-}, []);
+  }, []);
 
  
-  const percentage = (newdonationData.amountPaid / newdonationData.totalCost) * 100;
+  const percentage = (newdonationData.amount_paid / newdonationData.total_cost) * 100;
+  // const TimeRemaing = (newdonationData.expiration_date - newdonationData.created_at);
 
   return (
     <section className="Urgent-Container">
@@ -47,7 +43,7 @@ const Urgent = () => {
             </svg>
             <div className='Number'>
               <h2>{percentage}<span>%</span></h2>
-              <p>{newdonationData.amountPaid}</p>
+              <p>{newdonationData.amount_paid}</p>
             </div>
           </div>
         </div>

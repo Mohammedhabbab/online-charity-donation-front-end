@@ -284,6 +284,7 @@ max-width: 100%;
 display: flex;
     position: relative;
     width: 100%;
+    text-decoration: none;
  
 }
 
@@ -506,12 +507,12 @@ font-size: 62px;
 font-weight: 700;
 
 }
-.Contactus-Container h2{
+.Contactus-Container #h2{
     display: flex;
     position: absolute;
-   
+   text-decoration: none;
         align-items: center;
-      
+      font-weight: 700;
     color:burlywood;
     background-color: white;
     width: 14rem;
