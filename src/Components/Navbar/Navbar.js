@@ -1,32 +1,51 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from 'react-router-dom';
+import { NavLink,useNavigate,useLocation } from 'react-router-dom';
+
+
 import './Navbar.css';
 import logo from './NavAssets/Asset 17.svg'
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Abril+Fatface" />;
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Bangers" />;
-export const Navbar = () => {
-  const [isUserSignedIn, setIsUserSignedIn] = useState(false);
-  const [userType, setUserType] = useState('user');
-  const [charityData, setCharityData] = useState({ logoUrl: '', name: '' });
+
+export const Navbar = ({ mode,handleSignOut }) => {
+    const [showDropdown, setShowDropdown] = useState(false);
+
+  const toggleDropdown = () => {
+    setShowDropdown((prev) => !prev);
+  };
+ const [isUserSignedIn, setIsUserSignedIn] = useState(false);
 
   useEffect(() => {
-    // Fetlogo,name api a
-    fetchCharityData();
-  }, []);
+    // check  token exists
+    const authToken = localStorage.getItem('authToken');
 
-  const fetchCharityData = async () => {
-    try {
-      const response = await fetch('https://jsonplaceholder.typicode.com/users'); 
-      if (response.ok) {
-        const data = await response.json();
-        setCharityData({ logoUrl: data.logoUrl, name: data.name });
-      } else {
-        console.error('Failed to fetch company data');
-      }
-    } catch (error) {
-      console.error('Error fetching company data:', error);
-    }
-  };
+    // update the local state
+    setIsUserSignedIn(!!authToken);
+  }, []); // empty array means this effect runs imed
+
+
+
+
+ // const [charityData, setCharityData] = useState({ logoUrl: '', name: '' });
+
+  // useEffect(() => {
+  //   // Fetlogo,name api a
+  //   fetchCharityData();
+  // }, []);
+
+  // const fetchCharityData = async () => {
+  //   try {
+  //     const response = await fetch('https://jsonplaceholder.typicode.com/users'); 
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       setCharityData({ logoUrl: data.logoUrl, name: data.name });
+  //     } else {
+  //       console.error('Failed to fetch company data');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error fetching company data:', error);
+  //   }
+  // };
 
   return (
     <>
@@ -44,13 +63,23 @@ export const Navbar = () => {
           <li><NavLink id='nav' to="/contactus">تواصل معنا</NavLink></li>
 
           {isUserSignedIn ? (
-            userType === 'user' ? (
-              <li><NavLink id='nav' to="/user-profile">Profile</NavLink></li>
-            ) : (
-              <li><NavLink id='nav' to="/org-profile">Profile</NavLink></li>
-            )
+     <>
+              <li onClick={toggleDropdown} className="dropdown-trigger">
+                <span id="nav">{mode === 'user' ? 'حسابي' : 'حساب الجمعية'}</span>
+                {showDropdown && (
+                  <div className="dropdown-content">
+                    <NavLink  to={mode === 'user' ? '/user-profile' : '/org-profile'}>
+                      {mode === 'user' ? 'الملف الشخصي' : 'ملف الجمعية'}
+                    </NavLink>
+                    <button onClick={handleSignOut}>Sign Out</button>
+                  </div>
+                )}
+              </li>
+            </>
           ) : (
-            <li><NavLink id='nav' to="/signin">Sign In</NavLink></li>
+            <li>
+              <NavLink id="nav" to="/sign">تسجيل</NavLink>
+            </li>
           )}
         </ul>
         

@@ -1,6 +1,6 @@
 import './index.css';
 // import Navbar from './Components/Navbar/Navbar'
-  import Footer from './Components/Footer/Footer'
+
 // import { RouterProvider, createBrowserRouter,createRoutesFromElements, Route , Outlet } from 'react-router-dom'
 // import Home from './Pages/Home'
 // import About from './Pages/About'
@@ -8,7 +8,7 @@ import './index.css';
 // import Sign from './Pages/Sign'
 // import ProfileU from './Pages/ProfileU'
 // import ProfileO from './Pages/ProfileO'
-import '../src/Components/PagesStyles/Services.css'
+// import '../src/Components/PagesStyles/Services.css'
 // import Logo from '../images/Logo.jpg';
 import NavigationRouter from './Routes/NavigationRouter'
 import Card from './Components/PersonCard';
@@ -20,10 +20,7 @@ function App() {
   return (
     <>
      <NavigationRouter />
-     <>
-     <Card/>
-     
-     </>
+    
     
     
     </>

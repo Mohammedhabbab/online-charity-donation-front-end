@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Navbar from '../Components/Navbar/Navbar';
+
 import { FaMapMarkerAlt, FaEnvelope } from 'react-icons/fa'; // Import icons for location and email
-import BackContactImage from '../images/Back.jpg';
-import '../Components/PagesStyles/Contactus.css';
-import ContactUsMap from '../Components/ContactUsMap';
+import BackContactImage from '../Components/images/Back.jpg'
+import '../Components/ContactUs/Contactus.css';
+import ContactUsMap from '../Components/ContactUs/ContactUsMap';
 
 const Contactus = () => {
   const [name, setName] = useState('');
@@ -14,35 +14,30 @@ const Contactus = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('Form submitted with:', { name, email, problem, message });
-  
-    fetch('http://localhost:8000/api/insert_complain', { 
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        problem: problem,
-        message: message,
-      }),
-    })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      
-      console.log('Success:', data);
-     
-    })
-    .catch((error) => {
-    
-      console.error('Error:', error);
-    });
-  
+    fetch('http://localhost:8000/api/insert_complain', {
+       method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+     name:name,
+      email:email,
+      problem:problem,
+      message:message,
+
+    }),
+  })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .catch((error) => {
+        console.log(error);
+        
+      });
+   
     setName('');
     setEmail('');
     setProblem('');
@@ -57,8 +52,10 @@ const Contactus = () => {
         <div>
       <div style={{ backgroundImage: `url(${BackContactImage})` }} className='BackgroundImage'>
     
-        <div className="contact-container">
-         
+        <div className="contact-container"> 
+    <img className='BackgroundImage' src={BackContactImage} alt=''></img>
+        
+         <div className='container' >
           <div className="contact-info">
             <div className="contact-info-item">
               <FaMapMarkerAlt className="contact-info-icon" />
@@ -112,8 +109,10 @@ const Contactus = () => {
           </form>
           <ContactUsMap position={position} />
         </div>
-      </div>
-      </div>
+     </div>
+     </div>
+     </div>
+      
     </>
   );
 };

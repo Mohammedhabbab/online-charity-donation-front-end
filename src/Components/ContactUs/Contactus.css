@@ -15,13 +15,17 @@
 }
 
 .BackgroundImage {
-  background-size: cover;
-  background-position: center;
+display: flex;
+  position: relative;
+  width: 100%;
+  height: 100%;
   
 }
 
 .contact-form {
-  position: relative;
+  position: absolute;
+
+top: 2.5rem;
   left: 55rem;
   max-width: 400px;
   margin: 50px auto;
@@ -69,15 +73,25 @@
 
 .contact-container {
   display: flex;
-  justify-content: center;
-  align-items: flex-start; 
-}
+  position: relative;
+  width: 100%;
 
+  
+}
+.contact-container .container{
+  position: absolute;
+width:80%;
+max-width: 100%;
+ left: 10rem;
+ top:5rem;
+}
 .contact-info {
+  display: flex;
   position: absolute;
   left: 10rem; 
   top: 7rem; 
   display: flex;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
   font-size: larger;
@@ -86,6 +100,7 @@
 
 .contact-info-item {
   display: flex;
+  position: relative;
   align-items: center;
   margin-bottom: 30px;
 }
@@ -101,6 +116,7 @@
   width: 300px; 
   opacity: 0.5;  
   position: absolute;
+  display: flex;
   margin-right: 20px; 
   margin-bottom: 20px; 
   border-radius: 10px;  

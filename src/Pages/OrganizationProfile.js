@@ -1,9 +1,14 @@
 import React from 'react'
 
-const ProfileO = () => {
+const OrganizationProfile = () => {
   return (
-    <div>ProfileO</div>
+    <>
+      <section className='Org'>
+        
+        
+    </section>
+    </>
   )
 }
 
-export default ProfileO
+export default OrganizationProfile
