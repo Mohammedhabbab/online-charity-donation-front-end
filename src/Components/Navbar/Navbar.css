@@ -75,3 +75,50 @@ border-bottom: 3px solid beige;
 color: white;
     text-decoration-style: none;
 }
+
+/* Dropdown container */
+.dropdown-trigger {
+    position: relative;
+    cursor: pointer;
+}
+
+/* Dropdown content */
+.dropdown-content {
+  
+    position: absolute;
+    background-color: #c7b492;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    top: 2rem;
+    /* Adjust the top position as needed */
+    right: 0;
+    padding: 1rem;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    display: block;
+    font-family: Bangers;
+    font-size: 20px;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddcdaf;
+}
+
+/* Style the sign-out button */
+.dropdown-content button {
+    background-color: #ddcdaf;
+    color: black;
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+    font-family: Bangers;
+    font-size: 20px;
+}
+
+.dropdown-content button:hover {
+    background-color: #c7b492;
+}

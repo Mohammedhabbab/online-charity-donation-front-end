@@ -10,7 +10,9 @@ const ServicesResults = ({ results }) => {
           key={index}
           title={result.title}
           description={result.description}
-          imageUrl={result.imageUrl}
+           url={result.url}
+          image={result.image}
+        
         >
           <button onClick={() => window.location.href = `/service/${index+1}`}>اضغط</button>
         </ServicesCard>

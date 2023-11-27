@@ -1,7 +1,7 @@
 
 .ServiceContainer{
   width: 100%;
-  display:grid;
+  display:flex;
   position: relative;
   top:2rem;
 
@@ -9,21 +9,39 @@
 
 
 }
+.Services{
+  position: relative;
+  display: flex;
+  width:100%;
+
+}
+.Services .BackgroundImage {
+  display: flex;
+  position: relative;
+  width: 100%;
+  
+}
+.services-card-container{
+  position: absolute;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
 .services-card {
   border: 2px solid #ccc;
   border-radius: 8px;
-  left: 2rem;
-  margin-right: 3rem;
-  padding: 10px;
-  max-width: 300px; 
+
+  margin: 2rem;
+  padding: 12px;
+  width: 20%; 
   display:inline-block;
   position: relative;
-  top: -55rem;
-  min-height: 27rem;
-  max-height: 29rem;
 
- 
+ height: 20%;
+direction: rtl;
 }
+ 
+
 
 .services-card img {
   max-width: 100%;
@@ -36,6 +54,7 @@
 .services-card-title {
   font-size: 1.25rem;
   margin: 0;
+
 }
 
 .services-card-text {
@@ -57,8 +76,13 @@
   font-size: 1rem;
   width: 100%; 
   transition: background-color 0.3s; 
+ 
 }
-
+.services-card #td{
+text-decoration: none;
+color: white;
+font-weight: 400;
+}
 .services-card button:hover {
   background-color: black;
 }
