@@ -15,7 +15,7 @@ const ServicesCard = ({ title,description,url,image }) => {
       <div className="services-card-body">
         <h5 className="services-card-title">{title}</h5>
         <p className="services-card-text">{description}</p>
-        <button><NavLink id="td" to={`/services/${url}`}>تواصل معنا</NavLink></button> 
+        <button><NavLink id="td" to={`/services/${url}`}>اضغط</NavLink></button> 
       </div>
     </div>
   );

@@ -28,6 +28,20 @@ function Sign() {
  const [isUserSignedIn, setIsUserSignedIn] = useState(false);
   const [token, setToken] = useState(localStorage.getItem('authToken') || '');
 
+const validatePassword = (password) => {
+  // Password should have at least 8 characters
+  return password.length >= 8;
+};
+const validateMobileNumber = (mobileNumber) => {
+  // Simple check for a valid numeric mobile number
+  return /^\d+$/.test(mobileNumber);
+};
+
+const validateEmail = (email) => {
+  // Simple email format check
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+};
+
   useEffect(() => {
     // Update the token state when the localStorage changes
     setToken(localStorage.getItem('authToken') || '');
@@ -47,7 +61,17 @@ const handleModeSwitch = () => {
   
  const handleSignIn = (e) => {
   e.preventDefault();
- console.log('Sign in button clicked');
+   console.log('Sign in button clicked');
+   if (!validatePassword(mode === 'user' ? signInPassword : orgsignInPassword)) {
+    console.log('Password should have at least 8 characters.');
+    return;
+  }
+
+  // Email validation
+  if (!validateEmail(mode === 'user' ? signInEmail : orgsignInEmail)) {
+    console.log('Please enter a valid email address.');
+    return;
+  }
   // Check if the email or password field is empty
   if (!signInEmail || !signInPassword) {
    console.log('Please fill in both email and password.');
@@ -82,7 +106,7 @@ const handleModeSwitch = () => {
           setToken(data.access_token);
           setIsUserSignedIn(true);
           setMode(data.mode);
-          navigate('/', { replace: true });
+      navigate('/', { replace: true, state: { mode, isUserSignedIn } });
         } else {
           setLoginStatus('Invalid login. Please try again.');
         }
@@ -129,6 +153,22 @@ const handleModeSwitch = () => {
  if (mode === 'organization' && (!orgsignUpName || !orgsignUpEmail || !orgsignUpPassword || !orgsignUpPhone || !orgsignUpAddress) ){
     console.log('Please fill in all required fields.');
     return;
+   }
+   if (!validatePassword(mode === 'user' ? signUpPassword : orgsignUpPassword)) {
+    console.log('Password should have at least 8 characters.');
+    return;
+  }
+
+  // Mobile number validation
+  if (!validateMobileNumber(mode === 'user' ? signUpPhone : orgsignUpPhone)) {
+    console.log('Please enter a valid mobile number.');
+    return;
+  }
+
+  // Email validation
+  if (!validateEmail(mode === 'user' ? signUpEmail : orgsignUpEmail)) {
+    console.log('Please enter a valid email address.');
+    return;
   }
   if (mode === 'user') {
     // Additional checks and API call for user sign-up
@@ -161,7 +201,7 @@ const handleModeSwitch = () => {
           setFormSubmitted(true);
 
           setTimeout(() => {
-            navigate('/', { replace: true });
+          navigate('/', { replace: true, state: { mode, isUserSignedIn } });
           }, 10000);
         } else {
           setLoginStatus('Sign Up failed. Please try again.');

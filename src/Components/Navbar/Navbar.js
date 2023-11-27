@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink,useNavigate } from 'react-router-dom';
+import { NavLink,useNavigate,useLocation } from 'react-router-dom';
 
 
 import './Navbar.css';
@@ -7,13 +7,22 @@ import logo from './NavAssets/Asset 17.svg'
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Abril+Fatface" />;
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Bangers" />;
 
-export const Navbar = ({ isUserSignedIn, mode, handleSignOut }) => {
+export const Navbar = ({ mode,handleSignOut }) => {
     const [showDropdown, setShowDropdown] = useState(false);
 
   const toggleDropdown = () => {
     setShowDropdown((prev) => !prev);
   };
- 
+ const [isUserSignedIn, setIsUserSignedIn] = useState(false);
+
+  useEffect(() => {
+    // check  token exists
+    const authToken = localStorage.getItem('authToken');
+
+    // update the local state
+    setIsUserSignedIn(!!authToken);
+  }, []); // empty array means this effect runs imed
+
 
 
 

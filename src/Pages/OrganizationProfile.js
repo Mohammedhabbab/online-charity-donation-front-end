@@ -2,7 +2,12 @@ import React from 'react'
 
 const OrganizationProfile = () => {
   return (
-    <div>OrganizationProfile</div>
+    <>
+      <section className='Org'>
+        
+        
+    </section>
+    </>
   )
 }
 
