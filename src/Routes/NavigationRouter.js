@@ -15,7 +15,7 @@ import PersonCard from '../Components/PersonCard';
 // import Navbar from '../Components/Navbar/Navbar'
 
 const router = createBrowserRouter(
-    createRoutesFromElements(
+    createRoutesFromElements(<>
       <Route path="/" element={<RootPage />}>
         <Route index element={<Home />} />
             <Route path="services" element={<Services />} />
@@ -26,11 +26,12 @@ const router = createBrowserRouter(
         <Route path="AddingHero" element={<HeroAdd />} />
         <Route path="user-profile" element={<UserProfile />} />
          <Route path="org-profile" element={<OrganizationProfile/>}/>
-         <Route path="Card" element={<PersonCard />} />
 
          
         </Route>
-    )
+        <Route path="card" element={<PersonCard />} />
+    </>
+    ),
 );
 
 function Routee() {

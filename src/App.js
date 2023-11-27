@@ -20,9 +20,6 @@ function App() {
   return (
     <>
      <NavigationRouter />
-    
-    
-    
     </>
   );
 }
