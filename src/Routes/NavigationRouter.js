@@ -4,10 +4,12 @@ import Home from '../Pages/Home'
 import Services from '../Pages/Services'
 import About from '../Pages/About'
 import Contactus from '../Pages/Contactus'
-import Sign from '../Pages/Sign'
+import Sign from '../Pages/SignIn'
 import { RootPage } from '../Pages/Root'
 import OrganizationProfile from '../Pages/OrganizationProfile'
 import UserProfile from '../Pages/UserProfile'
+import PersonCard from '../Components/PersonCard';
+
 // import Navbar from '../Components/Navbar/Navbar'
 
 const router = createBrowserRouter(
@@ -20,6 +22,9 @@ const router = createBrowserRouter(
         <Route path="sign" element={<Sign />} />
         <Route path="user-profile" element={<UserProfile />} />
          <Route path="org-profile" element={<OrganizationProfile/>}/>
+         <Route path="Card" element={<PersonCard />} />
+
+         
         </Route>
     )
 );

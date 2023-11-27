@@ -14,28 +14,46 @@ const Contactus = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('Form submitted with:', { name, email, problem, message });
-   /* fetch('')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .catch((error) => {
-        setError(error);
-        
-      });*/
-   
+  
+    fetch('http://localhost:8000/api/insert_complain', { 
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        problem: problem,
+        message: message,
+      }),
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      
+      console.log('Success:', data);
+     
+    })
+    .catch((error) => {
+    
+      console.error('Error:', error);
+    });
+  
     setName('');
     setEmail('');
     setProblem('');
     setMessage('');
   };
+  
+  
   const position = [33.4913, 36.2983];
 
   return (
     <>
-      <Navbar />
         <div>
       <div style={{ backgroundImage: `url(${BackContactImage})` }} className='BackgroundImage'>
     

@@ -5,7 +5,7 @@ import * as Components from '../Components/styledcomponents/Sign';
 function Sign() {
   const [mode, setMode] = useState('user');
   const [signIn, toggle] = useState(true);
-    const [signInEmail, setSignInEmail] = useState('');
+  const [signInEmail, setSignInEmail] = useState('');
   const [signInPassword, setSignInPassword] = useState('');
   const [signUpName, setSignUpName] = useState('');
   const [signUpEmail, setSignUpEmail] = useState('');

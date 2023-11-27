@@ -1,20 +1,21 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './ServicesCard.css';
-import OrphanImage from '../images/orphan.jpg';
-import MedicalImage from '../images/Medical.png';
-import StudentsImage from '../images/Students.jpg';
-import SchoolImage from '../images/School.png';
 
+const ServicesCard = ({ id, title, description, imageUrl }) => {
+  const navigate = useNavigate();
 
-const ServicesCard = ({ title, description, imageUrl }) => {
-  console.log(title)
+  const navigateToService = () => {
+    navigate(`/service/${id}`); 
+  };
+
   return (
     <div className="services-card">
       <img src={imageUrl} alt={title} />
       <div className="services-card-body">
         <h5 className="services-card-title">{title}</h5>
         <p className="services-card-text">{description}</p>
-        <button>اضغط</button> 
+        <button onClick={navigateToService}>اضغط</button>
       </div>
     </div>
   );

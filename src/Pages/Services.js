@@ -5,7 +5,7 @@ import ServicesCard from '../Components/ServicesCard';
 import '../Components/PagesStyles/Services.css';
 import '../Components/ServicesCard.css';
 import BackImage from '../images/Back.jpg';
-
+import CardC from '../Components/PersonCard';
 const Services = () => {
   const [services, setServices] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -14,7 +14,7 @@ const Services = () => {
   const [filteredServices, setFilteredServices] = useState();
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/get_donation_types')
+    fetch('http://localhost:8000/api/get_services')
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -47,12 +47,12 @@ const Services = () => {
     
     return (
     <>  
-      <Navbar />
       <div className='ServiceContainer'>
+       
         <ServicesSearchbar handleSearch={handleSearch} />
-        <div className='Services'>
+         <div className='Services'>
           <img src={BackImage} className='BackgroundImage'></img>
-          <div className="services-grid">
+          
             {isLoading ? (
               <div>Loading services...</div>
             ) : error ? (
@@ -61,15 +61,18 @@ const Services = () => {
               filteredServices.map((service) => ( 
                 <ServicesCard
                   key={service.id}
+                  id={service.id}
                   title={service.title}
                   description={service.description}
                   imageUrl={service.imageUrl}
                 />
+                
               ))
             )}
+          
           </div>
         </div>
-      </div>
+      
     </>
   );
 };
