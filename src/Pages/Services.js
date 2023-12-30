@@ -49,7 +49,9 @@ const Services = () => {
     <>  
     
       <div className='ServiceContainer'>
-        <ServicesSearchbar handleSearch={handleSearch} />
+      
+          <ServicesSearchbar handleSearch={handleSearch} />
+          
         <div className='Services'>
           <img src={BackImage} className='BackgroundImage'></img>
           <div className="services-card-container">
@@ -69,7 +71,8 @@ const Services = () => {
               ))
             )}
           </div>
-        </div>
+            </div>
+          
       </div>
     </>
   );

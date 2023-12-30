@@ -219,7 +219,7 @@ const handleModeSwitch = () => {
   return (
   
 <>
-
+      <div style={{ backgroundColor:'#c7b492'}} >
  <Components.SwitchButton onClick={handleModeSwitch}>
         Switch to {mode === 'user' ? 'Organization' : 'User'}
       </Components.SwitchButton>
@@ -436,7 +436,7 @@ const handleModeSwitch = () => {
             {loginStatus && <p>{loginStatus}</p>}
           </Components.Container>
         )}
-      </>
+      </div></>
   );
 }
 

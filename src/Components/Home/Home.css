@@ -1,167 +1,280 @@
-
-.Urgent-Container{
-    display: flex;
-    position: relative;
-width: 100%;
-height: 9rem;
-background-color: black;
-direction: rtl;
-   
-
-}
-.Urgent-Container .urgent{
-    display: flex;
+.Urgent-Container {
+    background-color: black;
+display: flex;
+  
     position: relative;
     width: 100%;
-right: 10rem;
-}
-.Urgent-Container .urgent h3 {
-    position: relative;
-    font-size: 36px;
-    color: white;
-left: 7rem;
-top: 1rem;
-
-}
-
-.Urgent-Container .urgent #urgent-img{
-    position: relative;
-    border-radius: 50%;
-    max-width: 5rem;
-        max-height: rem;
--webkit-margin-start: 72%;
  
+    height: 10rem;
+    direction: rtl;
 }
-.CircularBar-Container{
-    position: relative;
+
+.Urgent-Content {
+    display: none;
+    height: 2rem;
+    /* Hide all by default */
+}
+
+.Urgent-Content.active {
     display: flex;
+    height: 2rem;
+    /* Display only the active one */
+}
+
+
+
+.CircularBar-Container {
+    position: absolute;
+   display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    gap:40px;
-top: -2.4rem;
+    flex-wrap: nowrap;
+  height:8rem;
+  top: 1rem;
+   left:2rem;
+  
+
 }
-.CircularBar-Container .Progress{
+
+
+.CircularBar-Container .Progress {
     position: relative;
     width: 220px;
     height: 220px;
-    
     background: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.CircularBar-Container .Progress .Fill{
-position: relative;
-width: 150px;
-height: 150px;
 
-}
 
-.CircularBar-Container .Progress .Fill svg{
+
+.CircularBar-Container .Progress .Fill {
     position: relative;
-        width: 150px;
-        height: 150px;
-        transform: rotate(270deg);
+    width: 150px;
+    height: 150px;
+
 }
 
-.CircularBar-Container .Progress .Fill svg circle{
-width: 100%;
-height: 100%;
-fill: transparent;
-stroke-width: 2;
-stroke: #191919;
-transform: translate(5px,5px) ;
+.CircularBar-Container .Progress .Fill svg {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    transform: rotate(270deg);
+}
+
+.CircularBar-Container .Progress .Fill svg circle {
+    width: 100%;
+    height: 100%;
+    fill: transparent;
+    stroke-width: 2;
+    stroke: #191919;
+    transform: translate(5px, 5px);
 
 
 }
 
 .CircularBar-Container .Progress .Fill svg circle:nth-child(2) {
-stroke: var(--color);
-stroke-dasharray: 440;
-stroke-dashoffset: calc(440 - (440 * var(--percentage)) / 100);
-opacity: 0;
-animation: fadeIn 1s linear forwards;
-animation-delay: 2.5s;
+    stroke: var(--color);
+    stroke-dasharray: 440;
+    stroke-dashoffset: calc(440 - (440 * var(--percentage)) / 100);
+    opacity: 0;
+    animation: fadeIn 1s linear forwards;
+    animation-delay: 2.5s;
 }
-@keyframes fadeIn{
-    0%{
+
+@keyframes fadeIn {
+    0% {
         opacity: 0;
-    }100%{
+    }
+
+    100% {
         opacity: 1;
     }
 }
 
-.Dot{
+.Dot {
     position: absolute;
     inset: 5px;
     z-index: 10;
 
     animation: animateDot 2s linear forwards;
 }
-@keyframes animateDot{
-    0%{
+
+@keyframes animateDot {
+    0% {
         transform: rotate(0deg);
-    }100%{
+    }
+
+    100% {
         transform: rotate(calc(3.6deg *var(--percentage)));
     }
 }
-.Dot::before{
+
+.Dot::before {
     content: '';
     position: absolute;
-top: -5px;
-left: 50%;
-transform: translateX(-50%);
-width: 10px;
-height: 10px;
-border-radius: 50%;
-background: var(--color) ;
-box-shadow: 0 0 10px var(--color),
-0 0 30px var(--color);
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color);
+    box-shadow: 0 0 10px var(--color),
+        0 0 30px var(--color);
 
 }
-.Number{
-position: absolute;
-inset: 0;
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction: column;
-direction: ltr;
+
+.Number {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    direction: ltr;
 
 }
+
 .Number h2 {
-display: flex;
-position: absolute;
-justify-content: center;
+    display: flex;
+    position: absolute;
+    justify-content: center;
     align-items: center;
     color: #fff;
     font-weight: 700;
-    font-size: 3rem;
-    top:-0.3rem;
-    left: 2.7rem;
+    font-size: 2.2rem;
+   
+    left: 1.5rem;
 
 }
-.Number h2 span{
+
+.Number h2 span {
     position: absolute;
-    left: 3.4rem;
-    top:1.5rem;
-color: #fff;
-    font-weight:300;
+    left: 5.8rem;
+    justify-content: center;
+        align-items: center;
+        top:1rem;
+    color: #fff;
+    font-weight: 300;
     font-size: 1.3rem;
 }
-.Number p{
+
+.Number p {
+    position: absolute;
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 2px;
+    top: 7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75)
+}
+.Urgent-Info-Container{
+  background-color: #ddcdaf;
+  border: 5px solid whitesmoke;
+    border-radius: 0.1%;
+    width: 50rem;
+    height:8rem;
+    top:0.75rem;
+  left:20%;
+display: flex;
 position: absolute;
-        font-weight: 300;
-        font-size:1rem;
-        line-height: 2px;
-top:6rem;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color:rgba(255, 255, 255, 0.75)
 }
 
+.Time{
+    position: absolute;
+    right: 24rem;
+    width:22rem;
+  top: 2rem;
+}
+.Time-Container{
+    display: flex;
+    position: relative;
+    top:1.1rem;
+}
+.Time h4  {
+    position: absolute;
 
+color: #191919;
+    word-wrap: nowrap;
+    font-size: 1.3rem;
+  word-spacing: 0.4rem;
+    text-transform: uppercase;
+    direction: rtl;
+    
+}
+
+.Time #sec {
+    background-color: black;
+    border-radius: 0.1%;
+    position: absolute;
+    color: white;
+padding: 0.4rem;
+align-items: center;
+text-align: center;
+justify-content: center;
+width: 4.8rem;
+right:18rem;
+margin-right: 15px;
+font-size: 1.2rem;
+
+    text-transform: uppercase;
+    
+  
+}
+.Time #min {
+    background-color: black;
+    border-radius:0.1%;
+    font-size: 12px;
+    position: absolute;
+    color: white;
+    padding:0.4rem;
+    right: 12rem;
+    margin-right: 15px;
+    font-size: 1.2rem;
+    direction: rtl;
+    text-transform: uppercase;
+align-items: center;
+    text-align: center;
+    justify-content: center;
+    width: 4.5rem;
+
+}
+.Time #hours {
+    background-color: black;
+    border-radius: 0.1%;
+    position: absolute;
+    color: white;
+    padding: 0.4rem;
+    right:6rem;
+    margin-right: 15px;
+    font-size: 1.2rem;
+    direction: rtl;
+    text-transform: uppercase;
+align-items: center;
+    text-align: center;
+    justify-content: center;
+    width: 4.5rem;
+
+}
+.Time #days {
+    background-color: black;
+    border-radius: 0.1%;
+    position: absolute;
+    color: white;
+    padding: 0.4rem;
+    margin-right: 15px;
+    font-size: 1.2rem;
+    direction: rtl;
+    text-transform: uppercase;
+align-items: center;
+    text-align: center;
+    justify-content: center;
+    width: 4.5rem;
+
+}
 /*Hero-Section*/
 
 .Hero-Section {
@@ -232,9 +345,14 @@ height: 100%;
 .Slider-Button.Prev {
     left: 10px;
 }
-
+.Slider-Button.PrevS {
+    left: 0px;
+}
 .Slider-Button.Next {
     right: 10px;
+}
+.Slider-Button.NextS {
+    right: 50px;
 }
 
 
@@ -327,7 +445,7 @@ align-items: center;
     text-align: center;
 left: -15.5rem;
 width: 1rem;
-top: 16rem;
+top: 18rem;
 
 
 }
@@ -360,7 +478,7 @@ align-items: center;
     left: -15.5rem;
     width: 1rem;
 
- top: 16rem;
+ top: 17rem;
   
 
 }
@@ -392,7 +510,7 @@ white-space: wrap;
         text-align: center;
         left: -15.5rem;
 
- top: 16rem;
+ top: 18rem;
     width: 1rem;
     
 
@@ -426,7 +544,7 @@ align-items: center;
     left: -15.5rem;
     width: 1rem;
 
-   top:16rem;
+   top:17rem;
 
 }
 

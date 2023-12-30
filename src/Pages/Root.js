@@ -26,11 +26,12 @@ export const RootPage = () => {
   return (
       <>
       <Navbar isUserSignedIn={isUserSignedIn} mode={mode} handleSignOut={handleSignOut} />
-       <div className="Full"> 
-        <Outlet />
+      <div className='Fully'><Outlet /></div>
       
+        
+     
       <Footer />
-       </div>
+      
     </>
   )
 }

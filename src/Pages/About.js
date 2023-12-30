@@ -1,10 +1,15 @@
 import React from 'react'
+import '../Components/Org/org.css'
 const About = () => {
 
   return (
     <>
-     
-      About
+      <section>
+       
+          About
+      
+     </section>
+      
     </>
   )
 }

@@ -5,6 +5,7 @@ const Adding = () => {
   const [url, setUrl] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState(null);
+  const [shape, setShape] = useState('');
 
   const handleImageChange = (e) => {
     // Handle image selection from file input
@@ -19,6 +20,7 @@ const Adding = () => {
       formData.append('url', url);
       formData.append('description', description);
       formData.append('image', image);
+      formData.append('shape',shape)
 
       const response = await fetch('http://localhost:8000/api/insert_service', {
         method: 'POST',
@@ -32,6 +34,7 @@ const Adding = () => {
         setUrl('');
         setDescription('');
         setImage(null);
+        setShape('');
       } else {
         console.error('Failed to add data to the database.');
       }
@@ -41,7 +44,7 @@ const Adding = () => {
   };
 
   return (
-    <div>
+    <div style={{color : 'white'}}>
       <h2>Adding Service</h2>
       <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
         <label>
@@ -62,6 +65,12 @@ const Adding = () => {
         <label>
           Image:
           <input type="file" accept="image/*" onChange={handleImageChange} />
+        </label>
+        <br />
+       
+        <label>
+          Shape:
+          <textarea value={shape} onChange={(e) => setShape(e.target.value)} />
         </label>
         <br />
         <button type="submit">Add Data</button>

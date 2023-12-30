@@ -1,7 +1,7 @@
 .Navbar {
 max-width: 100%;
     padding: 0.5%;
-    
+    height:4rem;
     color: white;
      background-color:#c7b492 ; 
 
@@ -20,8 +20,8 @@ max-width: 100%;
                     position: absolute;
                     left: 5rem;
           
-                    max-width: 4rem;
-                    max-height: 4rem;
+                    max-width: 3.2rem;
+                    max-height: 3.2rem;
                    
                 }
                                 .logo-container #charity-name {
@@ -64,13 +64,15 @@ border-bottom: 3px solid beige;
 .Navbar ul {
     -webkit-margin-start: 1%;
     list-style-type: none;
+    top:4rem;
     direction: rtl;
+  
 }
 
 .Navbar li {
     display: inline-block;
     position: relative;
-
+top:1rem;
     margin-right: 5%;
 color: white;
     text-decoration-style: none;
