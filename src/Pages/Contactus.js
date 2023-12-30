@@ -43,10 +43,14 @@ const Contactus = () => {
     setProblem('');
     setMessage('');
   };
+  
+  
   const position = [33.4913, 36.2983];
 
   return (
     <>
+        <div>
+      <div style={{ backgroundImage: `url(${BackContactImage})` }} className='BackgroundImage'>
     
       <div className="contact-container"> 
         <body>
@@ -107,6 +111,8 @@ const Contactus = () => {
           <ContactUsMap position={position} />
           </div>
       </body>
+     </div>
+     </div>
      </div>
       
     </>

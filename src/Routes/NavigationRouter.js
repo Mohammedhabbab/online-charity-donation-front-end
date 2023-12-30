@@ -41,7 +41,7 @@ function Routee() {
 
   const createDynamicRoutes = () => {
     const dynamicRoutes = services.flatMap((service) => {
-      // Define the paths and components for each service
+     
       const pathsAndComponents = [
         {
           key: `org-profile/manage/${service.url}`,
@@ -98,8 +98,6 @@ function Routee() {
 
     return DynamicComponent ? <DynamicComponent service={service} /> : null;
   };
-
-  
 
 
   const DynamicOrgManageComponent = ({ service }) => {
@@ -172,6 +170,7 @@ function Routee() {
 
   const router = createBrowserRouter(
     createRoutesFromElements(
+
       <Route path="/" element={<RootPage />}>
         <Route index element={<Home />} />
         <Route path="services" element={<Services />} />
@@ -191,6 +190,15 @@ function Routee() {
       </Route>
     )
   );
+         <Route path="org-profile" element={<OrganizationProfile/>}/>
+
+         
+        </Route>
+        <Route path="card" element={<PersonCard />} />
+    </>
+    ),
+);
+
 
   return (
     <>
