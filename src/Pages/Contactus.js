@@ -52,7 +52,8 @@ const Contactus = () => {
         <div>
       <div style={{ backgroundImage: `url(${BackContactImage})` }} className='BackgroundImage'>
     
-        <div className="contact-container"> 
+      <div className="contact-container"> 
+        <body>
     <img className='BackgroundImage' src={BackContactImage} alt=''></img>
         
          <div className='container' >
@@ -108,7 +109,8 @@ const Contactus = () => {
             <button type="submit">إرسال</button>
           </form>
           <ContactUsMap position={position} />
-        </div>
+          </div>
+      </body>
      </div>
      </div>
      </div>

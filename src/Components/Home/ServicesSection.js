@@ -10,6 +10,35 @@ const ServicesSection = () => {
   const [showLeftButton, setShowLeftButton] = useState(false);
   const [showRightButton, setShowRightButton] = useState(true);
 
+  const handleSlide = (direction) => {
+    const scrollWidth = servicesCardRef.current.offsetWidth;
+    const currentScrollLeft = servicesSectionRef.current.scrollLeft;
+
+    if (direction === 'left') {
+      servicesSectionRef.current.scrollTo({
+        left: currentScrollLeft - scrollWidth,
+        behavior: 'smooth',
+      });
+    } else {
+      servicesSectionRef.current.scrollTo({
+        left: currentScrollLeft + scrollWidth,
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  const scrollByInterval = () => {
+    if (servicesSectionRef.current && servicesCardRef.current) {
+      const scrollWidth = servicesCardRef.current.offsetWidth;
+      servicesSectionRef.current.scrollBy({
+        left: scrollWidth,
+        behavior: 'smooth',
+      });
+    }
+
+    setTimeout(scrollByInterval, 10000);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -28,69 +57,52 @@ const ServicesSection = () => {
     fetchData();
   }, []);
 
-
-const handleSlide = (direction) => {
-  const scrollWidth = servicesCardRef.current.offsetWidth;
-  const currentScrollLeft = servicesSectionRef.current.scrollLeft;
-
-  if (direction === 'left') {
-    servicesSectionRef.current.scrollTo({
-      left: currentScrollLeft - scrollWidth,
-      behavior: 'smooth',
-    });
-  } else {
-    servicesSectionRef.current.scrollTo({
-      left: currentScrollLeft + scrollWidth,
-      behavior: 'smooth',
-    });
-  }
-};
   useEffect(() => {
-     const interval = setInterval(() => {
-      if (servicesSectionRef.current && servicesCardRef.current) {
-        const scrollWidth = servicesCardRef.current.offsetWidth;
-        servicesSectionRef.current.scrollBy({
-          left: scrollWidth,
-          behavior: 'smooth',
-        });
+    const handleScroll = () => {
+      const currentScrollLeft = servicesSectionRef.current?.scrollLeft || 0;
+      const maxScrollLeft =
+        (servicesSectionRef.current?.scrollWidth || 0) -
+        (servicesSectionRef.current?.clientWidth || 0);
+
+      setShowLeftButton(currentScrollLeft > 0);
+      setShowRightButton(currentScrollLeft < maxScrollLeft - 1);
+    };
+
+    servicesSectionRef.current?.addEventListener('scroll', handleScroll);
+
+    // Cleanup function
+    return () => {
+      // Check if the ref and current property are available before removing the listener
+      if (servicesSectionRef.current) {
+        servicesSectionRef.current.removeEventListener('scroll', handleScroll);
       }
-     }, 10000);     return () => clearInterval(interval);
-    
+    };
   }, []);
+
+
   useEffect(() => {
-  const handleScroll = () => {
-    const currentScrollLeft = servicesSectionRef.current.scrollLeft;
-    const maxScrollLeft =
-      servicesSectionRef.current.scrollWidth - servicesSectionRef.current.clientWidth;
+    scrollByInterval();
 
-    setShowLeftButton(currentScrollLeft > 0);
-    setShowRightButton(currentScrollLeft < maxScrollLeft - 1);
-  };
-
-  servicesSectionRef.current.addEventListener('scroll', handleScroll);
-
-  return () => {
-    servicesSectionRef.current.removeEventListener('scroll', handleScroll);
-  };
-}, []);
-
+    // Clear interval when the component is unmounted
+    return () => {
+      clearTimeout(scrollByInterval);
+    };
+  }, []);
 
   return (
     <>
       <div className='Services-Section' ref={servicesSectionRef}>
-        
         {Array.from({ length: Math.ceil(services.length / servicesPerSet) }).map(
           (set, setIndex) => (
             <div key={setIndex} className='Service-Card' ref={servicesCardRef}>
               <button
-          className="Slider-Button"
-          onClick={() => handleSlide('left')}
-          style={{ display: showLeftButton ? 'block' : 'none' }}
-        >
-          ←
-        </button>
+                className="Slider-Button PrevS"
+                onClick={() => handleSlide('left')}
+                style={{ display: showLeftButton ? 'block' : 'none' }}
+              >
+                &#9664;
+              </button>
               <h2>خدماتنا</h2>
-
               <img src={svg} alt='' />
               {services
                 .slice(setIndex * servicesPerSet, (setIndex + 1) * servicesPerSet)
@@ -98,27 +110,24 @@ const handleSlide = (direction) => {
                   <Link
                     key={index + setIndex * servicesPerSet}
                     to={`/services/${service.url}`}
-                    className={`Service-Card ${
-                      (index + setIndex * servicesPerSet) % 4 === 0 ? 'A1' : ''
-                    } ${(index + setIndex * servicesPerSet) % 4 === 1 ? 'A2' : ''} ${
-                      (index + setIndex * servicesPerSet) % 4 === 2 ? 'A3' : ''
-                    } ${(index + setIndex * servicesPerSet) % 4 === 3 ? 'A4' : ''}`}
+                    className={`Service-Card ${(index + setIndex * servicesPerSet) % 4 === 0 ? 'A1' : ''
+                      } ${(index + setIndex * servicesPerSet) % 4 === 1 ? 'A2' : ''} ${(index + setIndex * servicesPerSet) % 4 === 2 ? 'A3' : ''
+                      } ${(index + setIndex * servicesPerSet) % 4 === 3 ? 'A4' : ''}`}
                   >
                     <img src={service.image} alt={service.title} />
                     <h3>{service.title}</h3>
                   </Link>
                 ))}
-                 <button
-          className="Slider-Button Next"
-          onClick={() => handleSlide('right')}
-          style={{ display: showRightButton ? 'block' : 'none' }}
-        >
-          →
-        </button>
+              <button
+                className="Slider-Button NextS"
+                onClick={() => handleSlide('right')}
+                style={{ display: showRightButton ? 'block' : 'none' }}
+              >
+                &#9654;
+              </button>
             </div>
           )
         )}
-     
       </div>
     </>
   );

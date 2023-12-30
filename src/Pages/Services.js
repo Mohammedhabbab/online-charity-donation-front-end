@@ -48,8 +48,8 @@ const Services = () => {
     return ( 
     <>  
       <div className='ServiceContainer'>
-        <ServicesSearchbar handleSearch={handleSearch} />
-         <div className='Services'>
+          <ServicesSearchbar handleSearch={handleSearch} />
+        <div className='Services'>
           <img src={BackImage} className='BackgroundImage'></img>
           <div className="services-card-container">
             {isLoading ? (
@@ -71,10 +71,11 @@ const Services = () => {
             )}
           
           </div>
-        </div>
-        </div>
-      
-    </> 
-    );};
+            </div>
+          
+      </div>
+    </>
+  );
+};
 
 export default Services;

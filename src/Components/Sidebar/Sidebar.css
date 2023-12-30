@@ -1,0 +1,210 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    
+}
+
+
+
+.navigation{
+    top: 20px;
+    right: 20px;
+    bottom: 20px;
+ width: 60px;
+
+    border-radius: 10px;
+    border-right: 5px solid #c7b492;
+    box-sizing: initial;
+    background: #c7b492;
+    position: absolute;
+    transition: width 0.5s;
+    overflow-x: hidden;
+  
+    direction: rtl;
+}
+.navigation.active{
+    width: 13.40%;
+    position: absolute;
+}
+.navigation ul{
+    position: absolute;
+    top: 0;
+right: 0px;
+width:100%;
+padding-right: 5px;
+padding-top: 40px;
+direction: rtl;
+}
+.navigation ul li{
+    position: relative;
+    list-style: none;
+    width: 100%;
+  
+   
+}
+.navigation ul li #nav{
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: white;
+    border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        
+}
+.navigation ul li #nav .icon {
+    position: relative;
+    display: block;
+   min-width: 60px;
+   height: 60px;
+   line-height: 60px;
+   text-align: center;
+
+}
+.navigation ul li #nav .icon ion-icon{
+    font-size: 1.5em;
+}
+.navigation ul li #nav .title{
+    position: relative;
+    display: block;
+    padding-right: 10px;
+    height: 60px;
+    line-height: 60px;
+    white-space: normal;
+}
+.navigation ul li #nav.active{
+    background-color: black;
+}
+.navigation ul li #nav.active{
+    color: white;
+}
+
+.navigation ul li b:nth-child(1){
+position: absolute;
+top: -20px;
+height: 20px;
+width: 100%;
+background: black;
+display: none;
+}
+.navigation ul li b:nth-child(1)::before{
+content: '';
+position: absolute;
+top: 0;  
+left: 0;   
+width: 100%;
+height: 100%;
+border-bottom-left-radius: 20px;
+background: #c7b492;
+}
+
+
+.navigation ul li b:nth-child(2) {
+    position: absolute;
+    bottom: -20px;
+    height: 20px;
+    width: 100%;
+    background: black;
+    display: none;
+}
+
+.navigation ul li  b:nth-child(2)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 20px;
+    background: #c7b492;
+
+
+
+
+}
+
+
+.Toggle{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 50px;
+    height: 50px;
+background: #c7b492;
+border-radius: 10px;
+cursor: pointer;
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+.Toggle.active{
+    background: #fff;
+}
+.Toggle.active ion-icon{
+    position: absolute;
+    color:black;
+    font-size: 34px;
+
+   
+}
+.Toggle ion-icon.open,
+.Toggle.active ion-icon.close{
+    display: block;
+}
+.Toggle ion-icon.close,
+.Toggle.active ion-icon.open {
+    display: none;
+}
+/* New styles for services list */
+.services-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    display: none;
+    /* Hide the services list by default */
+}
+
+.services-list.active {
+    display: block;
+    /* Show the services list when active */
+}
+.services-list li{
+    display: flex;
+    position: relative;
+    align-items: center;
+    top: 0.4rem;
+}
+
+.services-list li #nav2 {
+    width: 100%;
+    position: relative;
+    display: flex;
+    text-decoration: none;
+    color: white;
+    padding-right: 15px;
+    margin-bottom: 6px;
+    /* Adjust as needed */
+}
+
+.services-list li #nav2 .icon {
+    min-width: 30px;
+    /* Adjust as needed */
+    text-align: center;
+}
+
+.services-list li #nav2 .title {
+    padding-right: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.services-list li #nav2.active {
+    background-color: black;
+    color: white;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
