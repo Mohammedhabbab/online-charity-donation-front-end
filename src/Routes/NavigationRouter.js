@@ -16,6 +16,8 @@ import OrganizationProfile from '../Pages/Org Pages/OrganizationProfile';
 import UserProfile from '../Pages/UserProfile';
 import OrgNotifications from '../Pages/Org Pages/OrgNotifications';
 import OrgManageAccount from '../Pages/Org Pages/OrgManageAccount';
+import CartHome from '../Components/Cart/CartHome';
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 
 function Routee() {
@@ -186,11 +188,15 @@ function Routee() {
         <Route path="org-profile" element={<OrganizationProfile />} />
         {createDynamicRoutes()}
         <Route path="org-notifications" element={<OrgNotifications />} />
-        <Route path="org-manage-account" element={<OrgManageAccount />} />
+        <Route path="org-manage-account" element={<OrgManageAccount />} /> 
+        <Route path="CartHome" element={<CartHome/>}/>
       </Route>
+
+      
     )
   );
          <Route path="org-profile" element={<OrganizationProfile/>}/>
+         
 
          
    
