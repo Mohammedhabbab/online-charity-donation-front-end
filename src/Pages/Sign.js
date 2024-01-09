@@ -6,8 +6,7 @@ import * as Components from '../Components/styledcomponents/Sign';
 function Sign() {
   const [mode, setMode] = useState('user');
   const [signIn, toggle] = useState(true);
- 
-  const [signInEmail, setSignInEmail] = useState('');
+ const [signInEmail, setSignInEmail] = useState('');
   const [signInPassword, setSignInPassword] = useState('');
   const [signUpName, setSignUpName] = useState('');
   const [signUpEmail, setSignUpEmail] = useState('');
@@ -36,21 +35,21 @@ function Sign() {
 
  
   const validatePassword = (password) => {
-    // Password should have at least 8 characters
+    /
     return password.length >= 8;
   };
   const validateMobileNumber = (mobileNumber) => {
-    // Simple check for a valid numeric mobile number
+  
     return /^\d+$/.test(mobileNumber);
   };
 
   const validateEmail = (email) => {
-    // Simple email format check
+   
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
   useEffect(() => {
-    // Update the token state when the localStorage changes
+   
     setToken(localStorage.getItem('authToken') || '');
   }, [token]);
 
@@ -73,13 +72,13 @@ function Sign() {
       return;
     }
 
-    // Email validation
+    
     if (!validateEmail(mode === 'user' ? signInEmail : orgsignInEmail)) {
       console.log('Please enter a valid email address.');
       return;
     }
 
-    // Check if the email or password field is empty
+ 
     if ((mode === 'user') && (!signInEmail || !signInPassword)) {
       console.log('Please fill in both email and password.');
       return;
@@ -102,10 +101,10 @@ function Sign() {
       .then((response) => response.json())
       .then((data) => {
         if (data.access_token) {
-          // Store the token in localStorage
+          
           localStorage.setItem('authToken', data.access_token);
 
-          // Update state and navigate
+         
           setIsUserSignedIn(true);
           navigate('/', { replace: true, state: { isUserSignedIn: true } });
         } else {
@@ -151,7 +150,7 @@ function Sign() {
    
        
      };
-  // Common checks for both user and organization sign-up
+ 
   if  (mode === 'user' &&(!signUpName || !signUpEmail || !signUpPassword || !signUpPhone || !signUpAddress)) {
     console.log('Please fill in all required fields.');
     return;
@@ -165,19 +164,19 @@ function Sign() {
     return;
   }
 
-  // Mobile number validation
+ 
   if (!validateMobileNumber(mode === 'user' ? signUpPhone : orgsignUpPhone)) {
     console.log('Please enter a valid mobile number.');
     return;
   }
 
-  // Email validation
+ 
   if (!validateEmail(mode === 'user' ? signUpEmail : orgsignUpEmail)) {
     console.log('Please enter a valid email address.');
     return;
   }
   if (mode === 'user') {
-    // Additional checks and API call for user sign-up
+    
     if (!signUpGender) {
       console.log('Please select a gender.');
       return;
@@ -195,10 +194,9 @@ function Sign() {
   .then((response) => response.json())
       .then((data) => {
         if (data.access_token) {
-          // Store the token in localStorage
+          
           localStorage.setItem('authToken', data.access_token);
 
-          // Update state and navigate
           setToken(data.access_token);
           setIsUserSignedIn(true);
             setMode(data.mode); 

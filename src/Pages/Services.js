@@ -45,13 +45,10 @@ const Services = () => {
   setFilteredServices(filterServices);
 }, [services, searchQuery]);
     
-    return (
+    return ( 
     <>  
-    
       <div className='ServiceContainer'>
-      
           <ServicesSearchbar handleSearch={handleSearch} />
-          
         <div className='Services'>
           <img src={BackImage} className='BackgroundImage'></img>
           <div className="services-card-container">
@@ -63,13 +60,16 @@ const Services = () => {
               filteredServices.map((service) => ( 
                 <ServicesCard
                   key={service.id}
+                  id={service.id}
                   title={service.title}
                   description={service.description}
                   image={service.image}
                   url={service.url}
                 />
+                
               ))
             )}
+          
           </div>
             </div>
           

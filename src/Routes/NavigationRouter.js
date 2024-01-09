@@ -99,8 +99,6 @@ function Routee() {
     return DynamicComponent ? <DynamicComponent service={service} /> : null;
   };
 
-  
-
 
   const DynamicOrgManageComponent = ({ service }) => {
     const [dynamicComponentModule, setDynamicComponentModule] = useState(null);
@@ -172,6 +170,7 @@ function Routee() {
 
   const router = createBrowserRouter(
     createRoutesFromElements(
+
       <Route path="/" element={<RootPage />}>
         <Route index element={<Home  />} />
         <Route path="services" element={<Services />} />
@@ -191,6 +190,15 @@ function Routee() {
       </Route>
     )
   );
+         <Route path="org-profile" element={<OrganizationProfile/>}/>
+
+         
+        </Route>
+        <Route path="card" element={<PersonCard />} />
+    </>
+    ),
+);
+
 
   return (
     <>
