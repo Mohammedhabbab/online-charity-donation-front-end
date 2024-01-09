@@ -1,0 +1,46 @@
+.OrgNotifications {
+    display: flex;
+    position: relative;
+    height: 50rem;
+
+    background: black;
+
+}
+.Container {
+    position: relative;
+    top: 1px;
+    left: 15px;
+    border-radius: 10px;
+    width: 83%;
+    height: auto;
+   
+    background: black;
+   
+    padding: 20px;
+
+}
+.InfoTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #c7b492;
+    direction: rtl;
+}
+
+.InfoTable th,
+.InfoTable td {
+    border: 3px solid #ffffff;
+    padding: 10px;
+    text-align: left;
+    color: black;
+    direction: rtl;
+}
+
+.InfoTable th {
+    background-color: wheat;
+    direction: rtl;
+}
+
+.InfoTable tbody tr:hover {
+    background-color: transparent;
+}

@@ -83,7 +83,7 @@ const ServicesSection = () => {
   useEffect(() => {
     scrollByInterval();
 
-    // Clear interval when the component is unmounted
+
     return () => {
       clearTimeout(scrollByInterval);
     };

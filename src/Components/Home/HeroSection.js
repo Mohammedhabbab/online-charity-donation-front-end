@@ -9,7 +9,7 @@ const HeroSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    // Use your actual API endpoint here
+
     const apiUrl = 'http://localhost:8000/api/get_hero';
     
     fetch(apiUrl)
