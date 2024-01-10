@@ -3,15 +3,18 @@ import styled, { css } from 'styled-components';
 export const Container = styled.div`
   margin-left: 12.5%;
   margin-top: 2%;
+  right:5rem;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   position: relative;
   overflow: hidden;
+  display:flex;
   width: 1356px;
   max-width: 100%;
   min-height: 800px;
   max-height: 1000px;
+
 `;
 
 export const SignUpContainer = styled.div`
@@ -100,12 +103,12 @@ export const RadioContainer = styled.div`
   margin: 8px 0;
   position: relative;
   margin-bottom:2rem;
- 
+ color:black;
 `;
 
 export const RadioInput = styled.input`
   display: none;
-
+color:black;
   &:checked + label::before {
     content: '';
     display: inline-block;
@@ -124,7 +127,7 @@ export const RadioLabel = styled.label`
   cursor: pointer;
   position: relative;
   left: -22rem; /* Adjust the left position to move it slightly to the left */
-
+color:black;
   &:before {
     content: '';
     display: inline-block;
