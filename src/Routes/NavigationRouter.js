@@ -190,15 +190,7 @@ function Routee() {
       </Route>
     )
   );
-         <Route path="org-profile" element={<OrganizationProfile/>}/>
-
-         
-        </Route>
-        <Route path="card" element={<PersonCard />} />
-    </>
-    ),
-);
-
+    
 
   return (
     <>
