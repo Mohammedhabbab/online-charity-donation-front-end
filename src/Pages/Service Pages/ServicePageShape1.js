@@ -16,7 +16,7 @@ const ServicePageShape1 = () => {
                 }
 
                 const data = await response.json();
-                console.log(data); // Log the data to the console
+                console.log(data); 
                 setPeople(data);
             } catch (error) {
                 console.error(error);

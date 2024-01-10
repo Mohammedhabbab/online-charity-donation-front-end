@@ -22,7 +22,7 @@ const Services = () => {
         return response.json();
       })
       .then((data) => {
-        setServices(data || []); 
+        setServices(data || []);
         setFilteredServices(data);
         setIsLoading(false);
       })

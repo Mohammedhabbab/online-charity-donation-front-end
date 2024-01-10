@@ -58,10 +58,10 @@ function Routee() {
           path: `admin/manage/:serviceUrl`,
           component: <DynamicAdminPageComponent service={service} />,
         },
-        // Add more paths and components as needed
+      
       ];
 
-      // Create Route elements for each path and component
+    
       return pathsAndComponents.map(({ key, path, component }) => (
         <Route key={key} path={path} element={component} />
       ));
@@ -172,7 +172,7 @@ function Routee() {
     createRoutesFromElements(
 
       <Route path="/" element={<RootPage />}>
-        <Route index element={<Home />} />
+        <Route index element={<Home  />} />
         <Route path="services" element={<Services />} />
         <Route path="about" element={<About />} />
         <Route path="contactus" element={<Contactus />} />

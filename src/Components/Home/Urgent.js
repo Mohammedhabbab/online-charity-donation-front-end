@@ -22,12 +22,12 @@ const Urgent = () => {
   }, []);
 
   useEffect(() => {
-    // Automatic slide change every 5 seconds (adjust the interval as needed)
+
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % newdonationData.length);
     }, 12000);
 
-    // Cleanup interval on component unmount
+   
     return () => clearInterval(interval);
   }, [newdonationData]);
 
@@ -41,7 +41,7 @@ const Urgent = () => {
 
 
   if (!newdonationData || newdonationData.length === 0) {
-    return null; // or some loading indicator
+    return null; 
   }
 
   const currentDonation = newdonationData[currentIndex];

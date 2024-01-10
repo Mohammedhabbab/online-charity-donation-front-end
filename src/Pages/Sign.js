@@ -1,20 +1,24 @@
 import React, { useState,useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 
 import * as Components from '../Components/styledcomponents/Sign';
 
 function Sign() {
   const [mode, setMode] = useState('user');
   const [signIn, toggle] = useState(true);
-  const [signInEmail, setSignInEmail] = useState('');
+ const [signInEmail, setSignInEmail] = useState('');
   const [signInPassword, setSignInPassword] = useState('');
   const [signUpName, setSignUpName] = useState('');
   const [signUpEmail, setSignUpEmail] = useState('');
   const [signUpPassword, setSignUpPassword] = useState('');
   const [signUpPhone, setSignUpPhone] = useState('');
   const [signUpAddress, setSignUpAddress] = useState('');
-
-    const [orgsignInEmail, setOrgSignInEmail] = useState('');
+  const [signUpStatus, setSignUpStatus] = useState('0');
+  const [orgsignUpStatus, setOrgSignUpStatus] = useState('0');
+ 
+  const [orgsignUpTelephoneNumber, setOrgSignUpTelephoneNumber] = useState('');
+  const [orgsignUpTypesOfExistingDonations, setOrgSignUpTypesOfExistingDonations] = useState('');
+  const [orgsignInEmail, setOrgSignInEmail] = useState('');
   const [orgsignInPassword, setOrgSignInPassword] = useState('');
   const [orgsignUpName, setOrgSignUpName] = useState('');
   const [orgsignUpEmail, setOrgSignUpEmail] = useState('');
@@ -23,90 +27,86 @@ function Sign() {
   const [orgsignUpAddress, setOrgSignUpAddress] = useState('');
 
   const [signUpGender, setSignUpGender] = useState('');
+  const [orgsignUpGender, setOrgSignUpGender] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [loginStatus, setLoginStatus] = useState('');
- const [isUserSignedIn, setIsUserSignedIn] = useState(false);
+  const [isUserSignedIn, setIsUserSignedIn] = useState(false);
   const [token, setToken] = useState(localStorage.getItem('authToken') || '');
 
-const validatePassword = (password) => {
-  // Password should have at least 8 characters
-  return password.length >= 8;
-};
-const validateMobileNumber = (mobileNumber) => {
-  // Simple check for a valid numeric mobile number
-  return /^\d+$/.test(mobileNumber);
-};
+ 
+  const validatePassword = (password) => {
+    /
+    return password.length >= 8;
+  };
+  const validateMobileNumber = (mobileNumber) => {
+  
+    return /^\d+$/.test(mobileNumber);
+  };
 
-const validateEmail = (email) => {
-  // Simple email format check
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-};
+  const validateEmail = (email) => {
+   
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
 
   useEffect(() => {
-    // Update the token state when the localStorage changes
+   
     setToken(localStorage.getItem('authToken') || '');
   }, [token]);
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const handleModeSwitch = () => {
+    const newMode = mode === 'user' ? 'charity' : 'user';
+    console.log('Switching Mode:', newMode);
+    setMode(newMode);
+    console.log(mode);
+  };
 
-const handleModeSwitch = () => {
-  const newMode = mode === 'user' ? 'organization' : 'user';
-  console.log('Switching Mode:', newMode);
-  setMode(newMode);
-};
 
   
+  const handleSignIn = (e) => {
+    e.preventDefault();
+
+    if (!validatePassword(mode === 'user' ? signInPassword : orgsignInPassword)) {
+      console.log('Password should have at least 8 characters.');
+      return;
+    }
+
+    
+    if (!validateEmail(mode === 'user' ? signInEmail : orgsignInEmail)) {
+      console.log('Please enter a valid email address.');
+      return;
+    }
+
  
-  
-  
- const handleSignIn = (e) => {
-  e.preventDefault();
-   console.log('Sign in button clicked');
-   if (!validatePassword(mode === 'user' ? signInPassword : orgsignInPassword)) {
-    console.log('Password should have at least 8 characters.');
-    return;
-  }
+    if ((mode === 'user') && (!signInEmail || !signInPassword)) {
+      console.log('Please fill in both email and password.');
+      return;
+    } else if ((mode === 'charity') && (!orgsignInEmail || !orgsignInPassword)) {
+      console.log('Please fill in both email and password.');
+      return;
+    }
 
-  // Email validation
-  if (!validateEmail(mode === 'user' ? signInEmail : orgsignInEmail)) {
-    console.log('Please enter a valid email address.');
-    return;
-  }
-  // Check if the email or password field is empty
-  if (!signInEmail || !signInPassword) {
-   console.log('Please fill in both email and password.');
-    return;
-   }
-   
-    const signInApi = mode === 'user'
-      ? 'http://localhost:8000/api/login' 
-     : 'https://org-signin-api-url';
-   
-   const signInBody = mode === 'user'
-     ? { email: signInEmail, password: signInPassword }
-     : { email: orgsignInEmail, password: orgsignInPassword };
-   
-   
-  fetch(signInApi, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(
-      signInBody
-    ),
-  })
-         .then((response) => response.json())
+    const signInBody = mode === 'user'
+      ? { email: signInEmail, password: signInPassword, type_of_user: mode }
+      : { email: orgsignInEmail, password: orgsignInPassword, type_of_user: mode };
+
+    fetch('http://localhost:8000/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(signInBody),
+    })
+      .then((response) => response.json())
       .then((data) => {
         if (data.access_token) {
-          // Store the token in localStorage
+          
           localStorage.setItem('authToken', data.access_token);
 
-          // Update state and navigate
-          setToken(data.access_token);
+         
           setIsUserSignedIn(true);
-          setMode(data.mode);
-      navigate('/', { replace: true, state: { mode, isUserSignedIn } });
+          navigate('/', { replace: true, state: { isUserSignedIn: true } });
         } else {
           setLoginStatus('Invalid login. Please try again.');
         }
@@ -117,16 +117,11 @@ const handleModeSwitch = () => {
   };
 
 
-
-
  const handleSignUp = (e) => {
   e.preventDefault();
   console.log('Sign up button clicked');
 
-  // Define the API endpoint based on the mode
-  const signUpApi = mode === 'user'
-    ? 'http://localhost:8000/api/register'
-     : 'http://localhost:8000/api/org-register';
+  
    
    const signUpBody = mode === 'user'
      ? {
@@ -136,6 +131,10 @@ const handleModeSwitch = () => {
        password: signUpPassword,
        address: signUpAddress,
        gender: signUpGender,
+       status: signUpStatus,
+       type_of_user: mode,
+      types_of_existing_donations:"",
+       telephone_number:''
      }
      : {
        full_name: orgsignUpName,
@@ -143,9 +142,15 @@ const handleModeSwitch = () => {
        email: orgsignUpEmail,
        password: orgsignUpPassword,
        address: orgsignUpAddress,
+       telephone_number:orgsignUpTelephoneNumber,
+       type_of_user: mode,
+       types_of_existing_donations:orgsignUpTypesOfExistingDonations,
+       status: orgsignUpStatus,
+       gender:''
+   
        
      };
-  // Common checks for both user and organization sign-up
+ 
   if  (mode === 'user' &&(!signUpName || !signUpEmail || !signUpPassword || !signUpPhone || !signUpAddress)) {
     console.log('Please fill in all required fields.');
     return;
@@ -159,49 +164,46 @@ const handleModeSwitch = () => {
     return;
   }
 
-  // Mobile number validation
+ 
   if (!validateMobileNumber(mode === 'user' ? signUpPhone : orgsignUpPhone)) {
     console.log('Please enter a valid mobile number.');
     return;
   }
 
-  // Email validation
+ 
   if (!validateEmail(mode === 'user' ? signUpEmail : orgsignUpEmail)) {
     console.log('Please enter a valid email address.');
     return;
   }
   if (mode === 'user') {
-    // Additional checks and API call for user sign-up
+    
     if (!signUpGender) {
       console.log('Please select a gender.');
       return;
     }
   }
 
-  // Make the API call with the defined API endpoint and data
-  fetch(signUpApi, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(
-     signUpBody
-    ),
-  })
+    fetch('http://localhost:8000/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(signUpBody),
+    })
+
   .then((response) => response.json())
       .then((data) => {
         if (data.access_token) {
-          // Store the token in localStorage
+          
           localStorage.setItem('authToken', data.access_token);
 
-          // Update state and navigate
           setToken(data.access_token);
           setIsUserSignedIn(true);
             setMode(data.mode); 
           setFormSubmitted(true);
 
           setTimeout(() => {
-          navigate('/', { replace: true, state: { mode, isUserSignedIn } });
+          navigate('/', { replace: true, state: { isUserSignedIn } });
           }, 10000);
         } else {
           setLoginStatus('Sign Up failed. Please try again.');
@@ -219,9 +221,13 @@ const handleModeSwitch = () => {
   return (
   
 <>
-      <div style={{ backgroundColor:'#c7b492'}} >
+      <div style={{ height:'60rem',backgroundColor: '#c7b492' , marginBottom:'10rem'}} >
+        <body style={{
+          backgroundColor: '#c7b492'
+          
+}}>
  <Components.SwitchButton onClick={handleModeSwitch}>
-        Switch to {mode === 'user' ? 'Organization' : 'User'}
+        Switch to {mode === 'user' ? 'charity' : 'user'}
       </Components.SwitchButton>
       {mode === 'user' ? (
         <Components.Container>
@@ -269,10 +275,11 @@ const handleModeSwitch = () => {
                     onChange={(e) => setSignUpAddress(e.target.value)}
                   />
                   <Components.RadioContainer>
-                    <label style={{ marginRight: '22.5rem' }}>Gender:</label>
-                    <Components.RadioInput
+                    <label style={{ marginRight: '22.5rem'}}>Gender:</label>
+                    <Components.RadioInput 
                       type="radio"
-                      id='gender'
+                          id='gender'
+                        
                       value="male"
                       checked={signUpGender === "male"}
                       onChange={() => setSignUpGender("male")}
@@ -289,7 +296,8 @@ const handleModeSwitch = () => {
                       onClick={() => setSignUpGender("female")}
                     />
                     <Components.RadioLabel onClick={() => setSignUpGender("female")}>Female</Components.RadioLabel>
-                  </Components.RadioContainer>
+                      </Components.RadioContainer>
+                     
                   <Components.Button onClick={handleSignUp}>انشاء الحساب</Components.Button>
                 </>
               )}
@@ -376,13 +384,25 @@ const handleModeSwitch = () => {
                       value={orgsignUpPhone}
                       onChange={(e) => setOrgSignUpPhone(e.target.value)}
                     />
-
+                        <Components.Input
+                          type='text'
+                          placeholder='Telephone Number'
+                          value={orgsignUpTelephoneNumber}
+                          onChange={(e) => setOrgSignUpTelephoneNumber(e.target.value)}
+                        />
                     <Components.Input
                       type='text'
                       placeholder='Address'
                       value={orgsignUpAddress}
                       onChange={(e) => setOrgSignUpAddress(e.target.value)}
-                    />
+                        />
+                        <Components.Input
+                          type='text'
+                          placeholder='types of services'
+                          value={orgsignUpTypesOfExistingDonations}
+                          onChange={(e) => setOrgSignUpTypesOfExistingDonations(e.target.value)}
+                        />
+                        
                     <Components.Button onClick={handleSignUp}>التسجيل</Components.Button>
                   </>
                 )}
@@ -435,7 +455,8 @@ const handleModeSwitch = () => {
 
             {loginStatus && <p>{loginStatus}</p>}
           </Components.Container>
-        )}
+          )}
+        </body>
       </div></>
   );
 }
