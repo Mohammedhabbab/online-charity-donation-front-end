@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+  import React, { useState, useEffect } from 'react';
 import {RouterProvider,createBrowserRouter,
 createRoutesFromElements,Route} from 'react-router-dom';
 import Home from '../Pages/Home';
@@ -16,6 +16,7 @@ import OrganizationProfile from '../Pages/Org Pages/OrganizationProfile';
 import UserProfile from '../Pages/UserProfile';
 import OrgNotifications from '../Pages/Org Pages/OrgNotifications';
 import OrgManageAccount from '../Pages/Org Pages/OrgManageAccount';
+import PersonDetailsPage from '../Components/Person/persondetails';
 
 
 function Routee() {
@@ -187,11 +188,12 @@ function Routee() {
         {createDynamicRoutes()}
         <Route path="org-notifications" element={<OrgNotifications />} />
         <Route path="org-manage-account" element={<OrgManageAccount />} />
+        <Route path="persondetails" element={<PersonDetailsPage />} />
       </Route>
     )
   );
     
-
+  
   return (
     <>
       <RouterProvider router={router} />

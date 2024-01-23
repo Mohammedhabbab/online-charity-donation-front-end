@@ -1,0 +1,52 @@
+
+.Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .paragraph {
+    font-size: 40px;
+    position: relative;
+    left: 9rem;
+    color: beige;
+    font-weight: bolder;
+    margin-bottom: 30px;
+  }
+  
+  .beigeBar {
+    width: 143%;
+    height: 75px;
+    background-color: #f0e2d0;
+    margin-bottom: 20px;
+  }
+  
+  .body {
+    width: 100%;
+    max-width: 1200px; 
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .Cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 50px; 
+    padding: 20px;
+    
+  }
+  
+
+  .person-details-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.5s; 
+  }
+  
+  .person-details-card:hover {
+    transform: scale(1.03); 
+  }
+  
