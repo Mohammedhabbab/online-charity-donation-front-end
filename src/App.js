@@ -11,15 +11,15 @@ import './index.css';
 // import '../src/Components/PagesStyles/Services.css'
 // import Logo from '../images/Logo.jpg';
 import NavigationRouter from './Routes/NavigationRouter'
-import Card from './Components/PersonCard';
-import '../src/Components/PersonCard.css' 
+
+
 
 function App() {
 
-  
+
   return (
     <>
-     <NavigationRouter />
+      <NavigationRouter />
     </>
   );
 }

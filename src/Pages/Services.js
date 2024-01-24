@@ -47,7 +47,7 @@ const Services = () => {
     
     return ( 
     <>  
-      <div className='ServiceContainer'>
+      <div className='ServiceContainer' style={{height:'100%'}} >
           <ServicesSearchbar handleSearch={handleSearch} />
         <div className='Services'>
           <img src={BackImage} className='BackgroundImage'></img>
@@ -65,6 +65,7 @@ const Services = () => {
                   description={service.description}
                   image={service.image}
                   url={service.url}
+                  shape={service.shape}
                 />
                 
               ))

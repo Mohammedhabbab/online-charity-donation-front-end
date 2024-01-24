@@ -109,7 +109,7 @@ const ServicesSection = () => {
                 .map((service, index) => (
                   <Link
                     key={index + setIndex * servicesPerSet}
-                    to={`/services/${service.url}`}
+                    to={`/services`}
                     className={`Service-Card ${(index + setIndex * servicesPerSet) % 4 === 0 ? 'A1' : ''
                       } ${(index + setIndex * servicesPerSet) % 4 === 1 ? 'A2' : ''} ${(index + setIndex * servicesPerSet) % 4 === 2 ? 'A3' : ''
                       } ${(index + setIndex * servicesPerSet) % 4 === 3 ? 'A4' : ''}`}

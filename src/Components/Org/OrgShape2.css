@@ -4,7 +4,7 @@
     display: flex;
     width: 100%;
     height: 100%;
-    min-height: 50rem;
+        min-height: 50rem;
     background: black;
 }
 
@@ -58,21 +58,22 @@
     background-color: wheat;
     direction: rtl;
     justify-self: center;
-        text-align: center;
+    text-align: center;
 }
 
 .InfoTable tbody tr:hover {
     background-color: transparent;
 }
-.Add-B {
+.Add-B{
     background: black;
-    width: 100%;
-    height: 100%;
+    width:100%;
+   height:100%;
     color: white;
     padding: 10px;
+   
 }
 
-.ModalShape1 {
+.Modal {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -87,32 +88,22 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 1200px;
     width: 100%;
-    min-height: 40rem;
+    min-height: 54rem;
     max-height:55rem;
     z-index: 1000;
-    direction: rtl;
 }
 
-.ModalShape1 Form {
+.Modal Form {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+    gap: 8px;
     width: 80%;
    
     max-width: 800px;
+    max-height: 40rem;
     
 }
-.ModalShape1 h2 {
-    position: absolute;
-    color: white;
-    top: 1rem;
-    border: 8px solid black;
-    background-color: black;
-    border-radius: 10px;
-    font-size: 24px;
-    left: 32rem;
-}
-.ModalShape1 h2.Add{
+.Modal h2{
     position: absolute;
     color: white;
    top:1rem;
@@ -120,32 +111,42 @@
    background-color: black;
    border-radius: 10px;
    font-size: 24px;
-   left:28rem;
+   left: 32rem;
 }
-.ModalShape1 label,
-.ModalShape1 input {
+
+.Modal h2.Add {
+    position: absolute;
+    color: white;
+    top: 2rem;
+    border: 8px solid black;
+    background-color: black;
+    border-radius: 10px;
+    font-size: 24px;
+    left: 27rem;
+}
+
+.Modal label,
+.Modal input {
     width: 100%;
     box-sizing: border-box;
     padding: 8px;
     margin-bottom: 10px;
-    margin-top: 2px;
-   
 }
 
-.ModalShape1 button { 
+.Modal button { 
     background-color: #c7b492;
     color: #fff;
     border: none;
     padding: 10px 15px;
     cursor: pointer;
 }
-.ModalShape1 .TwoButtons{
+.TwoButtons{
     position: relative;
-    top: 2rem;
-  right: 27rem;
+    top: 6rem;
+  left: -12rem;
 }
-.ModalShape1 button.cancel {
-    position: relative;
+.Modal button.cancel {
+    
     background-color: #000000;
 
 padding: 15px 10px;
@@ -153,52 +154,28 @@ width:10rem;
 
 }
 
-.ModalShape1 button.create {
+.Modal button.create {
     position: relative;
   color:black;
     background-color: white;
 padding: 15px 10px;
-left: 24rem;
+left:6rem;
     width: 10rem;
 }
-
-
-.ModalShape1 button.Addcancel {
-    position: relative;
-    background-color: #000000;
-
-    padding: 15px 10px;
-    width: 10rem;
-
+.EditB{
+background-color: #000000;
+color: white;
+padding: 4px;
+font-weight: 700;
+width: 4rem;
+    margin-right: -2px;
 }
-.ModalShape1 .TwoButtonsAdd {
-    position: relative;
-    top: 5rem;
-    right: 1rem;
-}
-.ModalShape1 button.Addcreate {
-    position: relative;
-    color: black;
-    background-color: white;
-    padding: 15px 10px;
-    left: 24rem;
-    width: 10rem;
-}
-.EditB {
-    background-color: #000000;
-    color: white;
-    padding: 4px;
-    font-weight: 700;
-    width:4rem;
-    margin-right: -25px;
-}
-
-.DeleteB {
-    background-color: #000000;
-    color: white;
-    margin-right: 1rem;
-    padding: 4px;
-    font-weight: 700;
+.DeleteB{
+background-color: #000000;
+color:white;
+margin-right: 1rem;
+padding: 4px;
+font-weight: 700;
 }
 
 .ModalD1 {
@@ -233,11 +210,11 @@ left: 24rem;
 }
 
 .ModalD1 .Delete .Button1 {
-    background: white;
-    color: #000000;
+background: white;
+color: #000000;
 }
 
 .ModalD1 .Delete .Button1 {
-    background: black;
-    color: white;
+background: black;
+color: white;
 }

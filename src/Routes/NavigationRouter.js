@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
+import { useService } from '../Components/Dynamic/ServiceContext';
+import { ServiceProvider } from '../Components/Dynamic/ServiceContext';
 import {RouterProvider,createBrowserRouter,
 createRoutesFromElements,Route} from 'react-router-dom';
 import Home from '../Pages/Home';
@@ -13,10 +15,11 @@ import AddBenf from '../Pages/AddBenf';
 import PersonCard from '../Components/Person/People'
 import { RootPage } from '../Pages/Root';
 import OrganizationProfile from '../Pages/Org Pages/OrganizationProfile';
-import UserProfile from '../Pages/UserProfile';
+import UserProfile from '../Pages/User Pages/UserProfile';
+import UserDonations from '../Pages/User Pages/UserDonations';
 import OrgNotifications from '../Pages/Org Pages/OrgNotifications';
 import OrgManageAccount from '../Pages/Org Pages/OrgManageAccount';
-
+import UserManageAccount from '../Pages/User Pages/UserManageAccount'
 
 function Routee() {
   const [services, setServices] = useState([]);
@@ -41,7 +44,6 @@ function Routee() {
 
   const createDynamicRoutes = () => {
     const dynamicRoutes = services.flatMap((service) => {
-     
       const pathsAndComponents = [
         {
           key: `org-profile/manage/${service.url}`,
@@ -58,10 +60,8 @@ function Routee() {
           path: `admin/manage/:serviceUrl`,
           component: <DynamicAdminPageComponent service={service} />,
         },
-      
       ];
 
-    
       return pathsAndComponents.map(({ key, path, component }) => (
         <Route key={key} path={path} element={component} />
       ));
@@ -69,17 +69,21 @@ function Routee() {
 
     return dynamicRoutes;
   };
+
   const DynamicServicePageComponent = ({ service }) => {
     const [dynamicComponentModule, setDynamicComponentModule] = useState(null);
+    const { selectedServiceS, setServiceS } = useService(); 
 
     useEffect(() => {
       const importComponent = async () => {
         try {
           let shapeComponentModule;
+          const shape = selectedServiceS?.shape || 0; 
+          console.log('servicess', shape);
 
-          if (service.shape === 0) {
+          if (shape === 0) {
             shapeComponentModule = await import('../Pages/Service Pages/ServicePageShape1');
-          } else if (service.shape === 1) {
+          } else if (shape === 1) {
             shapeComponentModule = await import('../Pages/Service Pages/ServicePageShape2');
           } else {
             shapeComponentModule = await import('../Pages/Service Pages/ServicePageShapeDefault');
@@ -92,7 +96,7 @@ function Routee() {
       };
 
       importComponent();
-    }, [service.shape]);
+    }, [selectedServiceS]);
 
     const DynamicComponent = dynamicComponentModule?.default || null;
 
@@ -100,17 +104,21 @@ function Routee() {
   };
 
 
+
+
   const DynamicOrgManageComponent = ({ service }) => {
     const [dynamicComponentModule, setDynamicComponentModule] = useState(null);
+    const { selectedServiceS, setServiceS } = useService(); 
 
     useEffect(() => {
       const importComponent = async () => {
         try {
           let shapeComponentModule;
-
-          if (service.shape === 0) {
+          const shape = selectedServiceS?.shape || 0;
+          console.log('sss', shape)
+          if (shape === 0) {
             shapeComponentModule = await import('../Pages/Org Pages/OrgManageShape1');
-          } else if (service.shape === 1) {
+          } else if (shape === 1) {
             shapeComponentModule = await import('../Pages/Org Pages/OrgManageShape2');
           } else {
             shapeComponentModule = await import('../Pages/Org Pages/OrgManageDefault');
@@ -123,7 +131,7 @@ function Routee() {
       };
 
       importComponent();
-    }, [service.shape]);
+    }, [selectedServiceS]);
 
    
     const DynamicComponent = dynamicComponentModule?.default || null;
@@ -136,15 +144,17 @@ function Routee() {
 
   const DynamicAdminPageComponent = ({ service }) => {
     const [dynamicComponentModule, setDynamicComponentModule] = useState(null);
+    const { selectedServiceS, setServiceS } = useService(); 
 
     useEffect(() => {
       const importComponent = async () => {
         try {
           let shapeComponentModule;
-
-          if (service.shape === 0) {
+          const shape = selectedServiceS?.selectedService || 0;
+          console.log('sss',shape)
+          if (shape === 0) {
             shapeComponentModule = await import('../Pages/Admin Pages/AdminServicePageShape1');
-          } else if (service.shape === 1) {
+          } else if (shape === 1) {
             shapeComponentModule = await import('../Pages/Admin Pages/AdminServicePageShape2');
           } else {
             shapeComponentModule = await import('../Pages/Admin Pages/AdminServicePageShapeDefault');
@@ -157,7 +167,7 @@ function Routee() {
       };
 
       importComponent();
-    }, [service.shape]);
+    }, [selectedServiceS]);
 
 
     const DynamicComponent = dynamicComponentModule?.default || null;
@@ -187,22 +197,23 @@ function Routee() {
         {createDynamicRoutes()}
         <Route path="org-notifications" element={<OrgNotifications />} />
         <Route path="org-manage-account" element={<OrgManageAccount />} />
+        <Route path="user-donations" element={<UserDonations />} />
+        <Route path="user-manage-account" element={<UserManageAccount />} />
       </Route>
     )
   );
-         <Route path="org-profile" element={<OrganizationProfile/>}/>
+       
 
-         
-        </Route>
-        <Route path="card" element={<PersonCard />} />
-    </>
-    ),
-);
+      
+    
+
 
 
   return (
     <>
-      <RouterProvider router={router} />
+      <ServiceProvider>
+        <RouterProvider router={router} />
+      </ServiceProvider>
     </>
   );
 }
