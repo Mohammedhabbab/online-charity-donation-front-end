@@ -24,6 +24,8 @@ const OrgManageShape1 = () => {
     const [showLoading, setShowLoading] = useState(true);
     const navigate = useNavigate();
     const [newPerson, setNewPerson] = useState({});
+    const handleNullValue = (value) => (value === '' ? null : value);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -62,9 +64,12 @@ const OrgManageShape1 = () => {
     }, []);
 
 
+
+
     useEffect(() => {
         const fetchServices = fetch('http://localhost:8000/api/get_services');
         const fetchPeople = fetch('http://localhost:8000/api/get_beneficiar');
+       
 
         Promise.all([fetchServices, fetchPeople])
             .then(async ([servicesResponse, peopleResponse]) => {
@@ -124,8 +129,12 @@ const OrgManageShape1 = () => {
         setIsDeleteModalOpen(true);
     };
 
-    const handleEditSubmit = async (editedPerson) => {
+    const handleEditSubmit = async (e, editedPerson) => {
         try {
+            e.preventDefault(); 
+
+            console.log('Editing Person:', editedPerson);
+
             const response = await fetch(`http://localhost:8000/api/update_Beneficiaries/${editedPerson.id}`, {
                 method: 'PUT',
                 headers: {
@@ -134,59 +143,87 @@ const OrgManageShape1 = () => {
                 body: JSON.stringify(editedPerson),
             });
 
+            console.log('Edit Response:', response);
+
             if (!response.ok) {
                 throw new Error('Failed to edit record');
             }
 
-         
             setIsEditModalOpen(false);
 
-         
-            setUpdateTrigger(prev => !prev);
+            setUpdateTrigger((prev) => !prev);
         } catch (error) {
             console.error('Error editing record:', error);
         }
     };
 
+
     const handleAddSubmit = async (e) => {
         e.preventDefault();
 
         try {
-           
-            const updatedNewPerson = {
-                ...newPerson,
-                needy_type: lowercasedServiceUrl,
-                charity_id: userData?.id,
-            };
+            const updatedNewPerson = { ...newPerson };
 
-           
-            const headers = getHeaders();
-            headers.forEach((header) => {
-                if (!(header in updatedNewPerson)) {
-                    updatedNewPerson[header] = null;
+            updatedNewPerson.needy_type = lowercasedServiceUrl;
+            updatedNewPerson.charity_id = userData?.id;
+
+            const fieldsToCheck = ['monthly_need', 'name_of_school', 'Educational_level'];
+
+            for (const field of fieldsToCheck) {
+                if (updatedNewPerson[field] === null || updatedNewPerson[field] === undefined) {
+                    updatedNewPerson[field] = '';
                 }
-            });
+            }
 
             console.log('Updated New Person State:', updatedNewPerson);
 
-          
             setNewPerson(updatedNewPerson);
-
-           
             setUpdateTrigger((prev) => !prev);
-
-           
             setIsAddModalOpen(false);
+
+            const response = await fetch('http://localhost:8000/api/insert_beneficiar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedNewPerson),
+            });
+
+            console.log('Add Record Response:', response);
+
+            if (!response.ok) {
+                throw new Error('Failed to add record');
+            }
+
+            setNewPerson({
+                full_name: '',
+                mother_name: '',
+                age: '',
+                gender: '',
+                phone_number: '',
+                overview: '',
+                address: '',
+                status: 0,
+                monthly_need: '',
+                name_of_school: '',
+                Educational_level: '',
+            });
+
+            setUpdateTrigger((prev) => !prev);
         } catch (error) {
             console.error('Error adding record:', error);
         }
     };
 
+
+
+
+
    
-    useEffect(() => {
+    /* useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:8000/api/register_Beneficiaries', {
+                const response = await fetch('http://localhost:8000/api/insert_beneficiar', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -227,7 +264,7 @@ const OrgManageShape1 = () => {
         }
     }, [updateTrigger, newPerson]);
 
-
+*/
 
 
 
@@ -260,7 +297,7 @@ const OrgManageShape1 = () => {
 
 
     useEffect(() => {
-        if (!isLoading && (!service || !people || people.length === 0)) {
+        if (!isLoading && (!service)) {
             
             const timeoutId = setTimeout(() => {
                 navigate('/404');
@@ -291,18 +328,19 @@ const OrgManageShape1 = () => {
 
                         <thead>
                             <tr>
-                                <th>Full Name</th>
-                                <th>Mother Name</th>
-                                <th>Age</th>
-                                <th>Gender</th>
-                                <th>Phone Number</th>
-                                <th>Overview</th>
-                                <th>Address</th>
-                                <th>Status</th>
-                                {filteredPeople.some(person => person.monthly_need !== null) && <th>Monthly Need</th>}
-                                {filteredPeople.some(person => person.name_of_school !== null) && <th>School</th>}
-                                {filteredPeople.some(person => person.Educational_level !== null) && <th>Education Level</th>}
-                                <th>Action</th>
+                                <th>الاسم</th>
+                                <th>اسم الأم</th>
+                                <th>العمر</th>
+                                <th>الجنس</th>
+                                <th>رقم الهاتف</th>
+                                <th>تفاصيل</th>
+                                <th>العنوان</th>
+                                <th>الوضع</th>
+                                {filteredPeople.some(person => person.monthly_need !== null) && <th>المبلغ</th>}
+                                {filteredPeople.some(person => person.name_of_school !== null) && <th>الجامعة</th>}
+                                {filteredPeople.some(person => person.Educational_level !== null) && <th>الدراسة</th>}
+                                <th>اجراء</th>
+                                <th><button className='Add-B' onClick={openAddModal}>إضافة</button></th>
                             </tr>
                         </thead>
 
@@ -321,16 +359,15 @@ const OrgManageShape1 = () => {
                                     {filteredPeople.some((p) => p.name_of_school !== null) && <td>{person.name_of_school || '-'}</td>}
                                     {filteredPeople.some((p) => p.Educational_level !== null) && <td>{person.Educational_level || '-'}</td>}
 
+                                   
+
                                     <td>
-
-                                        <td>
-                                            <button onClick={() => openEditModal(person)}>Edit</button>
-                                            <button onClick={openAddModal}>Add</button>
-                                            <button onClick={() => openDeleteModal(person)}>Delete</button>
-                                        </td>
-
-
+                                        <button className='EditB' onClick={() => openEditModal(person)}>تعديل</button>
+                                        <button className='DeleteB' onClick={() => openDeleteModal(person)}>X</button>
                                     </td>
+
+
+                                    
                                 </tr>
                             ))}
                         </tbody>
@@ -352,11 +389,116 @@ const OrgManageShape1 = () => {
                 isOpen={isEditModalOpen}
                 onRequestClose={() => setIsEditModalOpen(false)}
                 contentLabel="Edit Modal"
-               
+                className="ModalShape1"
             >
-           
-                <button onClick={() => setIsEditModalOpen(false)}>Cancel</button>
-                <button onClick={() => handleEditSubmit(selectedPerson)}>Change</button>
+                <h2>Edit Person</h2>
+
+                {selectedPerson && (
+                    <form onSubmit={(e) => handleEditSubmit(e, selectedPerson)}>
+                        <div>
+                            <label style={{ color: 'black' }}>الاسم:</label>
+                            <input
+                                type="text"
+                                value={selectedPerson.full_name || ''}
+                                onChange={(e) => setSelectedPerson((prev) => ({ ...prev, full_name: e.target.value }))}
+                            />
+                        </div>
+                        <div>
+                            <label style={{ color: 'black' }}>اسم الأم:</label>
+                            <input
+                                type="text"
+                                value={selectedPerson.mother_name || ''}
+                                onChange={(e) => setSelectedPerson((prev) => ({ ...prev, mother_name: e.target.value }))}
+                            />
+                        </div>
+                    <div>
+                        <label style={{ color: 'black' }}>
+                            العمر:
+                        </label>
+                        <input
+                            type="text"
+                                value={selectedPerson.age || ''}
+                                onChange={(e) => setSelectedPerson((prev) => ({ ...prev, age: e.target.value }))}
+                        />
+                    </div>
+                    <div>
+                        <label style={{ color: 'black' }}>
+                            الجنس:
+                        </label>
+                        <input
+                            type="text"
+                                value={selectedPerson.gender || ''}
+                                onChange={(e) => setSelectedPerson((prev) => ({ ...prev, gender: e.target.value }))}
+                        />
+                    </div>
+                    <div>
+                        <label style={{ color: 'black' }}>
+                            رقم الهاتف:
+                        </label>
+                        <input
+                            type="text"
+                                value={selectedPerson.phone_number || ''}
+                                onChange={(e) => setSelectedPerson((prev) => ({ ...prev, phone_number: e.target.value }))}
+                        />
+                    </div>
+                    <div>
+                        <label style={{ color: 'black' }}>
+                            التفاصيل:
+                        </label>
+                        <input
+                            type="text"
+                                value={selectedPerson.overview || ''}
+                                onChange={(e) => setSelectedPerson((prev) => ({ ...prev, overview: e.target.value }))}
+                        />
+                    </div>
+                    <div>
+                        <label style={{ color: 'black' }}>
+                            العنوان:
+                        </label>
+                        <input
+                            type="text"
+                                value={selectedPerson.address || ''}
+                                onChange={(e) => setSelectedPerson((prev) => ({ ...prev, address: e.target.value }))}
+                        />
+                    </div>
+                    <div>
+                        <label style={{ color: 'black' }}>
+                            الحالة:
+                        </label>
+                        <input
+                            type="text"
+                                value={selectedPerson.status || ''}
+                                onChange={(e) => setSelectedPerson((prev) => ({ ...prev, status: e.target.value }))}
+                        />
+                    </div>
+                        
+                        {headers.map((header) => (
+                            header !== 'id' &&
+                            header !== 'charity_id' &&
+                            header !== 'needy_type' &&
+                            header !== 'created_at' &&
+                            header !== 'updated_at' && (
+                                  (header === 'monthly_need' && filteredPeople.some(person => person.monthly_need !== null)) ||
+                              (header === 'name_of_school' && filteredPeople.some(person => person.name_of_school !== null)) ||
+                              (header === 'Educational_level' && filteredPeople.some(person => person.Educational_level !== null))
+                                 ) && (
+                                <div key={header}>
+                                    <label style={{ color: 'black' }}>{header}:</label>
+                                    <input
+                                        type="text"
+                                        value={selectedPerson[header] || ''}
+                                        onChange={(e) => setSelectedPerson((prev) => ({ ...prev, [header]: e.target.value }))}
+                                    />
+                                </div>
+                            )
+                        ))}
+
+                        <div className='TwoButtons'>
+                            <button onClick={() => setIsEditModalOpen(false)} className='cancel'>إلغاء</button>
+                            <button type="submit" className='create'>تعديل</button>
+                        </div>
+                    </form>
+                )}
             </Modal>
 
             {/* add Modal */}
@@ -364,14 +506,14 @@ const OrgManageShape1 = () => {
                 isOpen={isAddModalOpen}
                 onRequestClose={() => setIsAddModalOpen(false)}
                 contentLabel="Add Modal"
-                className="Modal"
+                className="ModalShape1"
             >
-                <h2 key={filteredServices?.id}>"أضف إلى فئة "{filteredServices?.title}</h2>
+                <h2 className='Add'  key={filteredServices?.id}>"أضف إلى فئة "{filteredServices?.title}</h2>
              
                 <form onSubmit={handleAddSubmit}>
                     <div>
                         <label style={{ color: 'black' }}>
-                            Full Name:
+                            الاسم:
                         </label>
                         <input
                             type="text"
@@ -381,7 +523,7 @@ const OrgManageShape1 = () => {
                     </div>
                     <div>
                         <label style={{ color: 'black' }}>
-                            Mother Name:
+                            اسم الأم:
                         </label>
                         <input
                             type="text"
@@ -391,7 +533,7 @@ const OrgManageShape1 = () => {
                     </div>
                     <div>
                         <label style={{ color: 'black' }}>
-                            Age:
+                            العمر:
                         </label>
                         <input
                             type="text"
@@ -401,7 +543,7 @@ const OrgManageShape1 = () => {
                     </div>
                     <div>
                         <label style={{ color: 'black' }}>
-                            Gender:
+                            الجنس:
                         </label>
                         <input
                             type="text"
@@ -411,7 +553,7 @@ const OrgManageShape1 = () => {
                     </div>
                     <div>
                         <label style={{ color: 'black' }}>
-                            Phone Number:
+                            رقم الهاتف:
                         </label>
                         <input
                             type="text"
@@ -421,7 +563,7 @@ const OrgManageShape1 = () => {
                     </div>
                     <div>
                         <label style={{ color: 'black' }}>
-                            Overview:
+                            التفاصيل:
                         </label>
                         <input
                             type="text"
@@ -431,7 +573,7 @@ const OrgManageShape1 = () => {
                     </div>
                     <div>
                         <label style={{ color: 'black' }}>
-                            Address:
+                            العنوان:
                         </label>
                         <input
                             type="text"
@@ -441,7 +583,7 @@ const OrgManageShape1 = () => {
                     </div>
                     <div>
                         <label style={{ color: 'black' }}>
-                            Status:
+                            الحالة:
                         </label>
                         <input
                             type="text"
@@ -449,32 +591,42 @@ const OrgManageShape1 = () => {
                             onChange={(e) => setNewPerson((prev) => ({ ...prev, status: e.target.value }))}
                         />
                     </div>
-                  
-                    {headers.map((header) => (
-                        header !== 'id' && 
-                        header !== 'charity_id' && 
-                        header !== 'needy_type' && 
-                        header !== 'created_at' && 
-                        header !== 'updated_at' && ( 
-                            (header === 'monthly_need' && filteredPeople.some(person => person.monthly_need !== null)) ||
-                            (header === 'name_of_school' && filteredPeople.some(person => person.name_of_school !== null)) ||
-                            (header === 'Educational_level' && filteredPeople.some(person => person.Educational_level !== null))
-                        ) && (
-                            <div key={header}>
-                                <label style={{color:'black'}}>
-                                    {header}:
-                                </label>
-                                <input
-                                    type="text"
-                                    value={newPerson[header] || ''}
-                                    onChange={(e) => setNewPerson((prev) => ({ ...prev, [header]: e.target.value }))}
-                                />
-                            </div>
-                        )
-                    ))}
-                    <div className='TwoButtons'>
-                    <button onClick={() => setIsAddModalOpen(false)} className='cancel'>Cancel</button>
-                        <button type="submit" className='create'>Create</button>
+                    <div>
+                        <label style={{ color: 'black' }}>
+                            الحاجة المالية :
+                        </label>
+                        <input
+                            type="text"
+                            value={newPerson.monthly_need || ''}
+                            onChange={(e) => setNewPerson((prev) => ({ ...prev, monthly_need: handleNullValue(e.target.value) }))}
+                        />
+                    </div>
+                    <div>
+                        <label style={{ color: 'black' }}>
+                            الدراسة :
+                        </label>
+                        <input
+                            type="text"
+                            value={newPerson.Educational_level || ''}
+                            onChange={(e) => setNewPerson((prev) => ({ ...prev, Educational_level: handleNullValue(e.target.value) }))}
+                        />
+                    </div>
+                    <div>
+                        <label style={{ color: 'black' }}>
+                            اسم الجامعة :
+                        </label>
+                        <input
+                            type="text"
+                            value={newPerson.name_of_school || ''}
+                            onChange={(e) => setNewPerson((prev) => ({ ...prev, name_of_school: handleNullValue(e.target.value) }))}
+                        />
+                    </div>
+
+
+                 
+                    <div className='TwoButtonsAdd'>
+                    <button onClick={() => setIsAddModalOpen(false)} className='Addcancel'>إلقاء</button>
+                        <button type="submit" className='Addcreate'>إضافة</button>
                     </div>
                 </form>
             </Modal>
@@ -486,10 +638,13 @@ const OrgManageShape1 = () => {
                 isOpen={isDeleteModalOpen}
                 onRequestClose={() => setIsDeleteModalOpen(false)}
                 contentLabel="Delete Modal"
+                className="ModalD1"
             >
-             
-                <button onClick={() => setIsDeleteModalOpen(false)}>Cancel</button>
-                <button onClick={() => handleDeleteSubmit(selectedPerson)}>Yes, Delete</button>
+
+                <div className='Delete'>
+                    <button className='Button2' onClick={() => setIsDeleteModalOpen(false)}>إلغاء</button>
+                    <button className='Button1' onClick={() => handleDeleteSubmit(selectedPerson)}>حذف</button>
+                </div>
             </Modal>
         </>
     );
