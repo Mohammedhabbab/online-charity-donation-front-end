@@ -36,7 +36,9 @@ function Sign() {
  
   const validatePassword = (password) => {
     
+
     return password.length >= 7;
+
   };
   const validateMobileNumber = (mobileNumber) => {
   

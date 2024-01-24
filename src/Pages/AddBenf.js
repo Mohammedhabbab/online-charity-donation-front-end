@@ -26,6 +26,9 @@ const AddBenf = () => {
             formData.append('charity_id', charity_id);
             formData.append('address', address);
             formData.append('overview', overview);
+            formData.append('monthly_need', '');
+            formData.append('name_of_school','');
+            formData.append('Educational_level','');
             formData.append('phone_number', phone_number);
             formData.append('status', status);
 
@@ -102,7 +105,7 @@ const AddBenf = () => {
                 </label>
                 <br />
                 <label>
-                    expiration_date:
+                    Phone Number:
                     <input
                         type="text"
                         value={phone_number}

@@ -19,7 +19,10 @@ function App() {
 
   return (
     <>
-      <NavigationRouter />
+
+     <NavigationRouter />
+     
+
     </>
   );
 }

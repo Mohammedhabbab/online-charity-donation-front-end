@@ -1,0 +1,83 @@
+.person-details-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 1300px; 
+  margin: 20px;
+  direction: rtl; 
+}
+
+.person-details-header {
+  padding: 20px;
+  background-color: #f7f7f7;
+  color: black;
+  min-height: 300px;
+  font-size: 30px;
+  
+}
+
+.person-details-avatar {
+  width: 60px;
+  border-radius: 50%;
+ 
+}
+
+.person-details-name-mother {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  
+}
+
+.person-details-full-name, .person-details-mother-name {
+  margin: 0;
+  text-align: right; 
+}
+
+.person-details-location {
+  margin-top: 10px;
+  font-size: 30px;
+  text-align: right; 
+}
+
+.person-details-stats {
+  display: flex;
+  justify-content: space-around;
+  background-color: #fff;
+  padding: 20px;
+}
+
+.person-details-stat {
+  text-align: center;
+}
+
+.person-details-stat-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.person-details-stat-label {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.person-details-about-button {
+  display: block;
+  width: 100%;
+  min-height: 50px;
+  padding: 10px 0;
+  background-color: beige;
+  color: black;
+  font-size: 20px;
+  font-weight: bolder;
+  border: 2px solid beige; /* Added border to see the effect on hover */
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; 
+}
+
+.person-details-about-button:hover {
+  background-color: #f5f5dc;
+  color: #333; 
+  border-color: #333; 
+}
+

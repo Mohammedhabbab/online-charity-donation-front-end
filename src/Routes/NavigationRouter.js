@@ -1,6 +1,10 @@
+
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { useService } from '../Components/Dynamic/ServiceContext';
 import { ServiceProvider } from '../Components/Dynamic/ServiceContext';
+
+  import React, { useState, useEffect } from 'react';
+
 import {RouterProvider,createBrowserRouter,
 createRoutesFromElements,Route} from 'react-router-dom';
 import Home from '../Pages/Home';
@@ -19,7 +23,12 @@ import UserProfile from '../Pages/User Pages/UserProfile';
 import UserDonations from '../Pages/User Pages/UserDonations';
 import OrgNotifications from '../Pages/Org Pages/OrgNotifications';
 import OrgManageAccount from '../Pages/Org Pages/OrgManageAccount';
+
 import UserManageAccount from '../Pages/User Pages/UserManageAccount'
+
+import PersonDetailsPage from '../Components/Person/persondetails';
+
+
 
 function Routee() {
   const [services, setServices] = useState([]);
@@ -199,6 +208,7 @@ function Routee() {
         <Route path="org-manage-account" element={<OrgManageAccount />} />
         <Route path="user-donations" element={<UserDonations />} />
         <Route path="user-manage-account" element={<UserManageAccount />} />
+         <Route path="persondetails" element={<PersonDetailsPage />} />
       </Route>
     )
   );
@@ -207,7 +217,9 @@ function Routee() {
       
     
 
-
+       
+   
+  
 
   return (
     <>
