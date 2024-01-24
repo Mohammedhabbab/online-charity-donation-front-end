@@ -1,8 +1,20 @@
 import './PersonCard.css'; 
 import MaleImg from '../Assets/Male.png'
 import FemaleImg from '../Assets/Female.png'
+import { useBene } from '../Dynamic/BeneficiarContext'
+import { NavLink } from 'react-router-dom';
 
-function Card({ id, full_name, address, age, gender, charity_id, status }) {
+function Card({ id, full_name, address, age, gender, charity_id, status, monthly_need, mother_name }) {
+  const { setBeneficiar } = useBene();
+
+  const handleClick = () => {
+    const selectedBene = { id, full_name, address, age, gender, charity_id, status,monthly_need,mother_name };
+
+    setBeneficiar(selectedBene);
+   
+  };
+  
+  
   return (
    
       <div className="card" style={{
@@ -118,9 +130,9 @@ function Card({ id, full_name, address, age, gender, charity_id, status }) {
               </div>
             </div>
             {gender === 'ذكر' ? (
-              <button className="About-button" style={{ backgroundColor: 'black', color:'#c7b492'}}>التفاصيل</button>) : (
-                <button className="About-button" style={{ backgroundColor: '#c7b492',color:'black' }}>التفاصيل</button>
-            )}
+              <button className="About-button" style={{ backgroundColor: 'black', color: '#c7b492' }} onClick={handleClick} ><NavLink style={{ textDecoration: 'none', color: '#c7b492' }} id="td" to={`/persondetails/${id}`}>التفاصيل</NavLink></button>) : (
+           <button className = "About-button" style = {{ backgroundColor: '#c7b492', color:'black' }}onClick={handleClick} ><NavLink style={{textDecoration:'none',color:'black'}} id="td" to={`/persondetails/`}>التفاصيل</NavLink></button>)
+            }
 
           </>
               
