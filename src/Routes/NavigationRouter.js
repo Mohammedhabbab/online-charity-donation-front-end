@@ -3,8 +3,6 @@ import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { useService } from '../Components/Dynamic/ServiceContext';
 import { ServiceProvider } from '../Components/Dynamic/ServiceContext';
 
-  import React, { useState, useEffect } from 'react';
-
 import {RouterProvider,createBrowserRouter,
 createRoutesFromElements,Route} from 'react-router-dom';
 import Home from '../Pages/Home';
@@ -27,6 +25,7 @@ import OrgManageAccount from '../Pages/Org Pages/OrgManageAccount';
 import UserManageAccount from '../Pages/User Pages/UserManageAccount'
 
 import PersonDetailsPage from '../Components/Person/persondetails';
+import { BeneficiarProvider } from '../Components/Dynamic/BeneficiarContext';
 
 
 
@@ -224,7 +223,9 @@ function Routee() {
   return (
     <>
       <ServiceProvider>
-        <RouterProvider router={router} />
+        <BeneficiarProvider>
+          <RouterProvider router={router} />
+        </BeneficiarProvider>
       </ServiceProvider>
     </>
   );

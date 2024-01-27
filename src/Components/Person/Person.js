@@ -1,7 +1,10 @@
 import React from 'react';
 import './Person.css'; 
+import { BeneficiarProvider, useBene } from '../Dynamic/BeneficiarContext';
 
 function Details({ id, full_name, mother_name, age, gender, monthly_need, address }) {
+  const { selectedBene, setSelectedBene } = useBene(); 
+
   return (
     <div className="person-details-card">
       <div className="person-details-header">
