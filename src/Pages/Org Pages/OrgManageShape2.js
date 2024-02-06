@@ -135,26 +135,28 @@ const OrgManageShape2 = () => {
     try {
       e.preventDefault();
 
-      const formData1 = new FormData();
+      const formData = new FormData();
     
 
       
-      formData1.append('name_of_proudct', editedPerson.name_of_proudct);
-      formData1.append('type_of_proudct', editedPerson.type_of_proudct);
-      formData1.append('total_count', editedPerson.total_count);
-      formData1.append('available_count', editedPerson.available_count);
-      formData1.append('price_per_item', editedPerson.price_per_item);
-      formData1.append('overview', editedPerson.overview);
-      formData1.append('total_amount', editedPerson.total_amount);
-      formData1.append('status', editedPerson.status);
-      formData1.append('needs_type', lowercasedServiceUrl);
-      formData1.append('charity_id', userData?.id);
-      formData1.append('image', selectedImage); 
+      formData.append('name_of_proudct', editedPerson.name_of_proudct);
+      formData.append('type_of_proudct', editedPerson.type_of_proudct);
+      formData.append('total_count', editedPerson.total_count);
+      formData.append('available_count', editedPerson.available_count);
+      formData.append('price_per_item', editedPerson.price_per_item);
+      formData.append('overview', editedPerson.overview);
+      formData.append('total_amount', editedPerson.total_amount);
+      formData.append('status', editedPerson.status);
+      formData.append('needs_type', lowercasedServiceUrl);
+      formData.append('charity_id', userData?.id);
+      formData.append('image', selectedImage); 
+      formData.append('_method', "PUT"); 
+
 
 
       const response = await fetch(`http://localhost:8000/api/update_Needs/${editedPerson.id}`, {
-        method: 'PUT',
-        body: formData1,
+        method: 'POST',
+        body: formData,
       });
       console.log('Add Record Response:', response);
       if (!response.ok) {

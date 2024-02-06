@@ -130,8 +130,8 @@ function Card({ id, full_name, address, age, gender, charity_id, status, monthly
               </div>
             </div>
             {gender === 'ذكر' ? (
-              <button className="About-button" style={{ backgroundColor: 'black', color: '#c7b492' }} onClick={handleClick} ><NavLink style={{ textDecoration: 'none', color: '#c7b492' }} id="td" to={`/persondetails/${id}`}>التفاصيل</NavLink></button>) : (
-           <button className = "About-button" style = {{ backgroundColor: '#c7b492', color:'black' }}onClick={handleClick} ><NavLink style={{textDecoration:'none',color:'black'}} id="td" to={`/persondetails/`}>التفاصيل</NavLink></button>)
+              <button className="About-button" style={{ backgroundColor: 'black', color: '#c7b492' }} onClick={handleClick} ><NavLink style={{ textDecoration: 'none', color: '#c7b492' }} id="td" to={`/persondetails`}>التفاصيل</NavLink></button>) : (
+           <button className = "About-button" style = {{ backgroundColor: '#c7b492', color:'black' }}onClick={handleClick} ><NavLink style={{textDecoration:'none',color:'black'}} id="td" to={`/persondetails`}>التفاصيل</NavLink></button>)
             }
 
           </>

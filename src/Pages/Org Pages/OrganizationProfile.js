@@ -42,16 +42,21 @@ const OrganizationProfile = () => {
 
         const userData = await userResponse.json();
         setUserData(userData);
+  
 
-        const servicesResponse = await fetch('http://localhost:8000/api/get_services');
+          const servicesResponse = await fetch('http://localhost:8000/api/get_services');
 
-        if (!servicesResponse.ok) {
-          throw new Error(`Failed to fetch services data. Status: ${servicesResponse.status}`);
-        }
+          if (!servicesResponse.ok) {
+            throw new Error(`Failed to fetch services data. Status: ${servicesResponse.status}`);
+          }
 
-        const servicesData = await servicesResponse.json();
-        setServices(servicesData || []);
-        setChanged(true);
+          const servicesData = await servicesResponse.json();
+          setServices(servicesData || []);
+          setChanged(true);
+
+       
+
+
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
@@ -129,7 +134,7 @@ const OrganizationProfile = () => {
     };
 
     fetchProductData();
-  }, [userData, services]);
+  }, [changed]);
 
  
   const calculateTotalItemCount = (items) => {

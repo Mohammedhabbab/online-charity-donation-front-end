@@ -243,28 +243,28 @@ function Sign() {
                   <Components.Input
                       type='text'
                       id='full_name'
-                    placeholder='Name'
+                    placeholder='الاسم'
                    value={signUpName}
                     onChange={(e) => setSignUpName(e.target.value)}
                   />
                   <Components.Input
                       type='email'
                       id='email'
-                    placeholder='Email'
+                    placeholder='الحساب'
                     value={signUpEmail}
                     onChange={(e) => setSignUpEmail(e.target.value)}
                   />
                   <Components.Input
                       type='password'
                       id='password'
-                    placeholder='Password'
+                    placeholder='كلمة المرور'
                     value={signUpPassword}
                     onChange={(e) => setSignUpPassword(e.target.value)}
                   />
                   <Components.Input
                       type='text'
                         id='mobile_number'
-                    placeholder='Mobile Number'
+                    placeholder='رقم الهاتف'
                     value={signUpPhone}
                     onChange={(e) => setSignUpPhone(e.target.value)}
                   />
@@ -272,22 +272,22 @@ function Sign() {
                   <Components.Input
                       type='text'
                       id='address'
-                    placeholder='Address'
+                    placeholder='العنوان'
                     value={signUpAddress}
                     onChange={(e) => setSignUpAddress(e.target.value)}
                   />
                   <Components.RadioContainer>
-                    <label style={{ marginRight: '22.5rem'}}>Gender:</label>
+                    <label style={{ marginRight: '22.5rem'}}>الجنس:</label>
                     <Components.RadioInput 
                       type="radio"
                           id='gender'
                         
                       value="male"
-                      checked={signUpGender === "male"}
-                      onChange={() => setSignUpGender("male")}
-                      onClick={() => setSignUpGender("male")}
+                      checked={signUpGender === "ذكر"}
+                      onChange={() => setSignUpGender("ذكر")}
+                      onClick={() => setSignUpGender("ذكر")}
                     />
-                    <Components.RadioLabel onClick={() => setSignUpGender("male")}>Male</Components.RadioLabel>
+                    <Components.RadioLabel onClick={() => setSignUpGender("ذكر")}>ذكر</Components.RadioLabel>
 
                     <Components.RadioInput
                       type="radio"
@@ -311,13 +311,13 @@ function Sign() {
               <Components.Title>تسجيل الدخول</Components.Title>
               <Components.Input
                 type='email'
-                placeholder='Email'
+                placeholder='الحساب'
                 value={signInEmail}
                 onChange={(e) => setSignInEmail(e.target.value)}
               />
               <Components.Input
                 type='password'
-                placeholder='Password'
+                placeholder='كلمة المرور'
                 value={signInPassword}
                 onChange={(e) => setSignInPassword(e.target.value)}
               />
@@ -342,7 +342,7 @@ function Sign() {
 
               <Components.RightOverlayPanel signIn={signIn}>
                 <Components.Title>مرحبا</Components.Title>
-                <Components.Paragraph>Enter Your personal details</Components.Paragraph>
+                <Components.Paragraph>أدخل معلوماتك الشخصية</Components.Paragraph>
                 <Components.GhostButton onClick={() => toggle(false)}>
                   انشاء حساب
                 </Components.GhostButton>
@@ -364,37 +364,37 @@ function Sign() {
                     <Components.Title>انشاء حساب</Components.Title>
                     <Components.Input
                       type='text'
-                      placeholder='Name'
+                      placeholder='الاسم'
                       value={orgsignUpName}
                       onChange={(e) => setOrgSignUpName(e.target.value)}
                     />
                     <Components.Input
                       type='email'
-                      placeholder='Email'
+                      placeholder='الحساب'
                       value={orgsignUpEmail}
                       onChange={(e) => setOrgSignUpEmail(e.target.value)}
                     />
                     <Components.Input
                       type='password'
-                      placeholder='Password'
+                      placeholder='كلمة المرور'
                       value={orgsignUpPassword}
                       onChange={(e) => setOrgSignUpPassword(e.target.value)}
                     />
                     <Components.Input
                       type='text'
-                      placeholder='Phone Number'
+                      placeholder='رقم الهاتف'
                       value={orgsignUpPhone}
                       onChange={(e) => setOrgSignUpPhone(e.target.value)}
                     />
                         <Components.Input
                           type='text'
-                          placeholder='Telephone Number'
+                          placeholder='الهاتف'
                           value={orgsignUpTelephoneNumber}
                           onChange={(e) => setOrgSignUpTelephoneNumber(e.target.value)}
                         />
                     <Components.Input
                       type='text'
-                      placeholder='Address'
+                      placeholder='العنوان'
                       value={orgsignUpAddress}
                       onChange={(e) => setOrgSignUpAddress(e.target.value)}
                         />
@@ -413,23 +413,23 @@ function Sign() {
 
             <Components.SignInContainer signIn={signIn}>
               <Components.Form>
-                <Components.Title>Login To Your Organization</Components.Title>
+                    <Components.Title> سجل الدخول إلى جمعيتك</Components.Title>
                 <Components.Input
                   type='email'
-                  placeholder='Email'
+                  placeholder='الحساب'
                   value={orgsignInEmail}
                   onChange={(e) => setOrgSignInEmail(e.target.value)}
                 />
                 <Components.Input
                   type='password'
-                  placeholder='Password'
+                  placeholder='كلمة المرور'
                   value={orgsignInPassword}
                   onChange={(e) => setOrgSignInPassword(e.target.value)}
                 />
           
 
                 <Components.Anchor href='#'>Forgot your password?</Components.Anchor>
-                <Components.Button onClick={handleSignIn}>Sign In</Components.Button>
+                <Components.Button onClick={handleSignIn}>تسجيل الدخول</Components.Button>
               </Components.Form>
             </Components.SignInContainer>
 
@@ -438,7 +438,7 @@ function Sign() {
                 <Components.LeftOverlayPanel signIn={signIn}>
                   <Components.Title>اهلاً بعودتك</Components.Title>
                   <Components.Paragraph>
-                    Login to Your Organization From Here
+                    سجل الدخول إلى جمعيتك
                   </Components.Paragraph>
                   <Components.GhostButton onClick={() => toggle(true)}>
                     تسجيل الدخول
@@ -447,7 +447,7 @@ function Sign() {
 
                 <Components.RightOverlayPanel signIn={signIn}>
                   <Components.Title>مرحبا</Components.Title>
-                  <Components.Paragraph>Let Your Organization Join Us</Components.Paragraph>
+                  <Components.Paragraph>ضم جمعيتك إلى موقعنا</Components.Paragraph>
                   <Components.GhostButton onClick={() => toggle(false)}>
                     انشاء حساب
                   </Components.GhostButton>

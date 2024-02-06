@@ -51,8 +51,8 @@ export const Navbar = ({ handleSignOut }) => {
   };
 
 
-  const navLinkTo = useMemo(() => userData?.type_of_user === 'user' ? '/user-profile' : '/org-profile', [userData]);
-
+ // const navLinkTo = useMemo(() => userData?.type_of_user === 'user' ? '/user-profile' : '/org-profile', [userData]);
+  const navLinkTo = useMemo(() => userData?.type_of_user === 'user' ? '/profile' : '/profile', [userData]);
   if (isLoading) {
     return null;
   }
@@ -70,9 +70,9 @@ export const Navbar = ({ handleSignOut }) => {
           <li><NavLink id='nav' to="/about">من نحن</NavLink></li>
           <li><NavLink id='nav' to="/contactus">تواصل معنا</NavLink></li>
 
-          {userData ? (
+          {userData && userData.type_of_user !== 'admin' ? (
             <li onClick={toggleDropdown} className="dropdown-trigger">
-              <span id="nav">{userData.type_of_user === 'user' ? 'حسابي' : 'حساب الجمعية'}</span>
+              <span id="nav">{userData.type_of_user === 'user' ? 'حسابي' :userData.type_of_user === 'charity' ? 'حساب الجمعية' : ''}</span>
               {showDropdown && (
                 <div className="dropdown-content">
                   <NavLink to={navLinkTo}>
