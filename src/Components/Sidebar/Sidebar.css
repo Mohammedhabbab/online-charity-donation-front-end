@@ -23,18 +23,37 @@
   
     direction: rtl;
 }
+.navigation h2{
+position: relative;   
+ text-align: center;
+ top: 1.5rem;
+ right: 1rem;;
+   
+}
 .navigation.active{
     width: 13.40%;
     position: absolute;
 }
 .navigation ul{
     position: absolute;
-    top: 0;
+    top: 2rem;
 right: 0px;
 width:100%;
 padding-right: 5px;
 padding-top: 40px;
 direction: rtl;
+}
+.navigation .services-list{
+ 
+            position: absolute;
+            top: 0rem;
+            right: 0px;
+            width: 100%;
+            padding-right: 5px;
+            padding-top: 40px;
+            direction: rtl;
+        
+        
 }
 .navigation ul li{
     position: relative;
@@ -130,7 +149,7 @@ background: #c7b492;
     position: absolute;
     top: 5px;
     left: 5px;
-    width: 50px;
+    width: 40px;
     height: 50px;
 background: #c7b492;
 border-radius: 10px;

@@ -2,6 +2,8 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { useService } from '../Components/Dynamic/ServiceContext';
 import { ServiceProvider } from '../Components/Dynamic/ServiceContext';
+import { UserProvider } from '../Components/Dynamic/UserContext';
+
 
 import {RouterProvider,createBrowserRouter,
 createRoutesFromElements,Route} from 'react-router-dom';
@@ -16,6 +18,8 @@ import UrgentAdd from '../Pages/UrgentAdd';
 import AddBenf from '../Pages/AddBenf';
 import PersonCard from '../Components/Person/People'
 import { RootPage } from '../Pages/Root';
+import Profile from '../Pages/Profile';
+
 import OrganizationProfile from '../Pages/Org Pages/OrganizationProfile';
 import UserProfile from '../Pages/User Pages/UserProfile';
 import UserDonations from '../Pages/User Pages/UserDonations';
@@ -27,8 +31,14 @@ import UserManageAccount from '../Pages/User Pages/UserManageAccount'
 import PersonDetailsPage from '../Components/Person/persondetails';
 import { BeneficiarProvider } from '../Components/Dynamic/BeneficiarContext';
 
-
-
+import AdminHomePage from '../Pages/Admin Pages/AdminHomePage';
+import AdminCharities from '../Pages/Admin Pages/AdminCharities';
+import AdminDonations from '../Pages/Admin Pages/AdminDonations';
+import AdminServices from '../Pages/Admin Pages/AdminServices';
+import AdminUsers from '../Pages/Admin Pages/AdminUsers';
+import AdminManageAccount from '../Pages/Admin Pages/AdminManageAccount';
+import AdminSignIn from '../Pages/Admin Pages/AdminSignIn';
+import AdminMessages from '../Pages/Admin Pages/AdminMessages';
 function Routee() {
   const [services, setServices] = useState([]);
 
@@ -202,31 +212,49 @@ function Routee() {
         <Route path="PersonCard" element={<PersonCard />} />
         <Route path="user-profile" element={<UserProfile />} />
         <Route path="org-profile" element={<OrganizationProfile />} />
+        <Route path="profile" element={<Profile />} />
+
         {createDynamicRoutes()}
         <Route path="org-notifications" element={<OrgNotifications />} />
         <Route path="org-manage-account" element={<OrgManageAccount />} />
         <Route path="user-donations" element={<UserDonations />} />
         <Route path="user-manage-account" element={<UserManageAccount />} />
-         <Route path="persondetails" element={<PersonDetailsPage />} />
+        <Route path="persondetails" element={<PersonDetailsPage />} />
+    
+        
+        <Route path="admin" element={<AdminSignIn />} />
+        <Route path="admin/dashboard" element={<AdminHomePage />} />
+        <Route path="admin/charities" element={<AdminCharities />} />
+        <Route path="admin/donations" element={<AdminDonations />} />
+        <Route path="admin/manage-account" element={<AdminManageAccount />} />
+        <Route path="admin/services" element={<AdminServices />} />
+        <Route path="admin/users" element={<AdminUsers />} />
+        <Route path="admin/messages" element={<AdminMessages />} />
+
+
+
+
       </Route>
+
+      
     )
   );
        
 
       
-    
 
-       
    
   
 
   return (
     <>
+      <UserProvider>
       <ServiceProvider>
         <BeneficiarProvider>
           <RouterProvider router={router} />
         </BeneficiarProvider>
       </ServiceProvider>
+      </UserProvider>
     </>
   );
 }

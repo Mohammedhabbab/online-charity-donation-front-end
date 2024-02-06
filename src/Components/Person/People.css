@@ -13,15 +13,7 @@
   min-height: 50rem;
  
 }
-body {
-color: white;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  background: black;
 
-}
 .paragraph {
   color: white;
   font-size: 40px;

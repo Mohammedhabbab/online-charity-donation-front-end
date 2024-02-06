@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import SideBar from '../../Components/Sidebar/SideBar';
-import '../../Components/Org/OrgManageAccount.css';
+import AdminSidebar from '../../Components/Admin/AdminSidebar'
+import '../../Components/Admin/AdminManageAccount.css'
 import { useNavigate, useLocation } from 'react-router-dom';
 import Modal from 'react-modal';
-
-const UserManageAccount = () => {
+const AdminManageAccount = () => {
     const [userData, setUserData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isEditFormOpen, setIsEditFormOpen] = useState(false);
@@ -20,7 +19,6 @@ const UserManageAccount = () => {
         gender: '',
     });
 
-    // New state variables for password change
     const [current_password, setCurrentPassword] = useState('');
     const [new_password, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
@@ -52,7 +50,6 @@ const UserManageAccount = () => {
                 const userData = await userResponse.json();
                 setUserData(userData);
 
-                // Initialize updatedInfo with the current user data
                 setUpdatedInfo({
                     full_name: userData.full_name,
                     email: userData.email,
@@ -139,7 +136,7 @@ const UserManageAccount = () => {
 
             if (changePassResponse.ok) {
                 console.log('Password changed successfully.');
-                handleCancelPassChange(); // Close the password change form
+                handleCancelPassChange(); 
             } else {
                 console.error('Failed to change password:', changePassResponse.status);
             }
@@ -154,7 +151,7 @@ const UserManageAccount = () => {
 
     return (
         <>
-            <section className="OrgManageAccount">
+            <section className="AdminManageAccount">
                 <div className="UserInfo">
                     <h2>المعلومات الشخصية</h2>
                     <div className='Info_Button'>
@@ -183,7 +180,7 @@ const UserManageAccount = () => {
                         </button>
                     </div>
                 </div>
-                <SideBar />
+                <AdminSidebar />
             </section>
 
             {/* Edit Information Modal */}
@@ -270,4 +267,5 @@ const UserManageAccount = () => {
     );
 };
 
-export default UserManageAccount;
+
+export default AdminManageAccount

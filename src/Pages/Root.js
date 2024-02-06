@@ -19,7 +19,6 @@ export const RootPage = () => {
   const handleSignOut = () => {
     localStorage.removeItem('authToken');
     setIsUserSignedIn(false);
-    // Reset the mode to 'user' or 'organization' based on your logic
     setMode('user');
     navigate('/sign');
   };
@@ -27,7 +26,7 @@ export const RootPage = () => {
       <>
       <Navbar isUserSignedIn={isUserSignedIn} mode={mode} handleSignOut={handleSignOut} />
       <div className='Fully'>
-        <body><Outlet /></body></div>
+        <Outlet /></div>
       
         
      

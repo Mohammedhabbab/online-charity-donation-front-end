@@ -343,13 +343,13 @@ height: 100%;
 }
 
 .Slider-Button.Prev {
-    left: 10px;
+    left: 2.25rem;
 }
 .Slider-Button.PrevS {
     left: 0px;
 }
 .Slider-Button.Next {
-    right: 10px;
+    right: 1.5rem;
 }
 .Slider-Button.NextS {
     right: 50px;
@@ -408,6 +408,7 @@ display: flex;
     position: relative;
     width: 100%;
     text-decoration: none;
+    
  
 }
 
@@ -422,7 +423,7 @@ display: flex;
     position: relative;
    top: -8rem;
    
-   left: -72rem;
+   left: -74.5rem;
     white-space: wrap;
    
 }
@@ -453,7 +454,7 @@ top: 18rem;
 .Services-Section .Service-Card.A2 {
     display: flex;
     position: relative;
- left: -90rem;
+ left: -92.5rem;
  top: 15rem;
     white-space: wrap;
 }
@@ -478,7 +479,7 @@ align-items: center;
     left: -15.5rem;
     width: 1rem;
 
- top: 17rem;
+ top: 17.5rem;
   
 
 }
@@ -487,7 +488,7 @@ align-items: center;
     display: flex;
     position: relative;
 top: -8rem;
-    left: -65rem;
+    left: -76rem;
 white-space: wrap;
 }
 
@@ -519,7 +520,7 @@ white-space: wrap;
 .Services-Section .Service-Card.A4 {
     display: flex;
     position: relative;
-    left: -110rem;
+    left: -116rem;
         top: 15rem;
 white-space: wrap;
 }
@@ -544,7 +545,7 @@ align-items: center;
     left: -15.5rem;
     width: 1rem;
 
-   top:17rem;
+   top:17.5rem;
 
 }
 

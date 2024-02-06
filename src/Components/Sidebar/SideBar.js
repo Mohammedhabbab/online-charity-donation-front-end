@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import './Sidebar.css';
 import { useService } from '../Dynamic/ServiceContext';
-
+import { useUser } from '../Dynamic/UserContext';
 const SideBar = () => {
     const [isNavigationActive, setIsNavigationActive] = useState(true);
     const [isServicesVisible, setIsServicesVisible] = useState(false);
     const [services, setServices] = useState([]);
     const [selectedService, setSelectedService] = useState(null);
-    const [userData, setUserData] = useState(null);
+    const { userData, setUserData } = useUser();
     const [isLoading, setIsLoading] = useState(true);
     const { setServiceS } = useService();
-   
+    const navigate = useNavigate();
+
     useEffect(() => {
+        
         const fetchData = async () => {
             try {
                 const authToken = localStorage.getItem('authToken');
@@ -20,6 +22,7 @@ const SideBar = () => {
                 if (!authToken) {
                     setUserData(null);
                     setIsLoading(false);
+                    navigate('/404');  
                     return;
                 }
 
@@ -34,12 +37,13 @@ const SideBar = () => {
 
                 if (!userResponse.ok) {
                     throw new Error(`Failed to fetch user data. Status: ${userResponse.status}`);
-                }
+                                 }
 
                 const userData = await userResponse.json();
                 setUserData(userData);
             } catch (error) {
                 console.error('Error fetching data:', error);
+                
             } finally {
                 setIsLoading(false);
             }
@@ -93,11 +97,14 @@ const SideBar = () => {
             {userData?.type_of_user === 'user' ? (
                 <>
                     <div className={`navigation ${isNavigationActive ? 'active' : ''}`}>
+                        <h2>{userData?.full_name}</h2>
+                        <br></br>
+                        <br></br>
                         <ul>
                             <li className='list' onClick={toggleNavigation}>
                                 <b></b>
                                 <b></b>
-                                <NavLink id='nav' to='/user-profile' activeClassName='active' exact>
+                                <NavLink id='nav' to='/profile' activeClassName='active' exact>
                                     <span className='icon'>
                                         <ion-icon name='home-outline'></ion-icon>
                                     </span>
@@ -138,12 +145,14 @@ const SideBar = () => {
                 </>
             ) : (
                 <>
-                    <div className={`navigation ${isNavigationActive ? 'active' : ''}`}>
+                        <div className={`navigation ${isNavigationActive ? 'active' : ''}`}>
+                            <h2>{userData?.full_name}</h2>
+                           
                         <ul>
                             <li className='list' onClick={toggleNavigation}>
                                 <b></b>
                                 <b></b>
-                                <NavLink id='nav' to='/org-profile' activeClassName='active' exact>
+                                <NavLink id='nav' to='/profile' activeClassName='active' exact>
                                     <span className='icon'>
                                         <ion-icon name='home-outline'></ion-icon>
                                     </span>

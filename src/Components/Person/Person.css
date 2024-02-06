@@ -24,6 +24,7 @@
 
 .person-details-name-mother {
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: flex-start; 
   
@@ -54,6 +55,7 @@
 .person-details-stat-value {
   font-size: 1.5rem;
   font-weight: bold;
+  color:black;
 }
 
 .person-details-stat-label {
