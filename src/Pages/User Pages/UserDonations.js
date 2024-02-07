@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import SideBar from '../../Components/Sidebar/SideBar';
 import '../../Components/User/UserProfile.css';
+import { useNavigate } from 'react-router-dom';
 
 const UserDonations = () => {
     const [people, setPeople] = useState([]);
@@ -9,7 +10,7 @@ const UserDonations = () => {
     const [pageSize] = useState(30);
     const [userData, setUserData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-
+    const navigate = useNavigate();
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -31,6 +32,8 @@ const UserDonations = () => {
                 });
 
                 if (!userResponse.ok) {
+                    navigate('/');
+
                     throw new Error(`Failed to fetch user data. Status: ${userResponse.status}`);
                 }
 

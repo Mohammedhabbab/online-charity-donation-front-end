@@ -85,7 +85,7 @@ const AdminCharities = () => {
 
 
 
-            const response = await fetch(`http://localhost:8000/api/update_Services/${editedCharity.id}`, {
+            const response = await fetch(`http://localhost:8000/api/auth/update_user/${editedCharity.id}`, {
                 method: 'POST',
                 body: formData,
             });
@@ -112,11 +112,14 @@ const AdminCharities = () => {
             formData.append('address', newcharity.address);
             formData.append('mobile_number', newcharity.mobile_number);
             formData.append('telephone_number', newcharity.telephone_number);
+            formData.append('status', 0);
+            formData.append('type_of_user', 'charity');
+            formData.append('gender', '');
 
             
            // formData.append('image', selectedImage);
 
-            const response = await fetch('http://localhost:8000/api/insert_charity', {
+            const response = await fetch('http://localhost:8000/api/insert_user', {
                 method: 'POST',
                 body: formData,
             });
@@ -133,6 +136,7 @@ const AdminCharities = () => {
                 address: '',
                 mobile_number: '',
                 telephone_number: '',
+                status:'0'
             });
 
             setUpdateTrigger((prev) => !prev);
@@ -151,7 +155,7 @@ const AdminCharities = () => {
                 return;
             }
 
-            const response = await fetch(`http://localhost:8000/api/delete_charities/${charityToDelete.id}`, {
+            const response = await fetch(`http://localhost:8000/api/delete_user/${charityToDelete.id}`, {
                 method: 'DELETE',
             });
 
@@ -293,6 +297,7 @@ const AdminCharities = () => {
                                 onChange={(e) => setSelectedCharity((prev) => ({ ...prev, telephone_number: e.target.value }))}
                             />
                         </div>
+
                         {/*<div>
                             <label style={{ color: 'black' }}>
                                 صورة الخدمة:

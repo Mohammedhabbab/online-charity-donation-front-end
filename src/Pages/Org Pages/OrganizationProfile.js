@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import SideBar from '../../Components/Sidebar/SideBar';
 import '../../Components/Org/org.css';
@@ -14,7 +15,8 @@ const OrganizationProfile = () => {
   const [selectedSegment, setSelectedSegment] = useState(null);
   const [product, setProducts] = useState([]);
   const [changed, setChanged] = useState(false);
-  
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,6 +39,7 @@ const OrganizationProfile = () => {
         });
 
         if (!userResponse.ok) {
+          navigate('/');
           throw new Error(`Failed to fetch user data. Status: ${userResponse.status}`);
         }
 

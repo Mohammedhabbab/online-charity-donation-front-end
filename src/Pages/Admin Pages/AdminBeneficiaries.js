@@ -3,8 +3,9 @@ import AdminSidebar from '../../Components/Admin/AdminSidebar'
 import '../../Components/Admin/AdminUsers.css'
 import { useParams, useNavigate } from 'react-router-dom';
 import Modal from 'react-modal';
-const AdminDonations = () => {
-    const [donations, setdonations] = useState([]);
+
+const AdminBeneficiaries = () => {
+    const [beneficiaries, setbeneficiaries] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
@@ -12,7 +13,7 @@ const AdminDonations = () => {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-    const [selecteddonation, setSelecteddonation] = useState(null);
+    const [selectedbeneficiar, setSelectedbeneficiar] = useState(null);
     const [updateTrigger, setUpdateTrigger] = useState(false);
     const [deleteTrigger, setDeleteTrigger] = useState(false);
     const [editTrigger, setEditTrigger] = useState(false);
@@ -20,13 +21,13 @@ const AdminDonations = () => {
     const navigate = useNavigate();
     const [selectedImage, setSelectedImage] = useState(null);
 
-    const [newdonation, setNewdonation] = useState({});
+    const [newbeneficiar, setNewbeneficiar] = useState({});
 
 
 
 
     useEffect(() => {
-        fetch('http://localhost:8000/api/get_donations')
+        fetch('http://localhost:8000/api/get_beneficiar')
             .then((response) => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -34,7 +35,7 @@ const AdminDonations = () => {
                 return response.json();
             })
             .then((data) => {
-                setdonations(data || []);
+                setbeneficiaries(data || []);
 
                 setIsLoading(false);
             })
@@ -44,31 +45,31 @@ const AdminDonations = () => {
             });
     }, [updateTrigger, deleteTrigger, editTrigger]);
 
-    const totalPages = Math.ceil(donations.length / pageSize);
+    const totalPages = Math.ceil(beneficiaries.length / pageSize);
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = startIndex + pageSize;
-    const currentdonation = donations.slice(startIndex, endIndex);
+    const currentbeneficiar = beneficiaries.slice(startIndex, endIndex);
 
-   
+ 
 
 
-    const openDeleteModal = (donation) => {
-        setSelecteddonation(donation);
+
+    const openDeleteModal = (beneficiar) => {
+        setSelectedbeneficiar(beneficiar);
         setIsDeleteModalOpen(true);
     };
 
-   
+    
 
-   
 
-    const handleDeleteSubmit = async (donationToDelete) => {
+    const handleDeleteSubmit = async (beneficiarToDelete) => {
         try {
-            if (!donationToDelete) {
+            if (!beneficiarToDelete) {
                 console.error('No person selected for deletion');
                 return;
             }
 
-            const response = await fetch(`http://localhost:8000/api/delete_donations/${donationToDelete.id}`, {
+            const response = await fetch(`http://localhost:8000/api/delete_Beneficiaries/${beneficiarToDelete.id}`, {
                 method: 'DELETE',
             });
 
@@ -93,39 +94,39 @@ const AdminDonations = () => {
 
     return (
         <>
-            <section className='AdminUsers' key={donations.id}>
+            <section className='AdminUsers' key={beneficiaries.id}>
                 <div className='AdminContainers'>
 
                     <table className='InfoTable'>
 
                         <thead>
                             <tr>
+                                <th>الاسم</th>
+                                <th>اسم الأم</th>
                                 <th>الخدمة</th>
-                                <th>التفاصيل</th>
-                                <th>المتبرع</th>
-                                <th>الجمعية المسؤولة</th>
-                                <th>المبلغ</th>
-                                <th>رقم العملية</th>
+                                <th>العنوان</th>
+                                <th>العمر</th>
+                                <th>الجنس</th>
 
                                 <th>اجراء</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            {currentdonation.map((donation) => (
-                                <tr key={donation.id}>
-                                    <td>{donation.donation_type_id}</td>
-                                    <td>{donation.overview}</td>
-                                    <td>{donation.users_id}</td>
-                                    <td>{donation.beneficaries_id}</td>
-                                    <td>{donation.total_amount_of_donation}</td>
-                                    <td>{donation.id}</td>
+                            {currentbeneficiar.map((beneficiar) => (
+                                <tr key={beneficiar.id}>
+                                    <td>{beneficiar.full_name}</td>
+                                    <td>{beneficiar.mother_name}</td>
+                                    <td>{beneficiar.needy_type}</td>
+                                    <td>{beneficiar.address}</td>
+                                    <td>{beneficiar.age}</td>
+                                    <td>{beneficiar.gender}</td>
 
 
 
 
                                     <td>
-                                        <button className='DeleteB' onClick={() => openDeleteModal(donation)}>X</button>
+                                        <button className='DeleteB' onClick={() => openDeleteModal(beneficiar)}>X</button>
                                     </td>
 
 
@@ -147,6 +148,7 @@ const AdminDonations = () => {
                 <AdminSidebar />
             </section>
 
+         
 
             {/* Delete Modal */}
             <Modal
@@ -158,11 +160,11 @@ const AdminDonations = () => {
 
                 <div className='Delete'>
                     <button className='Button2' onClick={() => setIsDeleteModalOpen(false)}>إلغاء</button>
-                    <button className='Button1' onClick={() => handleDeleteSubmit(selecteddonation)}>حذف</button>
+                    <button className='Button1' onClick={() => handleDeleteSubmit(selectedbeneficiar)}>حذف</button>
                 </div>
             </Modal>
         </>
     )
 }
 
-export default AdminDonations
+export default AdminBeneficiaries

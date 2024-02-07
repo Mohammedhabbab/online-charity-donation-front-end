@@ -48,6 +48,8 @@ const Profile = () => {
                 });
 
                 if (!userResponse.ok) {
+                    navigate('/');
+
                     throw new Error(`Failed to fetch user data. Status: ${userResponse.status}`);
                 }
 

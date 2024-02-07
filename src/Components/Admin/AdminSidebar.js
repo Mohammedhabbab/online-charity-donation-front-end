@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { NavLink ,useNavigate} from 'react-router-dom';
 import './AdminSidebar.css';
 import { useUser } from '../Dynamic/UserContext';
-
+import MaleImg from '../Assets/Male.png'
+import FemaleImg from '../Assets/Female.png'
 const AdminSidebar = () => {
     const [isNavigationActive, setIsNavigationActive] = useState(true);
     const [isServicesVisible, setIsServicesVisible] = useState(false);
@@ -70,7 +71,12 @@ const AdminSidebar = () => {
     <>
             <div className={`Anavigation ${isNavigationActive ? 'active' : ''}`}>
                 <h2>{userData?.full_name}</h2>
-
+                {userData?.gender === 'ذكر' ? (
+                    <img src={MaleImg} alt="img" id='MFimg'  />
+                    ) : (
+                        <img src={FemaleImg} alt="img" id='MFimg' />
+ 
+)  }
             <ul>
                 <li className='list' onClick={toggleNavigation}>
                     <b></b>
@@ -105,7 +111,26 @@ const AdminSidebar = () => {
                                 <ion-icon name="business-outline"></ion-icon>                            </span>
                             <span className='title'>الجمعيات</span>
                         </NavLink>
+                        
                     </li>  
+                    <li className='list' onClick={toggleNavigation}>
+                        <NavLink id='nav' to='/admin/beneficaries' activeClassName='active'>
+                            <span className='icon'>
+                                <ion-icon name="people-outline"></ion-icon>                            </span>
+                            <span className='title'>الأشخاص</span>
+                        </NavLink>
+                        
+                    </li> 
+
+                    <li className='list' onClick={toggleNavigation}>
+                        <NavLink id='nav' to='/admin/needs' activeClassName='active'>
+                            <span className='icon'>
+                                <ion-icon name="medkit-outline"></ion-icon>                            </span>
+                            <span className='title'>الأغراض</span>
+                        </NavLink>
+
+                    </li> 
+
                     <li className='list' onClick={toggleNavigation}>
                         <NavLink id='nav' to='/admin/users' activeClassName='active'>
                             <span className='icon'>

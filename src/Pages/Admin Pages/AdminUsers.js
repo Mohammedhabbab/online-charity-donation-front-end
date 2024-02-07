@@ -78,14 +78,14 @@ const AdminUsers = () => {
             formData.append('email', newuser.email);
             formData.append('address', newuser.address);
             formData.append('mobile_number', newuser.mobile_number);
-            formData.append('telephone_number', newuser.gender);
+            formData.append('gender', newuser.gender);
 
             //formData.append('image', selectedImage);
             formData.append('_method', "PUT");
 
 
 
-            const response = await fetch(`http://localhost:8000/api/update_Services/${editeduser.id}`, {
+            const response = await fetch(`http://localhost:8000/api/auth/update_users/${editeduser.id}`, {
                 method: 'POST',
                 body: formData,
             });
@@ -151,7 +151,7 @@ const AdminUsers = () => {
                 return;
             }
 
-            const response = await fetch(`http://localhost:8000/api/delete_users/${userToDelete.id}`, {
+            const response = await fetch(`http://localhost:8000/api/delete_user/${userToDelete.id}`, {
                 method: 'DELETE',
             });
 

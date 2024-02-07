@@ -182,7 +182,7 @@ const AdminServices = () => {
                               <th>الاسم</th>
                               <th>الوصف</th>
                            
-                              <th>اسم العنوان</th>
+                              <th>رابط</th>
                               <th>النوع</th>
                            
                           

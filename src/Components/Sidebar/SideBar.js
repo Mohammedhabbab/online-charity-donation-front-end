@@ -3,6 +3,8 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import './Sidebar.css';
 import { useService } from '../Dynamic/ServiceContext';
 import { useUser } from '../Dynamic/UserContext';
+import MaleImg from '../Assets/Male.png'
+import FemaleImg from '../Assets/Female.png'
 const SideBar = () => {
     const [isNavigationActive, setIsNavigationActive] = useState(true);
     const [isServicesVisible, setIsServicesVisible] = useState(false);
@@ -11,6 +13,7 @@ const SideBar = () => {
     const { userData, setUserData } = useUser();
     const [isLoading, setIsLoading] = useState(true);
     const { setServiceS } = useService();
+    
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -98,6 +101,12 @@ const SideBar = () => {
                 <>
                     <div className={`navigation ${isNavigationActive ? 'active' : ''}`}>
                         <h2>{userData?.full_name}</h2>
+                        {userData?.gender === 'ذكر' ? (
+                            <img src={MaleImg} alt="img" id='MFimg'/>
+                        ) : (
+                                <img src={FemaleImg} alt="img" id='MFimg' />
+
+                        )}
                         <br></br>
                         <br></br>
                         <ul>

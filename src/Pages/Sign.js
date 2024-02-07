@@ -229,7 +229,7 @@ function Sign() {
           
 }}>
  <Components.SwitchButton onClick={handleModeSwitch}>
-        Switch to {mode === 'user' ? 'charity' : 'user'}
+        سجل دخول {mode === 'user' ? 'كجمعية' : 'كمستخدم'}
       </Components.SwitchButton>
       {mode === 'user' ? (
         <Components.Container>
@@ -277,12 +277,12 @@ function Sign() {
                     onChange={(e) => setSignUpAddress(e.target.value)}
                   />
                   <Components.RadioContainer>
-                    <label style={{ marginRight: '22.5rem'}}>الجنس:</label>
+                    <label style={{ marginRight: '11rem',direction:'rtl'}}>الجنس:</label>
                     <Components.RadioInput 
                       type="radio"
                           id='gender'
                         
-                      value="male"
+                      value="ذكر"
                       checked={signUpGender === "ذكر"}
                       onChange={() => setSignUpGender("ذكر")}
                       onClick={() => setSignUpGender("ذكر")}
@@ -292,12 +292,12 @@ function Sign() {
                     <Components.RadioInput
                       type="radio"
                       id='gender'
-                      value="female"
-                      checked={signUpGender === "female"}
-                      onChange={() => setSignUpGender("female")}
-                      onClick={() => setSignUpGender("female")}
+                      value="انثى"
+                      checked={signUpGender === "انثى"}
+                      onChange={() => setSignUpGender("انثى")}
+                      onClick={() => setSignUpGender("انثى")}
                     />
-                    <Components.RadioLabel onClick={() => setSignUpGender("female")}>Female</Components.RadioLabel>
+                    <Components.RadioLabel onClick={() => setSignUpGender("انثى")}>انثى</Components.RadioLabel>
                       </Components.RadioContainer>
                      
                   <Components.Button onClick={handleSignUp}>انشاء الحساب</Components.Button>

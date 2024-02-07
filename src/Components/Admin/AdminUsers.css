@@ -45,13 +45,13 @@
         width: 100%;
         border-collapse: collapse;
         margin-top: 20px;
-        background: #c7b492;
+        background: beige;
         direction: rtl;
     }
     
         .AdminContainers .InfoTable th,
         .AdminContainers .InfoTable td {
-        border: 3px solid #ffffff;
+        border: 3px solid #393535;
         padding: 10px;
         text-align: left;
         color: black;

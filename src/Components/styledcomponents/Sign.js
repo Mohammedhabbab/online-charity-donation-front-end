@@ -74,23 +74,24 @@ export const Input = styled.input`
   padding: 12px 15px;
   margin: 8px 0;
   width: 100%;
+  direction:rtl;
 `;
 
 
 
 
 export const SwitchButton = styled.button`
-width:20rem;
+width:20%;
   background-color: black;
   border: 3px solid black;
   margin-left:40%;
   color:white;
   cursor: pointer;
   font-size: 24px;
-
+border-radius:12px;
   margin-top: 1rem;
   text-decoration: none;
-
+direction:rtl;
   &:hover {
     text-decoration: none;
   }
@@ -104,6 +105,7 @@ export const RadioContainer = styled.div`
   position: relative;
   margin-bottom:2rem;
  color:black;
+ left:70%;
 `;
 
 export const RadioInput = styled.input`
