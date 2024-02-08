@@ -593,13 +593,26 @@ const OrgManageShape1 = () => {
                             onChange={(e) => setNewPerson((prev) => ({ ...prev, age: e.target.value }))}
                         />
                     </div>
-                    <div>
+                    <div className='R'>
                         <label style={{ color: 'black' }}>
                             الجنس:
                         </label>
+                        <label className='L'>ذكر</label>
                         <input
-                            type="text"
-                            value={newPerson.gender || ''}
+                            className='I'
+                            type="radio"
+                            id='gender'
+                            value="ذكر"
+                            checked={newPerson.gender === 'ذكر'}
+                            onChange={(e) => setNewPerson((prev) => ({ ...prev, gender: e.target.value }))}
+                        />
+                        <label className='L' >انثى</label>
+                        <input
+                            className='I'
+                            type="radio"
+                            id='gender'
+                            value="انثى"
+                            checked={newPerson.gender === 'انثى'}
                             onChange={(e) => setNewPerson((prev) => ({ ...prev, gender: e.target.value }))}
                         />
                     </div>
@@ -633,13 +646,26 @@ const OrgManageShape1 = () => {
                             onChange={(e) => setNewPerson((prev) => ({ ...prev, address: e.target.value }))}
                         />
                     </div>
-                    <div>
+                    <div className='R'>
                         <label style={{ color: 'black' }}>
                             الحالة:
                         </label>
+                        <label className='L'>0</label>
                         <input
-                            type="text"
-                            value={newPerson.status || ''}
+                            className='I'
+                            type="radio"
+                            id='status'
+                            value="0"
+                            checked={newPerson.status === '0'}
+                            onChange={(e) => setNewPerson((prev) => ({ ...prev, status: e.target.value }))}
+                        />
+                        <label className='L' >1</label>
+                        <input
+                            className='I'
+                            type="radio"
+                            id='status'
+                            value="1"
+                            checked={newPerson.status === '1'}
                             onChange={(e) => setNewPerson((prev) => ({ ...prev, status: e.target.value }))}
                         />
                     </div>
@@ -649,7 +675,7 @@ const OrgManageShape1 = () => {
                         </label>
                         <input
                             type="text"
-                            value={newPerson.monthly_need || ''}
+                            value={newPerson.total_need || ''}
                             onChange={(e) => setNewPerson((prev) => ({ ...prev, monthly_need: handleNullValue(e.target.value) }))}
                         />
                     </div>
@@ -663,18 +689,44 @@ const OrgManageShape1 = () => {
                             onChange={(e) => setNewPerson((prev) => ({ ...prev, Educational_level: handleNullValue(e.target.value) }))}
                         />
                     </div>
+                 
                     <div>
                         <label style={{ color: 'black' }}>
-                            اسم الجامعة :
+                            المدة:
                         </label>
+                        <select
+                            className='S'
+                            value={newPerson.duration}
+                            onChange={(e) => setNewPerson((prev) => ({ ...prev, duration: e.target.value }))}>
+                            <option value="30">30 يوم</option>
+                            <option value="90">90 يوم</option>
+                            <option value="184">184 يوم</option>
+                            <option value="365">365 يوم</option>
+                        </select>
+                    </div>
+                    <div className='R'>
+                        <label style={{ color: 'black' }}>
+                            الأولوية:
+                        </label>
+                        <label className='L'>عادي</label>
                         <input
-                            type="text"
-                            value={newPerson.name_of_school || ''}
-                            onChange={(e) => setNewPerson((prev) => ({ ...prev, name_of_school: handleNullValue(e.target.value) }))}
+                            className='I'
+                            type="radio"
+                            id='priority'
+                            value="1"
+                            checked={newPerson.priority === '1'}
+                            onChange={(e) => setNewPerson((prev) => ({ ...prev, priority: e.target.value }))}
+                        />
+                        <label className='L' >مستعجلة</label>
+                        <input
+                            className='I'
+                            type="radio"
+                            id='priority'
+                            value="2"
+                            checked={newPerson.priority === '2'}
+                            onChange={(e) => setNewPerson((prev) => ({ ...prev, priority: e.target.value }))}
                         />
                     </div>
-
-
                  
                     <div className='TwoButtonsAdd'>
                     <button onClick={() => setIsAddModalOpen(false)} className='Addcancel'>إلقاء</button>
