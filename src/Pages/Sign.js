@@ -61,36 +61,9 @@ function Sign() {
 
   const handleSignIn = (e) => {
     e.preventDefault();
+  
+
     
-    setLoginStatus('');
-
-    if (!validateEmail(signInEmail)) {
-      setLoginStatus('Please enter a valid email address.');
-      return;
-    }
-
-    if (!validatePassword(signInPassword)) {
-      setLoginStatus('Password should have at least 8 characters.');
-      return;
-    }
-
-    if (!validateEmail(orgsignInEmail)) {
-      setLoginStatus('Please enter a valid email address.');
-      return;
-    }
-
-    if (!validatePassword(orgsignInPassword)) {
-      setLoginStatus('Password should have at least 8 characters.');
-      return;
-    }
-
-    if ((mode === 'user') && (!signInEmail || !signInPassword)) {
-      setLoginStatus('Please fill in both email and password.');
-      return;
-    } else if ((mode === 'charity') && (!orgsignInEmail || !orgsignInPassword)) {
-      setLoginStatus('Please fill in both email and password.');
-      return;
-    }
 
     const signInBody = mode === 'user'
       ? { email: signInEmail, password: signInPassword, type_of_user: mode }
@@ -405,74 +378,66 @@ function Sign() {
                         placeholder='الاسم'
                         value={orgsignUpName}
                         onChange={(e) => setOrgSignUpName(e.target.value)}
-                      />
-                      {!validateEmail(orgsignUpEmail) && <Components.ErrorMessage>الرجاء إدخال بريد إلكتروني صالح</Components.ErrorMessage>}
+                          />
+                          {ShowSC === true ? (!signUpName && <Components.ErrorMessage>الرجاء إدخال الاسم بالكامل</Components.ErrorMessage>) : ''}
+
                       <Components.Input
                         type='email'
                         id='email'
                         placeholder='الحساب'
                         value={orgsignUpEmail}
                         onChange={(e) => setOrgSignUpEmail(e.target.value)}
-                      />
-                      {!validatePassword(orgsignUpPassword) && <Components.ErrorMessage>يجب أن تحتوي كلمة المرور على ما لا يقل عن 8 أحرف</Components.ErrorMessage>}
+                          />
+                          {ShowSC === true ? (!validateEmail(orgsignUpEmail) && <Components.ErrorMessage>الرجاء إدخال بريد إلكتروني صالح</Components.ErrorMessage>) : ''}
+
+
                       <Components.Input
                         type='password'
                         id='password'
                         placeholder='كلمة المرور'
                         value={orgsignUpPassword}
                         onChange={(e) => setOrgSignUpPassword(e.target.value)}
-                      />
-                      {!validateMobileNumber(orgsignUpPhone) && <Components.ErrorMessage>الرجاء إدخال رقم هاتف محمول صالح</Components.ErrorMessage>}
+                          />
+                          {ShowSC === true ? (!validatePassword(orgsignUpPassword) && <Components.ErrorMessage>يجب أن تحتوي كلمة المرور على ما لا يقل عن 8 أحرف</Components.ErrorMessage>) : ''}
+
+
                       <Components.Input
                         type='text'
                         id='mobile_number'
                         placeholder='رقم الهاتف'
                         value={orgsignUpPhone}
                         onChange={(e) => setOrgSignUpPhone(e.target.value)}
-                      />
+                          />
+                          {ShowSC === true ? (!validateMobileNumber(orgsignUpPhone) && <Components.ErrorMessage>الرجاء إدخال رقم هاتف محمول صالح</Components.ErrorMessage>) : ''}
+
                       <Components.Input
                         type='text'
                         id='address'
                         placeholder='العنوان'
                         value={orgsignUpAddress}
                         onChange={(e) => setOrgSignUpAddress(e.target.value)}
-                      />
+                          />
+                          {ShowSC === true ? (!orgsignUpAddress && <Components.ErrorMessage>الرجاء العنوان</Components.ErrorMessage>) : ''}
+
                       <Components.Input
                         type='text'
                         id='telephone_number'
                         placeholder='رقم الهاتف'
                         value={orgsignUpTelephoneNumber}
                         onChange={(e) => setOrgSignUpTelephoneNumber(e.target.value)}
-                      />
+                          />
+                          {ShowSC === true ? (!orgsignUpTelephoneNumber && <Components.ErrorMessage>الرجاء إدخال رقم الأرضي</Components.ErrorMessage>) : ''}
+
                       <Components.Input
                         type='text'
                         id='types_of_existing_donations'
                         placeholder='التبرعات الحالية'
                         value={orgsignUpTypesOfExistingDonations}
                         onChange={(e) => setOrgSignUpTypesOfExistingDonations(e.target.value)}
-                      />
-                      {!orgsignUpStatus && <Components.ErrorMessage>الرجاء تحديد الحالة</Components.ErrorMessage>}
-                      <Components.RadioContainer>
-                        <label style={{ marginRight: '11rem', direction: 'rtl' }}>الحالة:</label>
-                        <Components.RadioInput
-                          type="radio"
-                          id='status'
-                          value="مفتوح"
-                          checked={orgsignUpStatus === "مفتوح"}
-                          onChange={() => setOrgSignUpStatus("مفتوح")}
-                          onClick={() => setOrgSignUpStatus("مفتوح")}
-                        />
-                        <Components.RadioLabel onClick={() => setOrgSignUpStatus("مفتوح")}>مفتوح</Components.RadioLabel>
-                        <Components.RadioInput
-                          type="radio"
-                          id='status'
-                          value="مغلق"
-                          checked={orgsignUpStatus === "مغلق"}
-                          onChange={() => setOrgSignUpStatus("مغلق")}
-                          onClick={() => setOrgSignUpStatus("مغلق")}
-                        />
-                        <Components.RadioLabel onClick={() => setOrgSignUpStatus("مغلق")}>مغلق</Components.RadioLabel>
-                      </Components.RadioContainer>
+                          />
+                          
+                   
+                    
                           <Components.Button onClick={(e) => {
                             handleSignUp(e);
                             setShowSC(true);
@@ -489,14 +454,22 @@ function Sign() {
                     placeholder='الحساب'
                     value={orgsignInEmail}
                     onChange={(e) => setOrgSignInEmail(e.target.value)}
-                  />
+                    />
+                    {ShowIC === true ? (!validateEmail(orgsignInEmail) && <Components.SErrorMessage>الرجاء إدخال بريد إلكتروني صالح</Components.SErrorMessage>) : ''}
+
                   <Components.Input
                     type='password'
                     placeholder='كلمة المرور'
                     value={orgsignInPassword}
                     onChange={(e) => setOrgSignInPassword(e.target.value)}
-                  />
-                  <Components.Button onClick={handleSignIn}>تسجيل الدخول</Components.Button>
+                    />
+                    {ShowIC === true ? (!validatePassword(orgsignInPassword) && <Components.SErrorMessage>الرجاء إدخال بريد إلكتروني صالح</Components.SErrorMessage>) : ''}
+
+
+                    <Components.Button onClick={(e) => {
+                      handleSignIn(e);
+                      setShowIC(true);
+                    }}>تسجيل الدخول</Components.Button>
                 </Components.Form>
               </Components.SignInContainer>
               <Components.OverlayContainer signIn={signIn}>

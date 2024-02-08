@@ -241,3 +241,35 @@ left: 24rem;
     background: black;
     color: white;
 }
+.R{
+    position: relative;
+    display: flex;
+}
+.L{
+    position: relative;
+    display: flex;
+        
+      
+        cursor: pointer;
+        
+        flex-direction: row;
+       flex-wrap: nowrap;
+        color: black;
+    left:3rem;
+    top: 0.5rem;
+}
+.I{
+    display: flex;
+    position: relative;
+    flex-direction: row;
+        color: black;
+    max-width: 1.5rem;
+    left:5rem;
+    
+        
+}
+.S{
+    position: relative;
+    width: 4.5rem;
+    height:2rem;
+}

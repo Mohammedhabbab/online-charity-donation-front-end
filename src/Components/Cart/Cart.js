@@ -20,7 +20,7 @@ const Cart = () => {
     } = useCart();
 
 
-
+    let totalAmount = cartTotal;
     useEffect(() => {
 
         const fetchData = async () => {
@@ -132,7 +132,7 @@ const Cart = () => {
                                     // Do something when payment is approved
                                     console.log('Payment approved:', data);
                                     
-                                    navigate('./profile')
+                                    navigate('/profile')
 
 
                                     try {
@@ -140,28 +140,36 @@ const Cart = () => {
 
 
                                         const cartData = {
-                                            items: items.map(item => ({
-                                                donater_id: userData?.id,
-                                                itemName: item.name_of_proudct,
-                                                need_id: item.id,
-                                                quantity: item.quantity,
-                                                charity_id: item.charity_id,
-                                                subtotal:(item.quantity * item.price_per_item)
-                                            })),
-                                            totalItems,
-                                            cartTotal
-                                        };
+                                            orderDetails: {
+                                                
+                                                iteamsPurchased: items.map(item => ({
+                                                 
+                                                    itemName: item.name_of_proudct,
+                                                    quantity: item.quantity,
+                                                    subtotal: (item.quantity * item.price_per_item),
+                                                    donater_id: userData?.id,
+                                                    charity_id: item.charity_id,
+                                                    id: item.id,
+
+                                                })),
+                                                
+                                                totalAmount
+                                                
+                                            }
+};
 
                                       
                                        
-                                       // $charity_id = $item['charity_id'];
                                         
 
 
 
                                         const insert = fetch(`http://localhost:8000/api/purchase`, {
                                             method: 'POST',
-                                            body: cartData,
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            },
+                                            body: JSON.stringify(cartData)
                                         });
                                         console.log('Add Record Response:', insert);
                                         if (!insert.ok) {
@@ -183,7 +191,7 @@ const Cart = () => {
                                 console.error('Error occurred while checking payment status:', error);
                                 clearInterval(intervalId); // Stop further checks
                             });
-                    }, 100000); // Check every second
+                    }, 120000); // Check every second
                 }).catch(error => {
                     console.error("Error occurred while parsing JSON:", error);
                 });

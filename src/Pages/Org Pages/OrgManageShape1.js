@@ -168,13 +168,7 @@ const OrgManageShape1 = () => {
             updatedNewPerson.needy_type = lowercasedServiceUrl;
             updatedNewPerson.charity_id = userData?.id;
 
-            const fieldsToCheck = ['monthly_need', 'name_of_school', 'Educational_level'];
-
-            for (const field of fieldsToCheck) {
-                if (updatedNewPerson[field] === null || updatedNewPerson[field] === undefined) {
-                    updatedNewPerson[field] = '';
-                }
-            }
+            
 
             console.log('Updated New Person State:', updatedNewPerson);
 
@@ -205,9 +199,9 @@ const OrgManageShape1 = () => {
                 overview: '',
                 address: '',
                 status: 0,
-                monthly_need: '',
-                name_of_school: '',
-                Educational_level: '',
+                total_need: '',
+                priority: 1,
+                duration: 30,
             });
 
             setUpdateTrigger((prev) => !prev);
@@ -337,9 +331,9 @@ const OrgManageShape1 = () => {
                                 <th>تفاصيل</th>
                                 <th>العنوان</th>
                                 <th>الوضع</th>
-                                {filteredPeople.some(person => person.monthly_need !== null) && <th>المبلغ</th>}
-                                {filteredPeople.some(person => person.name_of_school !== null) && <th>الجامعة</th>}
-                                {filteredPeople.some(person => person.Educational_level !== null) && <th>الدراسة</th>}
+                                <th>الحاجة المالية</th>
+                                <th>الأولوية</th>
+                                <th>مدة الكفالة</th>
                                 <th>اجراء</th>
                                 <th><button className='Add-B' onClick={openAddModal}>إضافة</button></th>
                             </tr>
@@ -356,11 +350,9 @@ const OrgManageShape1 = () => {
                                     <td>{person.overview}</td>
                                     <td>{person.address}</td>
                                     <td>{person.status === 0 ? 'Not Sponsored' : 'Sponsored'}</td>
-                                    {filteredPeople.some((p) => p.monthly_need !== null) && <td>{person.monthly_need || '-'}</td>}
-                                    {filteredPeople.some((p) => p.name_of_school !== null) && <td>{person.name_of_school || '-'}</td>}
-                                    {filteredPeople.some((p) => p.Educational_level !== null) && <td>{person.Educational_level || '-'}</td>}
-
-                                   
+                                    <td>{person.total_need}</td>
+                                    <td>{person.priority}</td>
+                                    <td>{person.duration}</td>
 
                                     <td>
                                         <button className='EditB' onClick={() => openEditModal(person)}>تعديل</button>
@@ -422,16 +414,45 @@ const OrgManageShape1 = () => {
                                 onChange={(e) => setSelectedPerson((prev) => ({ ...prev, age: e.target.value }))}
                         />
                     </div>
-                    <div>
-                        <label style={{ color: 'black' }}>
-                            الجنس:
-                        </label>
-                        <input
-                            type="text"
-                                value={selectedPerson.gender || ''}
-                                onChange={(e) => setSelectedPerson((prev) => ({ ...prev, gender: e.target.value }))}
-                        />
-                    </div>
+                        <div>
+                            <label style={{ color: 'black' }}>
+                                الحاجة الملية:
+                            </label>
+                            <input
+                                type="text"
+                                value={selectedPerson.total_need || ''}
+                                onChange={(e) => setSelectedPerson((prev) => ({ ...prev, age: e.target.value }))}
+                            />
+                        </div>
+                                <div className='R'>
+                                    <label style={{ color: 'black' }}>
+                                        الجنس:
+                                    </label>
+                                    <label className='L'>ذكر</label>
+                                    <input
+                                        className='I'
+                                        type="radio"
+                                        id='gender'
+                                        value="ذكر"
+                                        checked={selectedPerson.gender === 'ذكر'}
+                                        onChange={(e) => setSelectedPerson((prev) => ({ ...prev, gender: e.target.value }))}
+                                    />
+                                    <label className='L' >انثى</label>
+                                    <input
+                                        className='I'
+                                        type="radio"
+                                        id='gender'
+                                        value="انثى"
+                                        checked={selectedPerson.gender === 'انثى'}
+                                        onChange={(e) => setSelectedPerson((prev) => ({ ...prev, gender: e.target.value }))}
+                                    />
+                                </div>
+
+
+
+
+                      
+                  
                     <div>
                         <label style={{ color: 'black' }}>
                             رقم الهاتف:
@@ -462,37 +483,67 @@ const OrgManageShape1 = () => {
                                 onChange={(e) => setSelectedPerson((prev) => ({ ...prev, address: e.target.value }))}
                         />
                     </div>
-                    <div>
+                    <div className='R'>
                         <label style={{ color: 'black' }}>
                             الحالة:
-                        </label>
-                        <input
-                            type="text"
-                                value={selectedPerson.status || ''}
+                            </label>
+                            <label className='L'>0</label>
+                            <input
+                               className='I'
+                                type="radio"
+                                id='status'
+                                value="0"
+                                checked={selectedPerson.status === '0'}
                                 onChange={(e) => setSelectedPerson((prev) => ({ ...prev, status: e.target.value }))}
-                        />
+                            />
+                            <label className='L' >1</label>
+                            <input
+                               className='I'
+                                type="radio"
+                                id='status'
+                                value="1"
+                                checked={selectedPerson.status === '1'}
+                                onChange={(e) => setSelectedPerson((prev) => ({ ...prev, status: e.target.value }))}
+                            />
                     </div>
-                        
-                        {headers.map((header) => (
-                            header !== 'id' &&
-                            header !== 'charity_id' &&
-                            header !== 'needy_type' &&
-                            header !== 'created_at' &&
-                            header !== 'updated_at' && (
-                                  (header === 'monthly_need' && filteredPeople.some(person => person.monthly_need !== null)) ||
-                              (header === 'name_of_school' && filteredPeople.some(person => person.name_of_school !== null)) ||
-                              (header === 'Educational_level' && filteredPeople.some(person => person.Educational_level !== null))
-                                 ) && (
-                                <div key={header}>
-                                    <label style={{ color: 'black' }}>{header}:</label>
-                                    <input
-                                        type="text"
-                                        value={selectedPerson[header] || ''}
-                                        onChange={(e) => setSelectedPerson((prev) => ({ ...prev, [header]: e.target.value }))}
-                                    />
-                                </div>
-                            )
-                        ))}
+                        <div className='R'>
+                            <label style={{ color: 'black' }}>
+                                الأولوية:
+                            </label>
+                            <label className='L'>عادي</label>
+                            <input
+                                className='I'
+                                type="radio"
+                                id='priority'
+                                value="1"
+                                checked={selectedPerson.priority === '1'}
+                                onChange={(e) => setSelectedPerson((prev) => ({ ...prev, priority: e.target.value }))}
+                            />
+                            <label className='L' >مستعجلة</label>
+                            <input
+                                className='I'
+                                type="radio"
+                                id='priority'
+                                value="2"
+                                checked={selectedPerson.priority === '2'}
+                                onChange={(e) => setSelectedPerson((prev) => ({ ...prev, priority: e.target.value }))}
+                            />
+                    </div>
+                        <div>
+                            <label style={{ color: 'black' }}>
+                                المدة:
+                            </label>
+                            <select 
+                               className='S'
+                                value={selectedPerson.duration}
+                                onChange={(e) => setSelectedPerson((prev) => ({ ...prev, duration: e.target.value }))}>
+                                <option value="30">30 يوم</option>
+                                <option value="90">90 يوم</option>
+                                <option value="184">184 يوم</option>
+                                <option value="365">365 يوم</option>
+                            </select>
+                        </div>
+<div></div>
 
                         <div className='TwoButtons'>
                             <button onClick={() => setIsEditModalOpen(false)} className='cancel'>إلغاء</button>
