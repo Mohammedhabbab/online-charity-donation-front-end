@@ -13,7 +13,7 @@ const AdminHomePage = () => {
       try {
         const authToken = localStorage.getItem('authToken');
         if (!authToken) {
-          navigate('/404');
+          navigate('/admin');
           return;
         }
 

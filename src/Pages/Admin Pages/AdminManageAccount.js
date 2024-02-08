@@ -44,6 +44,7 @@ const AdminManageAccount = () => {
                 });
 
                 if (!userResponse.ok) {
+                    navigate('./admin')
                     throw new Error(`Failed to fetch user data. Status: ${userResponse.status}`);
                 }
 

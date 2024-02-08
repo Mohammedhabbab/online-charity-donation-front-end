@@ -86,7 +86,7 @@ function Details({ id, full_name, mother_name, age, gender, monthly_need, addres
                 clearInterval(intervalId); // Stop further checks
                 // Do something when payment is approved
                 console.log('Payment approved:', data);
-
+navigate('./profile')
 
 
                 try {

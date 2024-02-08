@@ -49,7 +49,8 @@ const CartHome = () => {
                                 desc={item.overview}
                                 total={item.total_count}
                                 price={item.price_per_item}
-                                wanted={(item.total_count - item.available_count )}
+                                wanted={(item.total_count - item.available_count)}
+                                charity={(item.charity_id)}
                                 key={item.id} />))}
 
 

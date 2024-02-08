@@ -269,3 +269,38 @@ export const Paragraph = styled.p`
   letter-spacing: 0.5px;
   margin: 20px 0 30px;
 `;
+export const ErrorMessage = styled.span`
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+  text-align: right;
+`;
+export const SErrorMessage = styled.span`
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+  margin-bottom:10px;
+  text-align: right;
+`;
+export const RErrorMessage = styled.span`
+postion:relative;
+  color: red;
+  font-size: 12px;
+  top: 60px;
+      margin-top: -20px;
+
+    margin-bottom: 20px;
+
+  text-align: right;
+`;
+
+export const NotificationContainer = styled.div`
+ position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+`;

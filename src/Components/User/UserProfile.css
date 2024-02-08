@@ -7,7 +7,7 @@
             min-height: 50rem;
 }
 
-.Containers {
+.UContainers {
     position: relative;
     top: 30px;
     left: 15px;
@@ -20,29 +20,29 @@
 }
 
 
-.InfoTable {
+.UInfoTable {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    background: #c7b492;
+    background: beige;
     direction: rtl;
 }
 
-.InfoTable th,
-.InfoTable td {
-    border: 3px solid #ffffff;
+.UInfoTable th,
+.UInfoTable td {
+    border: 3px solid #393535;
     padding: 10px;
     text-align: left;
     color: black;
     direction: rtl;
 }
 
-.InfoTable th {
+.UInfoTable th {
     background-color: wheat;
     direction: rtl;
 }
 
-.InfoTable tbody tr:hover {
+.UInfoTable tbody tr:hover {
     background-color: transparent;
 }
 

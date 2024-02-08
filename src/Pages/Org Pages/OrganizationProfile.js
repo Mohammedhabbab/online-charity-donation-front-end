@@ -39,7 +39,7 @@ const OrganizationProfile = () => {
         });
 
         if (!userResponse.ok) {
-          navigate('/');
+          navigate('/sign');
           throw new Error(`Failed to fetch user data. Status: ${userResponse.status}`);
         }
 

@@ -4,6 +4,7 @@ import SideBar from '../Components/Sidebar/SideBar';
 import '../Components/Org/org.css';
 import '../Components/User/UserProfile.css';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../Components/Dynamic/UserContext';
 
 const Profile = () => {
     //charity
@@ -24,7 +25,7 @@ const Profile = () => {
     const [user, setUser] = useState(false);
     const [charity, setCharity] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    const [userData, setUserData] = useState(null);
+    const [userData, setUserData] = useState();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -315,10 +316,10 @@ const Profile = () => {
                 ) : userData?.type_of_user === 'user' ? (
                 
                
-                     <section className='User'>
-                         <div className='Containers'>
+                            <section className='User'>
+                         <div className='UContainers'>
 
-                             <table className='InfoTable'>
+                             <table className='UInfoTable'>
 
                                  <thead>
                                      <tr>
@@ -366,8 +367,8 @@ const Profile = () => {
                                          {index + 1}
                                      </button>
                                  ))}
-                             </div>
-                         </div>
+                                </div>
+                                </div>
                          <SideBar />
 
                     </section>
