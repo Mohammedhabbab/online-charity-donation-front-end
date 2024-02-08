@@ -1,7 +1,7 @@
 .Full-Org{
 display:flex;
 position: relative;
-    background:black;
+    background:beige;
         max-width: 100%;
             
             height: 100%;
@@ -37,7 +37,7 @@ margin-bottom: 5rem;
  flex-direction: column;
    width: 67%;
    min-height:15rem;
-   background: #c7b492;
+   background: beige;
    left: 25rem;
    top: 2.6rem;
    border-radius: 10px;

@@ -45,7 +45,7 @@ const OrgNotifications = () => {
   return (
     <>
       <section className='OrgNotifications'>
-        <div className='Container'>
+        <div className='NContainer'>
           <h2>Recent Status Changes</h2>
           <table className='InfoTable'>
             <thead>

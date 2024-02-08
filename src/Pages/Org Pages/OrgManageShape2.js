@@ -50,6 +50,7 @@ const OrgManageShape2 = () => {
         });
 
         if (!userResponse.ok) {
+          navigate('./sign')
           throw new Error(`Failed to fetch user data. Status: ${userResponse.status}`);
         }
 

@@ -3,8 +3,9 @@ import AdminSidebar from '../../Components/Admin/AdminSidebar'
 import '../../Components/Admin/AdminUsers.css'
 import { useParams, useNavigate } from 'react-router-dom';
 import Modal from 'react-modal';
-const AdminDonations = () => {
-    const [donations, setdonations] = useState([]);
+
+const AdminNeeds = () => {
+    const [needs, setneeds] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
@@ -12,7 +13,7 @@ const AdminDonations = () => {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-    const [selecteddonation, setSelecteddonation] = useState(null);
+    const [selectedneed, setSelectedneed] = useState(null);
     const [updateTrigger, setUpdateTrigger] = useState(false);
     const [deleteTrigger, setDeleteTrigger] = useState(false);
     const [editTrigger, setEditTrigger] = useState(false);
@@ -20,13 +21,13 @@ const AdminDonations = () => {
     const navigate = useNavigate();
     const [selectedImage, setSelectedImage] = useState(null);
 
-    const [newdonation, setNewdonation] = useState({});
+    const [newneed, setNewneed] = useState({});
 
 
 
 
     useEffect(() => {
-        fetch('http://localhost:8000/api/get_donations')
+        fetch('http://localhost:8000/api/get_needs')
             .then((response) => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -34,7 +35,7 @@ const AdminDonations = () => {
                 return response.json();
             })
             .then((data) => {
-                setdonations(data || []);
+                setneeds(data || []);
 
                 setIsLoading(false);
             })
@@ -44,31 +45,31 @@ const AdminDonations = () => {
             });
     }, [updateTrigger, deleteTrigger, editTrigger]);
 
-    const totalPages = Math.ceil(donations.length / pageSize);
+    const totalPages = Math.ceil(needs.length / pageSize);
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = startIndex + pageSize;
-    const currentdonation = donations.slice(startIndex, endIndex);
-
-   
+    const currentneed = needs.slice(startIndex, endIndex);
 
 
-    const openDeleteModal = (donation) => {
-        setSelecteddonation(donation);
+
+
+
+    const openDeleteModal = (need) => {
+        setSelectedneed(need);
         setIsDeleteModalOpen(true);
     };
 
-   
 
-   
 
-    const handleDeleteSubmit = async (donationToDelete) => {
+
+    const handleDeleteSubmit = async (needToDelete) => {
         try {
-            if (!donationToDelete) {
+            if (!needToDelete) {
                 console.error('No person selected for deletion');
                 return;
             }
 
-            const response = await fetch(`http://localhost:8000/api/delete_donations/${donationToDelete.id}`, {
+            const response = await fetch(`http://localhost:8000/api/delete_Needs/${needToDelete.id}`, {
                 method: 'DELETE',
             });
 
@@ -93,39 +94,45 @@ const AdminDonations = () => {
 
     return (
         <>
-            <section className='AdminUsers' key={donations.id}>
+            <section className='AdminUsers' key={needs.id}>
                 <div className='AdminContainers'>
 
                     <table className='InfoTable'>
 
                         <thead>
                             <tr>
-                                <th>الخدمة</th>
-                                <th>التفاصيل</th>
-                                <th>المتبرع</th>
-                                <th>الجمعية المسؤولة</th>
-                                <th>المبلغ</th>
-                                <th>رقم العملية</th>
-
+                                <th>اسم المنتج</th>
+                                <th>النوع</th>
+                                <th>الكمية المطلوبة</th>
+                                <th>الكمية المستلمة </th>
+                                <th>سعر المنتج</th>
+                                <th>السعر بالكامل</th>
+                                <th>تفاصيل</th>
+                                <th>الحالة</th>
                                 <th>اجراء</th>
+
+                               
                             </tr>
                         </thead>
 
                         <tbody>
-                            {currentdonation.map((donation) => (
-                                <tr key={donation.id}>
-                                    <td>{donation.donation_type_id}</td>
-                                    <td>{donation.overview}</td>
-                                    <td>{donation.users_id}</td>
-                                    <td>{donation.beneficaries_id}</td>
-                                    <td>{donation.total_amount_of_donation}</td>
-                                    <td>{donation.id}</td>
+                            {currentneed.map((need) => (
+                                <tr key={need.id}>
+                                    <td>{need.name_of_proudct}</td>
+                                    <td>{need.type_of_proudct}</td>
+                                    <td>{need.total_count}</td>
+                                    <td>{need.available_count}</td>
+                                    <td>{need.price_per_item}</td>
+                                    <td>{need.total_amount}</td>
+                                    <td>{need.overview}</td>
+
+                                    <td>{need.status === 0 ? 'Still in Need' : 'Needed Amount Claimed '}</td>
 
 
 
 
                                     <td>
-                                        <button className='DeleteB' onClick={() => openDeleteModal(donation)}>X</button>
+                                        <button className='DeleteB' onClick={() => openDeleteModal(need)}>X</button>
                                     </td>
 
 
@@ -148,6 +155,7 @@ const AdminDonations = () => {
             </section>
 
 
+
             {/* Delete Modal */}
             <Modal
                 isOpen={isDeleteModalOpen}
@@ -158,11 +166,11 @@ const AdminDonations = () => {
 
                 <div className='Delete'>
                     <button className='Button2' onClick={() => setIsDeleteModalOpen(false)}>إلغاء</button>
-                    <button className='Button1' onClick={() => handleDeleteSubmit(selecteddonation)}>حذف</button>
+                    <button className='Button1' onClick={() => handleDeleteSubmit(selectedneed)}>حذف</button>
                 </div>
             </Modal>
         </>
     )
 }
 
-export default AdminDonations
+export default AdminNeeds

@@ -39,6 +39,8 @@ import AdminUsers from '../Pages/Admin Pages/AdminUsers';
 import AdminManageAccount from '../Pages/Admin Pages/AdminManageAccount';
 import AdminSignIn from '../Pages/Admin Pages/AdminSignIn';
 import AdminMessages from '../Pages/Admin Pages/AdminMessages';
+import AdminBeneficiaries from '../Pages/Admin Pages/AdminBeneficiaries';
+import AdminNeeds from '../Pages/Admin Pages/AdminNeeds';
 function Routee() {
   const [services, setServices] = useState([]);
 
@@ -230,6 +232,8 @@ function Routee() {
         <Route path="admin/services" element={<AdminServices />} />
         <Route path="admin/users" element={<AdminUsers />} />
         <Route path="admin/messages" element={<AdminMessages />} />
+        <Route path="admin/beneficaries" element={<AdminBeneficiaries />} />
+        <Route path="admin/needs" element={<AdminNeeds />} />
 
 
 

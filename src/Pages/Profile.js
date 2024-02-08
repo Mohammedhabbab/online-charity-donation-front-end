@@ -4,6 +4,7 @@ import SideBar from '../Components/Sidebar/SideBar';
 import '../Components/Org/org.css';
 import '../Components/User/UserProfile.css';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../Components/Dynamic/UserContext';
 
 const Profile = () => {
     //charity
@@ -24,7 +25,7 @@ const Profile = () => {
     const [user, setUser] = useState(false);
     const [charity, setCharity] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    const [userData, setUserData] = useState(null);
+    const [userData, setUserData] = useState();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -48,6 +49,8 @@ const Profile = () => {
                 });
 
                 if (!userResponse.ok) {
+                    navigate('/');
+
                     throw new Error(`Failed to fetch user data. Status: ${userResponse.status}`);
                 }
 
@@ -184,7 +187,7 @@ const Profile = () => {
 
     //user profile 
     
-    useEffect(() => {
+   {/*  useEffect(() => {
         const fetchpeopledata = async () => {
             try {
                 const PeopleArray = [];
@@ -216,11 +219,11 @@ const Profile = () => {
 
 
 
-
+*/}
     const totalPages = Math.ceil(people.length / pageSize);
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = startIndex + pageSize;
-    const currentPeople = people.slice(startIndex, endIndex);
+    const currentDonation = donations.slice(startIndex, endIndex);
 
     useEffect(() => {
         if (!isLoading && (!userData)) {
@@ -313,48 +316,38 @@ const Profile = () => {
                 ) : userData?.type_of_user === 'user' ? (
                 
                
-                     <section className='User'>
-                         <div className='Containers'>
+                            <section className='User'>
+                         <div className='UContainers'>
 
-                             <table className='InfoTable'>
+                             <table className='UInfoTable'>
 
-                                 <thead>
-                                     <tr>
-                                         <th>الاسم</th>
-                                         {/*    <th>Mother Name</th> */}
-                                         <th>العمر</th>
-                                         <th>الجنس</th>
-                                         {/*    <th>Phone Number</th> */}
-                                         <th>معلومات</th>
-                                         {/*    <th>Address</th> */}
-                                         {/*   <th>Status</th> */}
-                                         {people.some(person => person.data.monthly_need !== null) && <th>Monthly Need</th>}
-                                         {people.some(person => person.data.name_of_school !== null) && <th>الجامعة</th>}
-                                         {people.some(person => person.data.Educational_level !== null) && <th>الدراسة</th>}
+                                    <thead>
+                                        <tr>
+                                            <th>الخدمة</th>
+                                            <th>التفاصيل</th>
+                                            <th>المبلغ</th>
+                                            <th>الاسم</th>
 
 
-                                     </tr>
-                                 </thead>
 
-                                 <tbody>
-                                     {currentPeople.map((person) => (
-                                         <tr key={person.data.id}>
-                                             <td>{person.data.full_name}</td>
-                                             {/*   <td>{person.mother_name}</td> */}
-                                             <td>{person.data.age}</td>
-                                             <td>{person.data.gender}</td>
-                                             {/* <td>{person.phone_number}</td> */}
-                                             <td>{person.data.overview}</td>
-                                             {/* <td>{person.address}</td> */}
-                                             {/*   <td>{person.status === 0 ? 'Not Sponsored' : 'Sponsored'}</td> */}
-                                             {people.some((p) => p.data.monthly_need !== null) && <td>{person.data.monthly_need || '-'}</td>}
-                                             {people.some((p) => p.data.name_of_school !== null) && <td>{person.data.name_of_school || '-'}</td>}
-                                             {people.some((p) => p.data.Educational_level !== null) && <td>{person.data.Educational_level || '-'}</td>}
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        {currentDonation.map((donation) => (
+                                            <tr key={donation.id}>
+                                                <td>{donation.service}</td>
+                                                <td>{donation.overview}</td>
+                                                <td>{donation.total_amount_of_donation}</td>
+                                                <td>{donation.Beneficiaries_name}</td>
 
 
-                                         </tr>
-                                     ))}
-                                 </tbody>
+
+
+
+                                            </tr>
+                                        ))}
+                                    </tbody>
                              </table>
 
 
@@ -364,8 +357,8 @@ const Profile = () => {
                                          {index + 1}
                                      </button>
                                  ))}
-                             </div>
-                         </div>
+                                </div>
+                                </div>
                          <SideBar />
 
                     </section>

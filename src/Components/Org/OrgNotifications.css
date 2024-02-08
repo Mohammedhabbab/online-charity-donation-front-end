@@ -3,10 +3,10 @@
     position: relative;
     height: 50rem;
 
-    background: black;
+    background: beige;
 
 }
-.Container {
+.NContainer {
     position: relative;
     top: 1px;
     left: 15px;
@@ -14,7 +14,7 @@
     width: 83%;
     height: auto;
    
-    background: black;
+    background: wheat;
    
     padding: 20px;
 

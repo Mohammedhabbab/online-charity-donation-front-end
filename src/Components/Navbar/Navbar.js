@@ -2,10 +2,11 @@ import React, { useState, useEffect, useMemo } from "react";
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import './Navbar.css';
 import logo from './NavAssets/Asset 17.svg';
+import { useUser } from "../Dynamic/UserContext";
 
 export const Navbar = ({ handleSignOut }) => {
   const [showDropdown, setShowDropdown] = useState(false);
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
