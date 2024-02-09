@@ -22,7 +22,6 @@ import Profile from '../Pages/Profile';
 
 import OrganizationProfile from '../Pages/Org Pages/OrganizationProfile';
 import UserProfile from '../Pages/User Pages/UserProfile';
-import UserDonations from '../Pages/User Pages/UserDonations';
 import OrgNotifications from '../Pages/Org Pages/OrgNotifications';
 import OrgManageAccount from '../Pages/Org Pages/OrgManageAccount';
 
@@ -41,6 +40,8 @@ import AdminSignIn from '../Pages/Admin Pages/AdminSignIn';
 import AdminMessages from '../Pages/Admin Pages/AdminMessages';
 import AdminBeneficiaries from '../Pages/Admin Pages/AdminBeneficiaries';
 import AdminNeeds from '../Pages/Admin Pages/AdminNeeds';
+import AdminHero from '../Pages/Admin Pages/AdminHero';
+import UserMessages from '../Pages/User Pages/UserMessages';
 function Routee() {
   const [services, setServices] = useState([]);
 
@@ -219,7 +220,7 @@ function Routee() {
         {createDynamicRoutes()}
         <Route path="org-notifications" element={<OrgNotifications />} />
         <Route path="org-manage-account" element={<OrgManageAccount />} />
-        <Route path="user-donations" element={<UserDonations />} />
+        <Route path="user-messages" element={<UserMessages />} />
         <Route path="user-manage-account" element={<UserManageAccount />} />
         <Route path="persondetails" element={<PersonDetailsPage />} />
     
@@ -234,6 +235,7 @@ function Routee() {
         <Route path="admin/messages" element={<AdminMessages />} />
         <Route path="admin/beneficaries" element={<AdminBeneficiaries />} />
         <Route path="admin/needs" element={<AdminNeeds />} />
+        <Route path="admin/hero" element={<AdminHero />} />
 
 
 

@@ -140,6 +140,14 @@ const AdminSidebar = () => {
                         </NavLink>
                     </li>  
                     <li className='list' onClick={toggleNavigation}>
+                        <NavLink id='nav' to='/admin/hero' activeClassName='active'>
+                            <span className='icon'>
+                                <ion-icon name='images-outline'></ion-icon>
+                            </span>
+                            <span className='title'>هيرو</span>
+                        </NavLink>
+                    </li>
+                    <li className='list' onClick={toggleNavigation}>
                         <NavLink id='nav' to='/admin/messages' activeClassName='active'>
                             <span className='icon'>
                                 <ion-icon name="mail-outline"></ion-icon>                            </span>

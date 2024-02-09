@@ -343,17 +343,33 @@ const AdminServices = () => {
                           onChange={(e) => setNewService((prev) => ({ ...prev, url: e.target.value }))}
                       />
                   </div>
-                  <div>
+                  
+                   
+                  <div className='R'>
                       <label style={{ color: 'black' }}>
-                          النوع:
+                          الشكل:
                       </label>
+                      <label className='L'>0</label>
+                      {/*  <img src={PersonsImage} alt="img" id='Pimg' />*/}
                       <input
-                          type="text"
-                          value={newService.shape || ''}
+                          className='I'
+                          type="radio"
+                          id='shape'
+                          value="0"
+                          checked={newService.shape === '0'}
+                          onChange={(e) => setNewService((prev) => ({ ...prev, shape: e.target.value }))}
+                      />
+                      <label className='L' >1</label>
+                    {/* <img src={StuffImage} alt="img" id='Simg' />*/}
+                      <input
+                          className='I'
+                          type="radio"
+                          id='shape'
+                          value="1"
+                          checked={newService.shape === '1'}
                           onChange={(e) => setNewService((prev) => ({ ...prev, shape: e.target.value }))}
                       />
                   </div>
-                
 
                   <div>
                       <label style={{ color: 'black' }}>

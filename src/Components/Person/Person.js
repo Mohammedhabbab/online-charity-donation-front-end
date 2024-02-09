@@ -7,11 +7,12 @@ import MaleImg from '../Assets/Male.png'
 import FemaleImg from '../Assets/Female.png'
 import { json } from 'react-router-dom';
 
-function Details({ id, full_name, mother_name, age, gender, monthly_need, address }) {
+function Details({ id, full_name, mother_name, age, gender, total_need, address,duration }) {
   const { userData, setUserData } = useUser();
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-  
+  const [notification, setNotification] = useState({ show: false, message: '' });
+
   useEffect(() => {
 
     const fetchData = async () => {
@@ -52,6 +53,12 @@ function Details({ id, full_name, mother_name, age, gender, monthly_need, addres
   }, []);
 
 
+  const handleNotification = (message) => {
+    setNotification({ show: true, message });
+    setTimeout(() => {
+      setNotification({ show: false, message: '' });
+    }, 6500);
+  };  
 
   const handleDonate = async () => {
     try {
@@ -59,7 +66,7 @@ function Details({ id, full_name, mother_name, age, gender, monthly_need, addres
   console.log('please sign in')
 }else{
 
-      const response = await fetch(`http://localhost:8000/api/create-payment/${monthly_need}`, {
+      const response = await fetch(`http://localhost:8000/api/create-payment/${total_need}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -99,7 +106,7 @@ navigate('./profile')
 
                 formData.append('donater_id', userData.id);
                   formData.append('beneficiar_id', id);
-                formData.append('amount', monthly_need);
+                formData.append('amount', total_need);
 
              
 
@@ -168,12 +175,16 @@ navigate('./profile')
           <span className="person-details-stat-value">{gender}</span>
         </div>
         <div className="person-details-stat">
-          <span className="person-details-stat-label">الاحتياج الشهري</span>
-          <span className="person-details-stat-value">{monthly_need}</span>
+          <span className="person-details-stat-label">الاحتياج</span>
+          <span className="person-details-stat-value">{total_need}</span>
 
         </div>
       </div>
-      <button className="person-details-about-button" onClick={handleDonate} >تبرع</button>
+      {userData?.type_of_user === 'user' ? <button className="person-details-about-button" onClick={handleDonate} >تبرع</button> : <button className="person-details-about-button" onClick={() => handleNotification('لا يمكن التبرع إلا للمستخدمين')} >لا يمكن التبرع إلا للمستخدمين</button> }
+    
+     
+   
+     
     </div>
   );
 }
