@@ -121,22 +121,15 @@ const SideBar = () => {
                                 </NavLink>
                             </li>
                             <li className={`list ${isServicesVisible ? 'active' : ''}`} onClick={toggleServices}>
-                                <NavLink id='nav' to='/user-donations' activeClassName='active' exact>
+                                <NavLink id='nav' to='/user-messages' activeClassName='active' exact>
                                     <span className='icon'>
-                                        <ion-icon name='server-outline'></ion-icon>
-                                    </span>
-                                    <span className='title'>التبرعات</span>
-                                </NavLink>
-                            </li>
-                            {isServicesVisible && brElements}
-                            <li className='list' onClick={toggleNavigation}>
-                                <NavLink id='nav' to='/user-notifications' activeClassName='active'>
-                                    <span className='icon'>
-                                        <ion-icon name='notifications-outline'></ion-icon>
+                                        <ion-icon name='mail-outline'></ion-icon>
                                     </span>
                                     <span className='title'>الرسائل</span>
                                 </NavLink>
                             </li>
+                            {isServicesVisible && brElements}
+                           
                             <li className='list' onClick={toggleNavigation}>
                                 <NavLink id='nav' to='/user-manage-account' activeClassName='active'>
                                     <span className='icon'>

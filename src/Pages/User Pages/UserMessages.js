@@ -3,9 +3,8 @@ import SideBar from '../../Components/Sidebar/SideBar';
 import '../../Components/User/UserProfile.css';
 import { useNavigate } from 'react-router-dom';
 
-const UserDonations = () => {
-    const [people, setPeople] = useState([]);
-    const [donations, setDonations] = useState([]);
+const UserMessages = () => {
+    const [messages, setmessages] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize] = useState(30);
     const [userData, setUserData] = useState(null);
@@ -40,22 +39,15 @@ const UserDonations = () => {
                 const userData = await userResponse.json();
                 setUserData(userData);
 
-                const donationsResponse = await fetch(`http://localhost:8000/api/get_all_donations_for_user/${userData?.id}`);
+                const messagesResponse = await fetch(`http://localhost:8000/api/get_user_messages/${userData?.id}`);
 
-                if (!donationsResponse.ok) {
-                    throw new Error(`Failed to fetch services data. Status: ${donationsResponse.status}`);
+                if (!messagesResponse.ok) {
+                    throw new Error(`Failed to fetch services data. Status: ${messagesResponse.status}`);
+
                 }
-                const fetchedDonations = await donationsResponse.json();
-                const donationsArray = fetchedDonations[""] || [];
-                console.log('Fetched Donations:', donationsArray);
-                setDonations(donationsArray || []);
 
-
-
-
-
-
-
+                const fetchedmessages = await messagesResponse.json();
+                setmessages(fetchedmessages.data || []);
             } catch (error) {
                 console.error('Error fetching data:', error);
             } finally {
@@ -67,57 +59,37 @@ const UserDonations = () => {
     }, []);
 
 
-
-
-
-
-
-
-
-
-    const totalPages = Math.ceil(donations.length / pageSize);
+    const totalPages = Math.ceil(messages.length / pageSize);
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = startIndex + pageSize;
-    const currentDonation = donations.slice(startIndex, endIndex);
+    const currentmessage = messages.slice(startIndex, endIndex);
 
     return (
         <>
             <section className='User'>
-                <div className='Containers'>
-
-                    <table className='InfoTable'>
-
+                <div className='UContainers'>
+                    <table className='UInfoTable'>
                         <thead>
                             <tr>
-                                <th>الخدمة</th>
-                                <th>التفاصيل</th>
-                                <th>المبلغ</th>
-                                <th>الاسم</th>
-
-
-
+                                <th>الرقم التعريفي</th>
+                                <th>الرسالة</th>
+                                <th>الجمعية</th>
+                                <th>رقم التبرع</th>
                             </tr>
                         </thead>
-
                         <tbody>
-                            {currentDonation.map((donation) => (
-                                <tr key={donation.data.service}>
-                                    <td>{donation.data.overview}</td>
-                                    <td>{donation.data.total_amount_of_donation}</td>
-                                    <td>{donation.data.Beneficiaries_id}</td>
-
-
-
-
-
+                            {currentmessage.map((message) => (
+                                <tr key={message.id}>
+                                    <td>{message.id}</td>
+                                    <td>{message.message}</td>
+                                    <td>{message.charity_id}</td>
+                                    <td>{message.Beneficiaries_id}</td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
-
-
                     <div>
-                        {Array.from({ length: totalPages }).map((_, index) => (
+                        {Array.from({ length: totalPages }).map((index) => (
                             <button key={index + 1} onClick={() => setCurrentPage(index + 1)}>
                                 {index + 1}
                             </button>
@@ -125,10 +97,9 @@ const UserDonations = () => {
                     </div>
                 </div>
                 <SideBar />
-
             </section>
         </>
     )
-}
+};
 
-export default UserDonations
+export default UserMessages;

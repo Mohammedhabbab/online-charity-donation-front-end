@@ -27,6 +27,8 @@ function Sign() {
   const [signUpGender, setSignUpGender] = useState('');
   const [orgsignUpGender, setOrgSignUpGender] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formUSubmitted, setFormUSubmitted] = useState(false);
+
   const [loginStatus, setLoginStatus] = useState('');
   const [ShowSU, setShowSU] = useState(false);
   const [ShowIU, setShowIU] = useState(false);
@@ -66,8 +68,8 @@ function Sign() {
     
 
     const signInBody = mode === 'user'
-      ? { email: signInEmail, password: signInPassword, type_of_user: mode }
-      : { email: orgsignInEmail, password: orgsignInPassword, type_of_user: mode };
+      ? { email: signInEmail, password: signInPassword, type_of_user: 'user' }
+      : { email: orgsignInEmail, password: orgsignInPassword, type_of_user: 'charity'};
 
     fetch('http://localhost:8000/api/login', {
       method: 'POST',
@@ -93,7 +95,7 @@ function Sign() {
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    setLoginStatus('');
+    console.log('ss');
 
     const signUpBody = mode === 'user'
       ? {
@@ -121,47 +123,9 @@ function Sign() {
         gender: ''
       };
 
-    if ((mode === 'user') && (!signUpName || !signUpEmail || !signUpPassword || !signUpPhone || !signUpAddress)) {
-      setLoginStatus('Please fill in all required fields.');
-      return;
-    }
-    if ((mode === 'charity') && (!orgsignUpName || !orgsignUpEmail || !orgsignUpPassword || !orgsignUpPhone || !orgsignUpAddress)) {
-      setLoginStatus('Please fill in all required fields.');
-      return;
-    }
-    if (!validatePassword(mode === 'user' ? signUpPassword : orgsignUpPassword)) {
-      setLoginStatus('Password should have at least 8 characters.');
-      return;
-    }
+    
 
-    if (!validateMobileNumber(mode === 'user' ? signUpPhone : orgsignUpPhone)) {
-      setLoginStatus('Please enter a valid mobile number.');
-      return;
-    }
-
-    if (!validateEmail(mode === 'user' ? signUpEmail : orgsignUpEmail)) {
-      setLoginStatus('Please enter a valid email address.');
-      return;
-    }
-    if (mode === 'user' || mode === 'charity') {
-      if (!signUpAddress || !orgsignUpAddress) {
-        setLoginStatus('Please enter an Address.');
-        return;
-      }
-    }
-    if (mode === 'user' || mode === 'charity') {
-      if (!signUpName || !orgsignUpName) {
-        setLoginStatus('Please enter an Address.');
-        return;
-      }
-    }
-
-    if (mode === 'user') {
-      if (!signUpGender) {
-        setLoginStatus('Please select a gender.');
-        return;
-      }
-    }
+   
 
     fetch('http://localhost:8000/api/register', {
       method: 'POST',
@@ -171,20 +135,19 @@ function Sign() {
       body: JSON.stringify(signUpBody),
     })
       .then((response) => response.json())
-      .then((data) => {
-        if (data.access_token) {
-          localStorage.setItem('authToken', data.access_token);
-          setIsUserSignedIn(true);
-          setMode(data.mode);
-          setFormSubmitted(true);
+    
 
-          // Clear form fields
+      .then((data) => {
+        if (mode === 'charity') {
+          setFormSubmitted(true);
           setSignUpName('');
           setSignUpEmail('');
           setSignUpPassword('');
           setSignUpPhone('');
           setSignUpAddress('');
           setSignUpGender('');
+        } else {
+          setFormUSubmitted(true);
           setOrgSignUpName('');
           setOrgSignUpEmail('');
           setOrgSignUpPassword('');
@@ -192,16 +155,18 @@ function Sign() {
           setOrgSignUpAddress('');
           setOrgSignUpTelephoneNumber('');
           setOrgSignUpTypesOfExistingDonations('');
+        }
+       
+console.log('yessss')
+        setMode(data.mode);
+       
+      
 
-          // Show notification if signed up as charity
-          if (mode === 'charity') {
-            setNotification({ show: true, message: 'Form submitted' });
-            setTimeout(() => {
-              setNotification({ show: false, message: '' });
-            }, 6000);
-          }
+        if (data.access_token ) {
+          localStorage.setItem('authToken', data.access_token);
+         
+        
 
-          // Redirect after sign up
           setTimeout(() => {
             navigate('/', { replace: true, state: { isUserSignedIn } });
           }, 10000);
@@ -232,8 +197,8 @@ function Sign() {
             <Components.Container>
               <Components.SignUpContainer signIn={signIn}>
                 <Components.Form>
-                  {formSubmitted ? (
-                    <p>Your form was added. Please wait for approval.</p>
+                  {formUSubmitted ? (
+                    <p>شكرا</p>
                   ) : (
                     <>
                         <Components.Title>انشاء حساب</Components.Title>
@@ -310,7 +275,8 @@ function Sign() {
                      { ShowSU === true ? (!signUpGender && <Components.RErrorMessage>الرجاء تحديد الجنس</Components.RErrorMessage>) : ''}
                       <Components.Button onClick={(e) => {
   handleSignUp(e);
-  setShowSU(true);
+                          setShowSU(true);
+                          console.log('clicked')
 }}
 >انشاء الحساب</Components.Button>
                     </>
@@ -379,7 +345,7 @@ function Sign() {
                         value={orgsignUpName}
                         onChange={(e) => setOrgSignUpName(e.target.value)}
                           />
-                          {ShowSC === true ? (!signUpName && <Components.ErrorMessage>الرجاء إدخال الاسم بالكامل</Components.ErrorMessage>) : ''}
+                          {ShowSC === true ? (!orgsignUpName && <Components.ErrorMessage>الرجاء إدخال الاسم بالكامل</Components.ErrorMessage>) : ''}
 
                       <Components.Input
                         type='email'
@@ -441,6 +407,7 @@ function Sign() {
                           <Components.Button onClick={(e) => {
                             handleSignUp(e);
                             setShowSC(true);
+                            console.log('clicked')
                           }}>انشاء الحساب</Components.Button>
                     </>
                   )}

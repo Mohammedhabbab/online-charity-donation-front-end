@@ -70,7 +70,7 @@ const OrgManageShape1 = () => {
     useEffect(() => {
         const fetchServices = fetch('http://localhost:8000/api/get_services');
         const fetchPeople = fetch('http://localhost:8000/api/get_beneficiar');
-       
+
 
         Promise.all([fetchServices, fetchPeople])
             .then(async ([servicesResponse, peopleResponse]) => {
@@ -118,13 +118,13 @@ const OrgManageShape1 = () => {
         setIsEditModalOpen(true);
     };
 
-  
+
     const openAddModal = () => {
         setSelectedPerson(null);
         setIsAddModalOpen(true);
     };
 
-    
+
     const openDeleteModal = (person) => {
         setSelectedPerson(person);
         setIsDeleteModalOpen(true);
@@ -132,7 +132,7 @@ const OrgManageShape1 = () => {
 
     const handleEditSubmit = async (e, editedPerson) => {
         try {
-            e.preventDefault(); 
+            e.preventDefault();
 
             console.log('Editing Person:', editedPerson);
 
@@ -168,7 +168,7 @@ const OrgManageShape1 = () => {
             updatedNewPerson.needy_type = lowercasedServiceUrl;
             updatedNewPerson.charity_id = userData?.id;
 
-            
+
 
             console.log('Updated New Person State:', updatedNewPerson);
 
@@ -214,7 +214,7 @@ const OrgManageShape1 = () => {
 
 
 
-   
+
     /* useEffect(() => {
         const fetchData = async () => {
             try {
@@ -242,7 +242,7 @@ const OrgManageShape1 = () => {
                     overview: '',
                     address:'',
                     status: 0,
-                    monthly_need: '',
+                    total_need: '',
                     name_of_school: '',
                     Educational_level: '',
                 });
@@ -278,7 +278,7 @@ const OrgManageShape1 = () => {
                 throw new Error('Failed to delete record');
             }
 
-         
+
             setIsDeleteModalOpen(false);
 
             setUpdateTrigger(prev => !prev);
@@ -288,17 +288,17 @@ const OrgManageShape1 = () => {
     };
 
 
-   
+
 
 
     useEffect(() => {
         if (!isLoading && (!service)) {
-            
+
             const timeoutId = setTimeout(() => {
                 navigate('/404');
-            }, 1000); 
+            }, 1000);
 
-           
+
             return () => clearTimeout(timeoutId);
         }
     }, [isLoading, service, people, navigate]);
@@ -360,13 +360,13 @@ const OrgManageShape1 = () => {
                                     </td>
 
 
-                                    
+
                                 </tr>
                             ))}
                         </tbody>
                     </table>
 
-            
+
                     <div>
                         {Array.from({ length: totalPages }).map((_, index) => (
                             <button key={index + 1} onClick={() => setCurrentPage(index + 1)}>
@@ -404,16 +404,16 @@ const OrgManageShape1 = () => {
                                 onChange={(e) => setSelectedPerson((prev) => ({ ...prev, mother_name: e.target.value }))}
                             />
                         </div>
-                    <div>
-                        <label style={{ color: 'black' }}>
-                            العمر:
-                        </label>
-                        <input
-                            type="text"
+                        <div>
+                            <label style={{ color: 'black' }}>
+                                العمر:
+                            </label>
+                            <input
+                                type="text"
                                 value={selectedPerson.age || ''}
                                 onChange={(e) => setSelectedPerson((prev) => ({ ...prev, age: e.target.value }))}
-                        />
-                    </div>
+                            />
+                        </div>
                         <div>
                             <label style={{ color: 'black' }}>
                                 الحاجة الملية:
@@ -424,72 +424,72 @@ const OrgManageShape1 = () => {
                                 onChange={(e) => setSelectedPerson((prev) => ({ ...prev, age: e.target.value }))}
                             />
                         </div>
-                                <div className='R'>
-                                    <label style={{ color: 'black' }}>
-                                        الجنس:
-                                    </label>
-                                    <label className='L'>ذكر</label>
-                                    <input
-                                        className='I'
-                                        type="radio"
-                                        id='gender'
-                                        value="ذكر"
-                                        checked={selectedPerson.gender === 'ذكر'}
-                                        onChange={(e) => setSelectedPerson((prev) => ({ ...prev, gender: e.target.value }))}
-                                    />
-                                    <label className='L' >انثى</label>
-                                    <input
-                                        className='I'
-                                        type="radio"
-                                        id='gender'
-                                        value="انثى"
-                                        checked={selectedPerson.gender === 'انثى'}
-                                        onChange={(e) => setSelectedPerson((prev) => ({ ...prev, gender: e.target.value }))}
-                                    />
-                                </div>
+                        <div className='R'>
+                            <label style={{ color: 'black' }}>
+                                الجنس:
+                            </label>
+                            <label className='L'>ذكر</label>
+                            <input
+                                className='I'
+                                type="radio"
+                                id='gender'
+                                value="ذكر"
+                                checked={selectedPerson.gender === 'ذكر'}
+                                onChange={(e) => setSelectedPerson((prev) => ({ ...prev, gender: e.target.value }))}
+                            />
+                            <label className='L' >انثى</label>
+                            <input
+                                className='I'
+                                type="radio"
+                                id='gender'
+                                value="انثى"
+                                checked={selectedPerson.gender === 'انثى'}
+                                onChange={(e) => setSelectedPerson((prev) => ({ ...prev, gender: e.target.value }))}
+                            />
+                        </div>
 
 
 
 
-                      
-                  
-                    <div>
-                        <label style={{ color: 'black' }}>
-                            رقم الهاتف:
-                        </label>
-                        <input
-                            type="text"
+
+
+                        <div>
+                            <label style={{ color: 'black' }}>
+                                رقم الهاتف:
+                            </label>
+                            <input
+                                type="text"
                                 value={selectedPerson.phone_number || ''}
                                 onChange={(e) => setSelectedPerson((prev) => ({ ...prev, phone_number: e.target.value }))}
-                        />
-                    </div>
-                    <div>
-                        <label style={{ color: 'black' }}>
-                            التفاصيل:
-                        </label>
-                        <input
-                            type="text"
+                            />
+                        </div>
+                        <div>
+                            <label style={{ color: 'black' }}>
+                                التفاصيل:
+                            </label>
+                            <input
+                                type="text"
                                 value={selectedPerson.overview || ''}
                                 onChange={(e) => setSelectedPerson((prev) => ({ ...prev, overview: e.target.value }))}
-                        />
-                    </div>
-                    <div>
-                        <label style={{ color: 'black' }}>
-                            العنوان:
-                        </label>
-                        <input
-                            type="text"
+                            />
+                        </div>
+                        <div>
+                            <label style={{ color: 'black' }}>
+                                العنوان:
+                            </label>
+                            <input
+                                type="text"
                                 value={selectedPerson.address || ''}
                                 onChange={(e) => setSelectedPerson((prev) => ({ ...prev, address: e.target.value }))}
-                        />
-                    </div>
-                    <div className='R'>
-                        <label style={{ color: 'black' }}>
-                            الحالة:
+                            />
+                        </div>
+                        <div className='R'>
+                            <label style={{ color: 'black' }}>
+                                الحالة:
                             </label>
                             <label className='L'>0</label>
                             <input
-                               className='I'
+                                className='I'
                                 type="radio"
                                 id='status'
                                 value="0"
@@ -498,14 +498,14 @@ const OrgManageShape1 = () => {
                             />
                             <label className='L' >1</label>
                             <input
-                               className='I'
+                                className='I'
                                 type="radio"
                                 id='status'
                                 value="1"
                                 checked={selectedPerson.status === '1'}
                                 onChange={(e) => setSelectedPerson((prev) => ({ ...prev, status: e.target.value }))}
                             />
-                    </div>
+                        </div>
                         <div className='R'>
                             <label style={{ color: 'black' }}>
                                 الأولوية:
@@ -528,13 +528,13 @@ const OrgManageShape1 = () => {
                                 checked={selectedPerson.priority === '2'}
                                 onChange={(e) => setSelectedPerson((prev) => ({ ...prev, priority: e.target.value }))}
                             />
-                    </div>
+                        </div>
                         <div>
                             <label style={{ color: 'black' }}>
                                 المدة:
                             </label>
-                            <select 
-                               className='S'
+                            <select
+                                className='S'
                                 value={selectedPerson.duration}
                                 onChange={(e) => setSelectedPerson((prev) => ({ ...prev, duration: e.target.value }))}>
                                 <option value="30">30 يوم</option>
@@ -543,7 +543,7 @@ const OrgManageShape1 = () => {
                                 <option value="365">365 يوم</option>
                             </select>
                         </div>
-<div></div>
+                        <div></div>
 
                         <div className='TwoButtons'>
                             <button onClick={() => setIsEditModalOpen(false)} className='cancel'>إلغاء</button>
@@ -560,8 +560,8 @@ const OrgManageShape1 = () => {
                 contentLabel="Add Modal"
                 className="ModalShape1"
             >
-                <h2 className='Add'  key={filteredServices?.id}>"أضف إلى فئة "{filteredServices?.title}</h2>
-             
+                <h2 className='Add' key={filteredServices?.id}>"أضف إلى فئة "{filteredServices?.title}</h2>
+
                 <form onSubmit={handleAddSubmit}>
                     <div>
                         <label style={{ color: 'black' }}>
@@ -676,20 +676,11 @@ const OrgManageShape1 = () => {
                         <input
                             type="text"
                             value={newPerson.total_need || ''}
-                            onChange={(e) => setNewPerson((prev) => ({ ...prev, monthly_need: handleNullValue(e.target.value) }))}
+                            onChange={(e) => setNewPerson((prev) => ({ ...prev, total_need: handleNullValue(e.target.value) }))}
                         />
                     </div>
-                    <div>
-                        <label style={{ color: 'black' }}>
-                            الدراسة :
-                        </label>
-                        <input
-                            type="text"
-                            value={newPerson.Educational_level || ''}
-                            onChange={(e) => setNewPerson((prev) => ({ ...prev, Educational_level: handleNullValue(e.target.value) }))}
-                        />
-                    </div>
-                 
+
+
                     <div>
                         <label style={{ color: 'black' }}>
                             المدة:
@@ -698,7 +689,7 @@ const OrgManageShape1 = () => {
                             className='S'
                             value={newPerson.duration}
                             onChange={(e) => setNewPerson((prev) => ({ ...prev, duration: e.target.value }))}>
-                            <option value="30">30 يوم</option>
+                            <option value='30'>30 يوم</option>
                             <option value="90">90 يوم</option>
                             <option value="184">184 يوم</option>
                             <option value="365">365 يوم</option>
@@ -713,7 +704,7 @@ const OrgManageShape1 = () => {
                             className='I'
                             type="radio"
                             id='priority'
-                            value="1"
+                            value='1'
                             checked={newPerson.priority === '1'}
                             onChange={(e) => setNewPerson((prev) => ({ ...prev, priority: e.target.value }))}
                         />
@@ -722,14 +713,14 @@ const OrgManageShape1 = () => {
                             className='I'
                             type="radio"
                             id='priority'
-                            value="2"
+                            value='2'
                             checked={newPerson.priority === '2'}
                             onChange={(e) => setNewPerson((prev) => ({ ...prev, priority: e.target.value }))}
                         />
                     </div>
-                 
+
                     <div className='TwoButtonsAdd'>
-                    <button onClick={() => setIsAddModalOpen(false)} className='Addcancel'>إلقاء</button>
+                        <button onClick={() => setIsAddModalOpen(false)} className='Addcancel'>إلقاء</button>
                         <button type="submit" className='Addcreate'>إضافة</button>
                     </div>
                 </form>

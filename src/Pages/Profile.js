@@ -255,9 +255,9 @@ const Profile = () => {
                                     {service.shape === 0 ? (
                                         <>
                                             <div className='Org-Services' key={index}>
-                                                <p>عدد الأخاص الكلي في هذه الفئة: {benfData[index]?.beneficiaries.length || 0}</p>
-                                                <p>عدد الأخاص الذي تم التبرع لهم في هذه الفئة: {sponBenfData[index]?.beneficiaries.length || 0}</p>
-                                                <p>عدد الأخاص الذي لم يتم التبرع لهم بعد في هذه الفئة: {notSponBenfData[index]?.beneficiaries.length || 0}</p>
+                                                <p>عدد الأشخاص الكلي في هذه الفئة: {benfData[index]?.beneficiaries.length || 0}</p>
+                                                <p>عدد الأشخاص الذي تم التبرع لهم في هذه الفئة: {sponBenfData[index]?.beneficiaries.length || 0}</p>
+                                                <p>عدد الأشخاص الذي لم يتم التبرع لهم بعد في هذه الفئة: {notSponBenfData[index]?.beneficiaries.length || 0}</p>
                                             </div>
                                             <div className='Pie-Chart'>
                                                 <div className='Simplified-Pie-Chart' key={`simplified-pie-chart-${index}`}

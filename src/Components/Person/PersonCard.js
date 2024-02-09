@@ -4,11 +4,11 @@ import FemaleImg from '../Assets/Female.png'
 import { useBene } from '../Dynamic/BeneficiarContext'
 import { NavLink } from 'react-router-dom';
 
-function Card({ id, full_name, address, age, gender, charity_id, status, monthly_need, mother_name }) {
+function Card({ id, full_name, address, age, gender, charity_id, status, total_need, mother_name }) {
   const { setBeneficiar } = useBene();
 
   const handleClick = () => {
-    const selectedBene = { id, full_name, address, age, gender, charity_id, status,monthly_need,mother_name };
+    const selectedBene = { id, full_name, address, age, gender, charity_id, status,total_need,mother_name };
 
     setBeneficiar(selectedBene);
    

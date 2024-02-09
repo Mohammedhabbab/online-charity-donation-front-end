@@ -87,12 +87,12 @@ const Cart = () => {
 
     if (!userData || userData.type_of_user !== 'user') {
         return (
-            <h1 className="text-center" style={{ marginTop: '6rem' }}>You are not authorized to access this page</h1>
+            <h1 className="text-center" style={{ marginTop: '6rem' }}>لا يمكن التبرع إلا للمستخدمين</h1>
         );
     }
 
     if (isEmpty) {
-        return <h1 className="text-center" style={{ marginTop: '6rem' }}>Your Cart is Empty</h1>;
+        return <h1 className="text-center" style={{ marginTop: '6rem' }}>السلة فارغة</h1>;
     }
 
 
@@ -128,8 +128,7 @@ const Cart = () => {
                             .then(response => response.json())
                             .then(data => {
                                 if (data.Data.status === 'A') {
-                                    clearInterval(intervalId); // Stop further checks
-                                    // Do something when payment is approved
+                                    clearInterval(intervalId); 
                                     console.log('Payment approved:', data);
                                     
                                     navigate('/profile')
@@ -209,7 +208,7 @@ const Cart = () => {
         <section className="py-4 container" style={{ marginTop: '6rem' }}>
             <div className="row justify-content-center">
                 <div className="col-12">
-                    <h5>Cart ({totalUniqueItems}) Total items: ({totalItems})</h5>
+                    <h5>Cart ({totalUniqueItems}) كل العناصر: ({totalItems})</h5>
                     <table className="table table-light table-hover m-0">
                         <tbody>
                             {items.map((item, index) => (
@@ -218,7 +217,7 @@ const Cart = () => {
                                     <td>{item.name_of_proudct}</td>
                                     <td>{item.price_per_item}</td>
                                     <td>{item.total_count - item.available_count}</td>
-                                    <td>Quantity ({item.quantity})</td>
+                                    <td>الكمية ({item.quantity})</td>
                                     <td>
                                         <button className="btn btn-info ms-2"
                                             onClick={() => updateItemQuantity(item.id, item.quantity - 1)}
@@ -228,13 +227,13 @@ const Cart = () => {
                                                 if (item.total_count - item.available_count > item.quantity) {
                                                     updateItemQuantity(item.id, item.quantity + 1);
                                                 } else {
-                                                    handleNotification(`Thanks but no need for more ${item.name_of_proudct}`);
+                                                    handleNotification(`شكرا,لكن تم الوصول إلى الكمية المطلوبة ${item.name_of_proudct}`);
                                                 }
                                             }}
                                         >+</button>
                                         <button className="btn btn-danger ms-2"
                                             onClick={() => handleRemoveItem(item.id)}
-                                        >Remove Item</button>
+                                        >إزالة العنصر</button>
                                     </td>
                                 </tr>
                             ))}
@@ -242,13 +241,13 @@ const Cart = () => {
                     </table>
                 </div>
                 <div className="col-auto ms-auto">
-                    <h2>Total Price: $ {cartTotal}</h2>
+                    <h2>السعر الكلي: $ {cartTotal}</h2>
                 </div>
                 <div className="col-auto">
                     <button className="btn btn-danger m-2"
                         onClick={handleClearCart}
-                    >Clear Cart</button>
-                    <button onClick={handleDonate} className="btn btn-primary m-2">Buy Now</button>
+                    >إفراغ السلة</button>
+                    <button onClick={handleDonate} className="btn btn-primary m-2">التبرع</button>
                 </div>
             </div>
             {notification.show && (
